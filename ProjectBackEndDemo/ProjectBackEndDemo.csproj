@@ -15,9 +15,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BL\" />
+    <Folder Include="Areas\Care\Controllers\" />
+    <Folder Include="Areas\Care\Data\" />
+    <Folder Include="Areas\Care\Models\" />
+    <Folder Include="Areas\Care\Views\" />
+    <Folder Include="Areas\Emergency\Controllers\" />
+    <Folder Include="Areas\Emergency\Data\" />
+    <Folder Include="Areas\Emergency\Models\" />
+    <Folder Include="Areas\Emergency\Views\" />
+    <Folder Include="Areas\Health\Controllers\" />
+    <Folder Include="Areas\Health\Data\" />
+    <Folder Include="Areas\Health\Models\" />
+    <Folder Include="Areas\Health\Views\" />
+    <Folder Include="Areas\Shops\Controllers\" />
+    <Folder Include="Areas\Shops\Data\" />
+    <Folder Include="Areas\Shops\Models\" />
+    <Folder Include="Areas\Shops\Views\" />
+    <Folder Include="Areas\Vets\Controllers\" />
+    <Folder Include="Areas\Vets\Data\" />
+    <Folder Include="Areas\Vets\Models\" />
+    <Folder Include="Areas\Vets\Views\" />
+    <Folder Include="BL\IRepository\" />
+    <Folder Include="BL\Helpers\" />
+    <Folder Include="BL\Repository\" />
     <Folder Include="Models\" />
-    <Folder Include="Areas\" />
   </ItemGroup>
 
 </Project>

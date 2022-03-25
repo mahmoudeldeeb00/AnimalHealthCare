@@ -19,7 +19,6 @@
     <Folder Include="Areas\Care\Data\" />
     <Folder Include="Areas\Care\Models\" />
     <Folder Include="Areas\Care\Views\" />
-    <Folder Include="Areas\Emergency\Controllers\" />
     <Folder Include="Areas\Emergency\Data\" />
     <Folder Include="Areas\Emergency\Models\" />
     <Folder Include="Areas\Emergency\Views\" />

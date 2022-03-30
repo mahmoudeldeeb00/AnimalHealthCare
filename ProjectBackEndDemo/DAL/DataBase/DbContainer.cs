@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using ProjectBackEndDemo.Areas.Identity.Models;
 using ProjectBackEndDemo.DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProjectBackEndDemo.DAL.DataBase
 {
-    public class DbContainer:DbContext
+    public class DbContainer:IdentityDbContext<AppUser>
     {
         public DbContainer(DbContextOptions<DbContainer> opts ) : base(opts) { }
         public DbSet<Animal> Animals { get; set; }

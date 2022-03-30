@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProjectBackEndDemo.Areas.Identity.Models;
 using ProjectBackEndDemo.DAL.DataBase;
 using System;
 using System.Collections.Generic;
@@ -31,11 +33,21 @@ namespace ProjectBackEndDemo
 
 
 
+
+            services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequiredUniqueChars = 0;
+            }).AddEntityFrameworkStores<DbContainer>() ;
+
             services.AddDbContextPool<DbContainer>(opts => opts.UseSqlServer(Configuration.GetConnectionString("AnimalHealthCare")));
 
 
-
-             services.AddRazorPages();
+            services.AddRazorPages();
 
         }
 

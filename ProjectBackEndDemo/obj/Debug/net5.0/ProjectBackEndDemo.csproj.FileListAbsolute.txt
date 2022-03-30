@@ -147,3 +147,9 @@ D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\bin\Debug\net5.0\Mic
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Identity\Views\Account\Registration.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\bin\Debug\net5.0\ar-EG\ProjectBackEndDemo.resources.dll
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\ProjectBackEndDemo.Resource.SharedResource.resources
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\ProjectBackEndDemo.Resource.SharedResource.ar-EG.resources
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\ProjectBackEndDemo.csproj.GenerateResource.cache
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\ar-EG\ProjectBackEndDemo.resources.dll
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Identity\Views\Account\Login.cshtml.g.cs

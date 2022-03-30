@@ -19,8 +19,22 @@ using ProjectBackEndDemo;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\Views\_ViewImports.cshtml"
+using ProjectBackEndDemo.Resource;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\Views\_ViewImports.cshtml"
+using Microsoft.Extensions.Localization;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"72083b26c3ca8a2ad3260ee8264793d84f0af5fb", @"/Views/Home/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"96d3f4288e59901ccd3669f984cf8ae5e265a626", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bcd52d18e4e212d90e8be51fa2a462b6241a5b49", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
@@ -38,6 +52,8 @@ using ProjectBackEndDemo;
             WriteLiteral("\r\n<h1>Index</h1>\r\n<h2>Hello from Home Page</h2>\r\n\r\n\r\n");
         }
         #pragma warning restore 1998
+        [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
+        public IStringLocalizer<SharedResource> AppLng { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]

@@ -319,6 +319,11 @@
         "runtime": {
           "ProjectBackEndDemo.dll": {}
         },
+        "resources": {
+          "ar-EG/ProjectBackEndDemo.resources.dll": {
+            "locale": "ar-EG"
+          }
+        },
         "compile": {
           "ProjectBackEndDemo.dll": {}
         }

@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿
+
+            
+@{ 
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -6,8 +13,15 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
+
+    <a asp-controller="Home" asp-action="Index" asp-route-Culture ="en-US"> english</a>
+
+
+    <a asp-controller="Home" asp-action="Index" asp-route-Culture ="ar-Eg"> arabic  </a>
+
+
     <div>
-        Hi from Layot 
+        Hi from @AppLng["test"]  and  @AppLng["test1"]
     </div>
     <div>
         @RenderBody()

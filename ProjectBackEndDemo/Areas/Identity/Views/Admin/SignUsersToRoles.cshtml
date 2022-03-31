@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "SignUsersToRoles";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+@addTagHelper * , Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+
+<h1>SignUsersToRoles</h1>
+
+@model ProjectBackEndDemo.Areas.Identity.Models.UserRoleVM
+
+
+<form asp-area="Identity" asp-controller="Admin" asp-action="SignUsersToRoles" method="post">
+
+    <label asp-for="RoleName"> Role </label>
+    <select asp-for="RoleName" asp-items="@(SelectList)ViewBag.Roles">
+        <option></option>
+    </select>
+    <br />
+    <label asp-for="UserName"> User Name </label>
+    <select asp-for="UserName" asp-items="@(SelectList)ViewBag.Users">
+        <option></option>
+    </select>
+    <input type="submit" name="" value="submit" class="btn btn-primary" />
+
+</form>
+<span asp-validiation-summary="All"></span>
+
+<div class="text-danger"> @TempData["NoUser"]  </div>

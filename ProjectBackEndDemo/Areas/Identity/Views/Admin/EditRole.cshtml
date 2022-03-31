@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "EditRole";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model ProjectBackEndDemo.Areas.Identity.Models.EditRoleVM 
+
+
+
+
+
+<h1>EditRole</h1>
+
+<form asp-area="Identity" asp-controller="Admin" asp-action="EditRole" method="post">
+    <input style="display:none" asp-for="Id" type="text" value="@Model.Id" />
+
+
+    <label> New Name : </label>
+    <input asp-for="Name" type="text"  value="@Model.Name"/>
+
+
+    <input type="submit" value="Save Changes " class="btn btn-primary" />
+
+</form>

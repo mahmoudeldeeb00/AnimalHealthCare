@@ -153,3 +153,8 @@ D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Pro
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\ProjectBackEndDemo.csproj.GenerateResource.cache
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\ar-EG\ProjectBackEndDemo.resources.dll
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Identity\Views\Account\Login.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Identity\Views\Admin\GetAllRoles.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Identity\Views\Admin\CreateRole.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\bin\Debug\net5.0\libman.json
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Identity\Views\Admin\EditRole.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Identity\Views\Admin\SignUsersToRoles.cshtml.g.cs

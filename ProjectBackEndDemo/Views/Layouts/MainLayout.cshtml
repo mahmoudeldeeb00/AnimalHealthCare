@@ -1,8 +1,10 @@
 ﻿
 
-            
-@{ 
+
+
+@{
     var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+   
 }
 
 <!DOCTYPE html>
@@ -11,13 +13,13 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
 
-    <a asp-controller="Home" asp-action="Index" asp-route-Culture ="en-US"> english</a>
+    <a href="@Url.PageLink()"> english</a>
 
-
-    <a asp-controller="Home" asp-action="Index" asp-route-Culture ="ar-Eg"> arabic  </a>
+    <a href="@Url.PageLink()?Culture=ar-Eg"> arabic  </a>
 
 
     <div>
@@ -26,5 +28,10 @@
     <div>
         @RenderBody()
     </div>
+
+
+
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
 </body>
 </html>

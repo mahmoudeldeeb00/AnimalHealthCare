@@ -10,16 +10,20 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
 {
     public class AccountController : Controller
     {
+
+        #region constructor 
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManaeger;
 
-        public AccountController(UserManager<AppUser> userManager , SignInManager<AppUser> signInManager , RoleManager<IdentityRole> roleManaeger )
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManaeger)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManaeger = roleManaeger;
         }
+        #endregion
+
 
 
         #region registration 
@@ -103,6 +107,7 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
             return RedirectToAction("Login");
         }
         #endregion
+
 
 
 

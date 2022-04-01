@@ -3,11 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectBackEndDemo.Areas.Identity.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace ProjectBackEndDemo.Areas.Identity.Controllers
 {
+    [Area("Identity")]
+    
     public class AccountController : Controller
     {
 
@@ -37,23 +41,35 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
         {
             if (ModelState.IsValid)
             {
-                AppUser NewUser = new AppUser()
+                var IsExist = await userManager.FindByNameAsync(regModel.UserName);
+                if(IsExist == null)
                 {
-                    UserName = regModel.UserName,
-                    Email = regModel.Email
-                };
-                var result = await userManager.CreateAsync(NewUser, regModel.Password);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Login");
+                    AppUser NewUser = new AppUser()
+                    {
+                        UserName = regModel.UserName,
+                        Email = regModel.Email
+                    };
+                    var result = await userManager.CreateAsync(NewUser, regModel.Password);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Login");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                    }
                 }
                 else
                 {
-                    foreach(var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
+                    ModelState.AddModelError("", "User Name is Already Exist ");
+
                 }
+
+
+
             }
 
             return View(regModel);
@@ -64,6 +80,7 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
 
 
         #region Login 
+        
         public IActionResult Login()
         {
             return View();
@@ -74,11 +91,13 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(lgmodel.Email, lgmodel.Password, lgmodel.RemmemberMe, false);
+                //var user = await userManager.FindByEmailAsync(lgmodel.Email);
+                var result = await signInManager.PasswordSignInAsync(lgmodel.UserName, lgmodel.Password, lgmodel.RemmemberMe, false);
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                      return RedirectToAction("Index", "Home" ,new { area=""});
+                   // return View("~/Views/Home/Index.cshtml");
                 }
                 else
                 {
@@ -98,7 +117,7 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
         #endregion
 
 
-        #region signOut 
+        #region logout 
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
@@ -110,6 +129,102 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
 
 
 
+        #region Edit Profile 
 
+        public async Task<IActionResult> EditProfile(string id )
+        {
+            var currentUser = await userManager.FindByIdAsync(id);
+
+            EditProfileVM u = new EditProfileVM()
+            {
+                Id = currentUser.Id ,
+                UserName = currentUser.UserName,
+                BirthDay = currentUser.BirthDay,
+                Email = currentUser.Email,
+                PhoneNumber = currentUser.PhoneNumber,
+                ProfilePic = currentUser.ProfilePic
+            };
+
+            return View(u);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditProfile(EditProfileVM prmodel )
+        {
+
+            if (ModelState.IsValid)
+            {
+                var User = await userManager.FindByIdAsync(prmodel.Id);
+
+                User.UserName = prmodel.UserName;
+                User.Email = prmodel.Email;
+                User.BirthDay = prmodel.BirthDay;
+                User.PhoneNumber = prmodel.PhoneNumber;
+
+
+
+                string FilePath = Directory.GetCurrentDirectory() + "/wwwroot/Files/UsersProfilePictures";
+                string FileName = User.Id + prmodel.ProfilePicture.FileName;
+                string FinalPath = Path.Combine(FilePath, FileName);
+                
+
+                using (var stream = new FileStream(FinalPath, FileMode.Create))
+                {
+                    prmodel.ProfilePicture.CopyTo(stream);
+                }
+
+
+                User.ProfilePic = FileName;
+
+                var result = await userManager.UpdateAsync(User);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home", new { area = "" });
+                }
+                else
+                {
+                    foreach(var error in result.Errors){
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(prmodel);
+                }
+
+
+
+
+
+
+            }
+
+            return View(prmodel);
+
+
+
+
+        }
+
+        #endregion
+        #region view profile 
+        
+        public async Task<IActionResult> ViewProfile(string id)
+        {
+            var currentUser = await userManager.FindByIdAsync(id);
+
+            EditProfileVM u = new EditProfileVM()
+            {
+                Id = currentUser.Id,
+                UserName = currentUser.UserName,
+                BirthDay = currentUser.BirthDay,
+                Email = currentUser.Email,
+                PhoneNumber = currentUser.PhoneNumber,
+                ProfilePic = currentUser.ProfilePic,
+                
+            };
+
+            return View(u);
+        }
+
+        #endregion
     }
 }

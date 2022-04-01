@@ -1,7 +1,11 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+    ViewBag.Title = "Login";
 }
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model ProjectBackEndDemo.Areas.Identity.Models.RegistrationVM
+
 
 <!DOCTYPE html>
 
@@ -9,7 +13,36 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Registration</title>
+
+
+
 </head>
 <body>
+
+
+    <div asp-validation-summary="All" >  </div>
+
+
+    <form asp-area="Identity" asp-controller="Account" asp-action="Registration" method="post" class="form-group">
+        <input type="text" asp-for="UserName" placeholder="user name" class="form-control" />
+        <span asp-validation-for="UserName" class="text-danger">  </span>
+        <input type="email" asp-for="Email" placeholder="email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger">  </span>
+
+        <input type="password" asp-for="Password" placeholder="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger">  </span>
+
+        <input type="password" asp-for="ConfirmPassword" placeholder="ConfirmPassword" class="form-control" />
+
+
+
+
+        <input type="submit" value="Sign Up" class="btn btn-primary" />
+
+
+    </form>
+    <script src="~/jquery/jquery.min.js"></script>
+    <script src="~/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 </body>
 </html>

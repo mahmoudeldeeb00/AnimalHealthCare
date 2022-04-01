@@ -1,11 +1,14 @@
 ﻿
 
-
+@using Microsoft.AspNetCore.Identity
+@using ProjectBackEndDemo.Areas.Identity.Models
+@inject SignInManager<AppUser> signinmanager
+@inject UserManager<AppUser> usermanager
 
 @{
     var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
-   
 }
+
 
 <!DOCTYPE html>
 
@@ -16,11 +19,34 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
+    <form asp-area="Identity" asp-controller="Account" asp-action="LogOut"  method="post">
+        <input type="submit" name="name" value="LogOut" />
+    </form>
 
     <a href="@Url.PageLink()"> english</a>
 
     <a href="@Url.PageLink()?Culture=ar-Eg"> arabic  </a>
 
+    @if (signinmanager.IsSignedIn(User))
+    {
+        var x = User.Identity.Name;
+        var result = await usermanager.FindByNameAsync(x);
+
+        var currentUserId = result.Id;
+        <div> @x  </div>
+        <a asp-area="Identity" asp-controller="Account" asp-action="EditProfile" asp-route-id="@currentUserId"> Edit Profile  </a>
+        <a asp-area="Identity" asp-controller="Account" asp-action="ViewProfile" asp-route-id="@currentUserId"> View Profile  </a>
+
+
+    }
+    else
+    {
+        <div> User is not Sign In  </div>
+    }
+
+
+
+    @*      <a asp-area="Identity" asp-controller="Account" asp-action="EditProfile" asp-route-Id="@currentUserId"> Edit Profile  </a>*@
 
     <div>
         Hi from @AppLng["test"]  and  @AppLng["test1"]

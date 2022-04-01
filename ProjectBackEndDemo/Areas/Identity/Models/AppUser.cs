@@ -9,5 +9,9 @@ namespace ProjectBackEndDemo.Areas.Identity.Models
     public class AppUser : IdentityUser 
     {
         public int Age { get; set; }
+        public DateTime BirthDay { get; set; }
+        public string ProfilePic { get; set; }
+
+
     }
 }

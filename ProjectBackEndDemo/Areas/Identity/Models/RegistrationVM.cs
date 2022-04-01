@@ -9,7 +9,7 @@ namespace ProjectBackEndDemo.Areas.Identity.Models
     public class RegistrationVM
     {
 
-        [Required(ErrorMessage = "Enter Email ")]
+        [Required(ErrorMessage = "Enter User Name ")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Enter Email ")]

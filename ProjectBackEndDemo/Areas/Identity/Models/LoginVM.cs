@@ -9,8 +9,12 @@ namespace ProjectBackEndDemo.Areas.Identity.Models
     public class LoginVM
     {
         [Required(ErrorMessage = "Enter Email ")]
-        [EmailAddress(ErrorMessage = " enter a valid email adress")]
-        public string Email { get; set; }
+        // [EmailAddress(ErrorMessage = " enter a valid email adress")]
+        public string UserName { get; set; }
+
+       // public string Email { get; set; }
+
+
 
         [Required(ErrorMessage = "Enter Password between 4 , 14 chars  ")]
         [MinLength(4, ErrorMessage = "min length is 4 chars ")]

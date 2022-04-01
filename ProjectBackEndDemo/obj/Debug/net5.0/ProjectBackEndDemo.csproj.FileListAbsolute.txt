@@ -158,3 +158,5 @@ D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Raz
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\bin\Debug\net5.0\libman.json
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Identity\Views\Admin\EditRole.cshtml.g.cs
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Identity\Views\Admin\SignUsersToRoles.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Identity\Views\Account\EditProfile.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Identity\Views\Account\ViewProfile.cshtml.g.cs

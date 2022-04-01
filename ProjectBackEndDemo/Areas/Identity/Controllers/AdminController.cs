@@ -104,7 +104,7 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
             var Roles = roleManager.Roles.ToList();
             var Users = _userManager.Users.ToList();
             ViewBag.Roles = new SelectList(Roles, "Name", "Name");
-            ViewBag.Users = new SelectList(Users, "Name", "Name");
+            ViewBag.Users = new SelectList(Users, "UserName", "UserName");
 
             return View();
         }

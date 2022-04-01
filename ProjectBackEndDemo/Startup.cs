@@ -47,13 +47,21 @@ namespace ProjectBackEndDemo
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 3;
                 options.Password.RequiredUniqueChars = 0;
+               
             }).AddEntityFrameworkStores<DbContainer>() ;
-
+          
             services.AddDbContextPool<DbContainer>(opts => opts.UseSqlServer(Configuration.GetConnectionString("AnimalHealthCare")));
 
 
             services.AddRazorPages();
-
+            // services.ConfigureApplicationCookie(cke => { cke.LoginPath = "/Identity/Account/Login"; });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+          
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,8 +80,10 @@ namespace ProjectBackEndDemo
 
             app.UseRouting();
 
-            app.UseAuthorization();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+      
             var supportedCultures = new[] {
                           new CultureInfo("ar-EG"),
                           new CultureInfo("en-US"),
@@ -96,15 +106,23 @@ namespace ProjectBackEndDemo
             {
                 endpoints.MapControllerRoute(
                   name: "areas",
-                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                );
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                  endpoints.MapControllerRoute(name: "login",
+                     pattern: "{area:exists}/{controller=Account}/{action=Login}/{id?}");
+            
+
             });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                    endpoints.MapControllerRoute(name: "login",
+                     pattern: "{area:exists}/{controller=Account}/{action=Login}/{id?}");
             });
+
 
             app.UseEndpoints(endpoints =>
             {

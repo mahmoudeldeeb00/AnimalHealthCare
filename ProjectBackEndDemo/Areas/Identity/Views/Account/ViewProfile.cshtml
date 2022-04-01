@@ -1,0 +1,18 @@
+﻿@model ProjectBackEndDemo.Areas.Identity.Models.EditProfileVM
+
+@{
+    ViewData["Title"] = "ViewProfile";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+<h1>ViewProfile</h1>
+
+<div>
+    <img src="~/Files/UsersProfilePictures/@Model.ProfilePic" style="width:200px;height:200px;border-radius:50%" /><br />
+    <span>User Name : </span> @Model.UserName <br />
+    <span>Phone Number : </span> @Model.PhoneNumber <br />
+    <span>Email : </span> @Model.Email <br />
+    <span>Birth Day  : </span> @Model.BirthDay
+</div>
+
+
+

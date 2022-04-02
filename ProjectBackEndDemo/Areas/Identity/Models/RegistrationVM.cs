@@ -10,6 +10,8 @@ namespace ProjectBackEndDemo.Areas.Identity.Models
     {
 
         [Required(ErrorMessage = "Enter User Name ")]
+        [MinLength(5,ErrorMessage = "min length to user name is 5  ")]
+
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Enter Email ")]

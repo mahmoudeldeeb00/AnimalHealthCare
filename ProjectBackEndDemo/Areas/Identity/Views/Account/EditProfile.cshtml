@@ -8,21 +8,28 @@
 }
 
 <h1>EditProfile</h1>
-
+<div asp-validation-summary="All" class="text-danger"></div>
 <form asp-area="Identity" asp-controller="Account" asp-action="EditProfile" method="post" enctype="multipart/form-data">
     <input hidden type="text" asp-for="Id" />
 
     <label asp-for="UserName">User Name</label>
     <input type="text" asp-for="UserName" />
+    <span asp-validation-for="UserName" class="text-danger"></span>
     <br />
     <label asp-for="Email">Email</label>
     <input type="email" asp-for="Email" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+
     <br />
     <label asp-for="PhoneNumber">PhoneNumber</label>
     <input type="text" asp-for="PhoneNumber" />
+    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
     <br />
     <label asp-for="BirthDay">BirthDay</label>
     <input type="datetime" asp-for="BirthDay" />
+    <span asp-validation-for="BirthDay" class="text-danger"></span>
+
     <br />
     <label asp-for="ProfilePicture">Profile Picture</label>
     <input type="file" asp-for="ProfilePicture" />
@@ -32,3 +39,6 @@
     <input class="btn btn-primary" value="submit" type="submit" />
 
 </form>
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

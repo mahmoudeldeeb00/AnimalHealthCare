@@ -19,7 +19,7 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <form asp-area="Identity" asp-controller="Account" asp-action="LogOut"  method="post">
+    <form asp-area="Identity" asp-controller="Account" asp-action="LogOut" method="post">
         <input type="submit" name="name" value="LogOut" />
     </form>
 
@@ -30,12 +30,16 @@
     @if (signinmanager.IsSignedIn(User))
     {
         var x = User.Identity.Name;
-        var result = await usermanager.FindByNameAsync(x);
 
-        var currentUserId = result.Id;
-        <div> @x  </div>
-        <a asp-area="Identity" asp-controller="Account" asp-action="EditProfile" asp-route-id="@currentUserId"> Edit Profile  </a>
-        <a asp-area="Identity" asp-controller="Account" asp-action="ViewProfile" asp-route-id="@currentUserId"> View Profile  </a>
+        var result = await usermanager.FindByNameAsync(x);
+        if (result != null)
+        {
+            var currentUserId = result.Id;
+            <div> @x  </div>
+            <a asp-area="Identity" asp-controller="Account" asp-action="EditProfile" asp-route-id="@currentUserId"> Edit Profile  </a>
+            <a asp-area="Identity" asp-controller="Account" asp-action="ViewProfile" asp-route-id="@currentUserId"> View Profile  </a>
+
+        }
 
 
     }

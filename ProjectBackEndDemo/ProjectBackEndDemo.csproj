@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.15">
@@ -20,9 +23,6 @@
     <Folder Include="Areas\Care\Data\" />
     <Folder Include="Areas\Care\Models\" />
     <Folder Include="Areas\Care\Views\" />
-    <Folder Include="Areas\Emergency\Data\" />
-    <Folder Include="Areas\Emergency\Models\" />
-    <Folder Include="Areas\Emergency\Views\" />
     <Folder Include="Areas\Health\Controllers\" />
     <Folder Include="Areas\Health\Data\" />
     <Folder Include="Areas\Health\Models\" />

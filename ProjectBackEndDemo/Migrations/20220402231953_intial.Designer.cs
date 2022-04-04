@@ -10,8 +10,8 @@ using ProjectBackEndDemo.DAL.DataBase;
 namespace ProjectBackEndDemo.Migrations
 {
     [DbContext(typeof(DbContainer))]
-    [Migration("20220401175645_addcustomproperties")]
-    partial class addcustomproperties
+    [Migration("20220402231953_intial")]
+    partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -195,6 +195,30 @@ namespace ProjectBackEndDemo.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.Areas.Emergency.Data.Emergency", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Animal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HowToDeal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Emergencies");
                 });
 
             modelBuilder.Entity("ProjectBackEndDemo.Areas.Identity.Models.AppUser", b =>

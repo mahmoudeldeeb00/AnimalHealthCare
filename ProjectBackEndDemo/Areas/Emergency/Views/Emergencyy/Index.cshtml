@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ProjectBackEndDemo.Areas.Identity.Models
+
+@inject UserManager<AppUser> usermanager
+@inject SignInManager<AppUser> signinmanager
+
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+@model IEnumerable<ProjectBackEndDemo.Areas.Emergency.Models.EmergencyVM>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<script src="~/jquery/jquery.min.js"></script>
+<h1>Index</h1>
+
+
+@if (signinmanager.IsSignedIn(User))
+{
+    var x = User.Identity.Name;
+
+    var result = await usermanager.FindByNameAsync(x);
+    foreach (var item in await usermanager.GetRolesAsync(result))
+    {
+        if (item == "Admin")
+        {
+            <a asp-area="Emergency" asp-controller="Emergencyy" asp-action="CreateEmergency" class="btn btn-primary"> Create Emergency </a>
+
+        }
+    }
+
+
+}
+
+
+
+<br />
+<br />
+<br />
+<br />
+
+<select id="selectPet" asp-items="@ViewBag.AnimalList">
+    <option value="">Select Pet</option>
+</select>
+<div class="text-primary">Medical emergencies in pets, by definition, are sudden, unplanned events. It's hard to stay calm when your pet is facing a medical emergency, but being prepared will make it easier. So, get the phone number of the nearest veterinary clinic, and the nearest veterinary hospital that has an emergency department</div>
+<div id="view">
+
+</div>
+
+<script>
+    $(function () {
+
+        $("#selectPet").change(function () {
+
+            var x = $("#selectPet").val();
+
+            $.ajax({
+                type: "post",
+                url: "/Emergency/Emergencyy/FilterData",
+                data: { name: x },
+                success: function (res) {
+                    $("#view").empty();
+
+
+                    $.each(res, function (i, e) {
+                        $("#view").append(
+
+                            "<h2>" + e.Name + " </h2 ><div>" + e.Description + " </div><div>" + e.HowToDeal + " </div>"
+
+
+                        )
+                    })
+
+
+                }
+
+
+
+            })
+
+        })
+    })
+</script>
+
+
+
+
+
+@*@foreach (var Item in Model)
+    {
+        <div>
+            <h2> @Item.Name</h2>
+            <div>@Item.Description</div>
+            <div>@Item.HowToDeal</div>
+        </div>
+    }*@
+
+

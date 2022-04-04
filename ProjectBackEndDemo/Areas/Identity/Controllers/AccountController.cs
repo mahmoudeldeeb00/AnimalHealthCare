@@ -28,8 +28,6 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
         }
         #endregion
 
-
-
         #region registration 
 
         public IActionResult Registration()
@@ -78,7 +76,6 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
 
         #endregion
 
-
         #region Login 
         
         public IActionResult Login()
@@ -91,19 +88,15 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var user = await userManager.FindByEmailAsync(lgmodel.Email);
+                
                 var result = await signInManager.PasswordSignInAsync(lgmodel.UserName, lgmodel.Password, lgmodel.RemmemberMe, false);
 
                 if (result.Succeeded)
                 {
                       return RedirectToAction("Index", "Home" ,new { area=""});
-                   // return View("~/Views/Home/Index.cshtml");
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid Login Data (User Name or Password ) ");
-
-                }
+                 ModelState.AddModelError("", "Invalid Login Data (User Name or Password ) ");
+                
             }
 
 
@@ -116,7 +109,6 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
 
         #endregion
 
-
         #region logout 
         [HttpPost]
         public async Task<IActionResult> Logout()
@@ -126,8 +118,6 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
             return RedirectToAction("Login");
         }
         #endregion
-
-
 
         #region Edit Profile 
 
@@ -205,6 +195,7 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
         }
 
         #endregion
+       
         #region view profile 
         
         public async Task<IActionResult> ViewProfile(string id)

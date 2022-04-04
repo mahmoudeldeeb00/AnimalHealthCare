@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ProjectBackEndDemo.Areas.Emergency.Data;
 using ProjectBackEndDemo.Areas.Identity.Models;
 using ProjectBackEndDemo.DAL.Entities;
 using System;
@@ -19,6 +20,10 @@ namespace ProjectBackEndDemo.DAL.DataBase
         public DbSet<Vet> Vets { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Shop> Shops { get; set; }
+        public DbSet<Emergencyy> Emergencies { get; set; }
+    
+
+
 
 
 

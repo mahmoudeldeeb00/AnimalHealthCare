@@ -7,7 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
+using ProjectBackEndDemo.Areas.Emergency.EmergencyServices;
 using ProjectBackEndDemo.Areas.Identity.Models;
+using ProjectBackEndDemo.BL.Mapper;
 using ProjectBackEndDemo.DAL.DataBase;
 using System;
 using System.Collections.Generic;
@@ -32,9 +35,15 @@ namespace ProjectBackEndDemo
 
             services.AddControllersWithViews()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
+                .AddDataAnnotationsLocalization()
+                 .AddNewtonsoftJson(opt => {
+                     opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                 });
 
 
+            services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
+            services.AddScoped<DbContainer>();
+            services.AddScoped<IEmergencyRep , EmergencyRep>();
 
 
 

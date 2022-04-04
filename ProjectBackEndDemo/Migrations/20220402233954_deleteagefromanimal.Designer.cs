@@ -10,8 +10,8 @@ using ProjectBackEndDemo.DAL.DataBase;
 namespace ProjectBackEndDemo.Migrations
 {
     [DbContext(typeof(DbContainer))]
-    [Migration("20220330095745_Addcustomuser")]
-    partial class Addcustomuser
+    [Migration("20220402233954_deleteagefromanimal")]
+    partial class deleteagefromanimal
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -197,6 +197,30 @@ namespace ProjectBackEndDemo.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProjectBackEndDemo.Areas.Emergency.Data.Emergency", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Animal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HowToDeal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Emergencies");
+                });
+
             modelBuilder.Entity("ProjectBackEndDemo.Areas.Identity.Models.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -207,6 +231,9 @@ namespace ProjectBackEndDemo.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("BirthDay")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -242,6 +269,9 @@ namespace ProjectBackEndDemo.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ProfilePic")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -271,9 +301,6 @@ namespace ProjectBackEndDemo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

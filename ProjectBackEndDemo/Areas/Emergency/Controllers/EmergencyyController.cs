@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjectBackEndDemo.Areas.Emergency.EmergencyServices;
 using ProjectBackEndDemo.Areas.Emergency.Models;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProjectBackEndDemo.Areas.Emergency.Controllers
 {
+    [Authorize]
     [Area("Emergency")]
     public class EmergencyyController : Controller
     {
@@ -18,30 +20,19 @@ namespace ProjectBackEndDemo.Areas.Emergency.Controllers
         {
             erep = Erep;
         }
-        public IActionResult Index()
-        {
-            var x = erep.GetAnimals().ToList();
-            ViewBag.AnimalList = new SelectList(x, "Name", "Name");
+        public IActionResult Index() => View();
 
-            var emergensies = erep.GetAllEmergences();
+        [Authorize(Roles = "Vet,Admin")]
 
-            return View(emergensies);
-        }
-        public IActionResult CreateEmergency()
-        {
-            var x = erep.GetAnimals().ToList();
-            ViewBag.AnimalList = new SelectList(x, "Name", "Name");
-
-            return View();
-
-        }
+        public IActionResult CreateEmergency() => View();
+       
         [HttpPost]
         public IActionResult CreateEmergency(EmergencyVM model)
         {
             if (ModelState.IsValid)
             {
                 erep.AddEmergency(model);
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
 
             }
            
@@ -51,7 +42,7 @@ namespace ProjectBackEndDemo.Areas.Emergency.Controllers
 
 
 
-        /// ajax call ----------------
+        /// ajax call ---------------- ////
         ///
         [HttpPost]
 

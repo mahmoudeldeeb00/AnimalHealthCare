@@ -1,17 +1,33 @@
 ﻿@model ProjectBackEndDemo.Areas.Identity.Models.EditProfileVM
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
     ViewData["Title"] = "ViewProfile";
     Layout = "~/Views/Layouts/MainLayout.cshtml";
 }
-<h1>ViewProfile</h1>
 
-<div>
+
+<div class="text-center" style="margin:0 auto">
+    <h3 class="text-primary">ViewProfile</h3>
+    <br />
     <img src="~/Files/UsersProfilePictures/@Model.ProfilePic" style="width:200px;height:200px;border-radius:50%" /><br />
+    <br />
+
+
+    <br />
     <span>User Name : </span> @Model.UserName <br />
     <span>Phone Number : </span> @Model.PhoneNumber <br />
     <span>Email : </span> @Model.Email <br />
-    <span>Birth Day  : </span> @Model.BirthDay
+    <span>Birth Day  : </span> @Model.BirthDay <br />
+    <span>Animal   : </span> @Model.AnimalName <br />
+    <span>Gmail  : </span> @Model.Gmail <br />
+
+
+    <a class="btn btn-primary" asp-area="Identity" asp-controller="Account" asp-action="EditProfile" asp-route-id="@Model.Id">Edit Profile</a>
+
+
+
+
 </div>
 
 

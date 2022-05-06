@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "GetAllNotification";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+@model List<ProjectBackEndDemo.Models.NotificationVM> 
+
+
+<h1>GetAllNotification</h1>
+
+<ul  class='list-group'>
+    @foreach (var item in Model)
+    {
+    <li class='list-group-item notification-text' data-id='@item.id'> @item.text  <a class='text-primary' href='@item.UrlReference'> View Page </a>  @item.time </li>
+
+    }
+</ul>
+

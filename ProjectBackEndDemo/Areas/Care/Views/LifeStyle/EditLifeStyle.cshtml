@@ -1,0 +1,69 @@
+﻿@inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slcthHelper
+
+@{
+    ViewData["Title"] = "Edit Life Style ";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var AnimalList = new SelectList(slcthHelper.GetAnimals(), "Id", "Name");
+
+}
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model ProjectBackEndDemo.Areas.Care.Models.LifeStyleVM
+
+
+
+<div class="container">
+    <h1>Edit Life Style</h1>
+
+    <form asp-area="Care" asp-controller="LifeStyle" asp-action="EditLifeStyle" method="post" class="form-group">
+
+        <div asp-validation-summary="All" class="text-danger">   </div>
+
+        <input hidden asp-for="Id" />
+
+
+        <label asp-for="AnimalId"> Select Animals </label>
+        <select asp-items="AnimalList" asp-for="AnimalId">
+            <option> Select Animal </option>
+        </select>
+
+        <br />
+        <label asp-for="Cleanliness">Cleanliness</label>
+        <textarea asp-for="Cleanliness" placeholder="Enter Cleanliness article  ">
+
+           </textarea>
+        <span class="text-danger" asp-validation-for="Cleanliness">  </span>
+        <br />
+
+
+        <label asp-for="Care"> Care</label>
+        <textarea asp-for="Care" placeholder="Enter Care article  ">
+
+           </textarea>
+        <span class="text-danger" asp-validation-for="Care">  </span>
+        <br />
+
+
+        <label asp-for="Mating"> Mating</label>
+        <textarea asp-for="Mating" placeholder="Enter Mating article  ">
+
+           </textarea>
+        <span class="text-danger" asp-validation-for="Mating">  </span>
+        <br />
+
+
+        <input type="submit" class="btn btn-primary" name="name" value="submit" />
+
+
+
+
+
+    </form>
+
+
+</div>
+
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+

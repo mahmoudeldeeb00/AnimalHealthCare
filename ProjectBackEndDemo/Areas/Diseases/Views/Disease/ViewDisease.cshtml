@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "ViewDisese";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@model ProjectBackEndDemo.Areas.Diseases.Models.DieseaseVM
+
+
+<form asp-action="Search" asp-controller="Disease" asp-area="Diseases" method="get">
+    <input id="search" name="search" type="search" placeholder="Search Diseases " />
+    <input type="submit" hidden />
+</form>
+
+
+<div class="container " id="DiseaseBody">
+
+
+        <ul class="list-group">
+            <li class="list-group-item">
+                Name : <span class="text-primary"> @Model.Name</span>
+            </li>
+            <li class="list-group-item">
+                is infect : <span class="text-primary"> @Model.IsInfect</span>
+            </li>
+
+            <li class="list-group-item">
+                Animal : <span class="text-primary"> @Model.AnimalName</span>
+            </li>
+
+            <li class="list-group-item">
+                Medicines  : <span class="text-primary">
+                    @foreach (var (x, y) in Model.MedicineNames.Zip(Model.MedicineIds))
+                    {
+                        <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewMedicine" asp-route-id="@y"> @x  </a>
+                    }
+
+
+                </span>
+            </li>
+
+            <li class="list-group-item">
+                symptoms : <span class="text-primary">
+
+                    @foreach (var (x, y) in Model.SymptomNames.Zip(Model.SymptomIds))
+                    {
+                        <a asp-area="Diseases" asp-controller="Disease" asp-action="Viewsymptom" asp-route-id="@y"> @x  </a>
+                    }
+
+                </span>
+            </li>
+        </ul>
+
+        <br /><br /><br />
+    
+
+</div>

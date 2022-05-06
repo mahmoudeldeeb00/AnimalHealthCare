@@ -15,6 +15,8 @@ namespace ProjectBackEndDemo.DAL.Entities
         public int age { get; set; }
         public string Address { get; set; }
         public string Telephone { get; set; }
+        public string PictureUrl { get; set; }
+
 
 
 

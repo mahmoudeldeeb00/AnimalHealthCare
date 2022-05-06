@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "ViewFeedBacks";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+@model List<ProjectBackEndDemo.Areas.Identity.Models.FeedBack>
+
+<div class="container">
+    
+    <table style="border:1px solid #f00">
+        
+        <thead>
+            <tr>
+                <td> Name </td>
+                <td> Email </td>
+                <td> Content </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td> @item.Name </td>
+                    <td> @item.Email </td>
+                    <td> @item.Content </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+</div>

@@ -117,16 +117,148 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutUs" xml:space="preserve">
+    <value>AboutUs</value>
+  </data>
+  <data name="AHealthcare&amp;LifestyleSystem" xml:space="preserve">
+    <value>A Healthcare &amp; Lifestyle System</value>
+  </data>
+  <data name="arabic" xml:space="preserve">
+    <value>لغة عربية</value>
+  </data>
+  <data name="Assessment" xml:space="preserve">
+    <value>Assessment</value>
+  </data>
+  <data name="Because every life matters, including our animals lives and their health too." xml:space="preserve">
+    <value>Because every life matters, including our animals lives and their health too.</value>
+  </data>
+  <data name="Care" xml:space="preserve">
+    <value>Care</value>
+  </data>
+  <data name="Contactaveterinarian" xml:space="preserve">
+    <value>Contact a veterinarian</value>
+  </data>
+  <data name="CreateEmergency" xml:space="preserve">
+    <value>Create Emergency</value>
+  </data>
   <data name="delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="Diseases" xml:space="preserve">
+    <value>Diseases</value>
+  </data>
   <data name="edit" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="Emergencies" xml:space="preserve">
+    <value>Emergencies</value>
+  </data>
+  <data name="Emergency" xml:space="preserve">
+    <value>Emergency</value>
+  </data>
+  <data name="english" xml:space="preserve">
+    <value>english</value>
+  </data>
+  <data name="Enteryouremail" xml:space="preserve">
+    <value>Enter your email</value>
+  </data>
+  <data name="Enteryourname" xml:space="preserve">
+    <value>Enter your name</value>
+  </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
+  <data name="Haveanemergencycase" xml:space="preserve">
+    <value>Have an emergency case</value>
+  </data>
+  <data name="Health" xml:space="preserve">
+    <value>Health</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Husbandry" xml:space="preserve">
+    <value>Husbandry</value>
+  </data>
+  <data name="Instructions" xml:space="preserve">
+    <value>Instructions</value>
+  </data>
+  <data name="Let'stakecareofouranimals" xml:space="preserve">
+    <value>Let's take care of our animals</value>
+  </data>
+  <data name="LifeStyle" xml:space="preserve">
+    <value>Life Style</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>LogOut</value>
+  </data>
+  <data name="Managenotifications" xml:space="preserve">
+    <value>Manage Notifications</value>
+  </data>
+  <data name="Medicines" xml:space="preserve">
+    <value>Medicines</value>
+  </data>
+  <data name="Notificationshistory" xml:space="preserve">
+    <value>Notifications history</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="RolesSitting" xml:space="preserve">
+    <value>Roles Sitting</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>Setting</value>
+  </data>
+  <data name="SomeFAQs" xml:space="preserve">
+    <value>Some FAQs</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Emergencies</value>
+  </data>
+  <data name="Symptoms" xml:space="preserve">
+    <value>Symptoms</value>
+  </data>
+  <data name="TellUsyourfeedback" xml:space="preserve">
+    <value>Tell Us your feedback</value>
   </data>
   <data name="test" xml:space="preserve">
     <value>Test</value>
   </data>
   <data name="test1" xml:space="preserve">
     <value>Test 2</value>
+  </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>Theme Color</value>
+  </data>
+  <data name="ThemeMood" xml:space="preserve">
+    <value>Theme Mood</value>
+  </data>
+  <data name="Veterinaries" xml:space="preserve">
+    <value>Veterinaries</value>
+  </data>
+  <data name="Vets" xml:space="preserve">
+    <value>Vets</value>
+  </data>
+  <data name="ViewAllCases" xml:space="preserve">
+    <value>View All Cases</value>
+  </data>
+  <data name="ViewAllVets" xml:space="preserve">
+    <value>ViewAllVets</value>
+  </data>
+  <data name="ViewMonitoringPage" xml:space="preserve">
+    <value>View Monitoring Page</value>
+  </data>
+  <data name="Wewishthatwehelpyouwithwhatyouneed" xml:space="preserve">
+    <value>We wish that we help you with what you need</value>
+  </data>
+  <data name="What'swrongwithyourpet?" xml:space="preserve">
+    <value>What's wrong with your pet?</value>
+  </data>
+  <data name="WhatsWrongwithyourPet!" xml:space="preserve">
+    <value>Whats Wrong with your Pet!</value>
   </data>
 </root>

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjectBackEndDemo.Areas.Identity.Models;
+using ProjectBackEndDemo.Areas.Identity.Rep;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +12,18 @@ using System.Threading.Tasks;
 namespace ProjectBackEndDemo.Areas.Identity.Controllers
 {
     [Area("Identity")]
+    [Authorize(Roles="Admin")]
     public class AdminController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IAdminRep adRep;
 
-        public AdminController(RoleManager<IdentityRole> _roleManager, UserManager<AppUser> userManager)
+        public AdminController(RoleManager<IdentityRole> _roleManager, UserManager<AppUser> userManager , IAdminRep adRep)
         {
             roleManager = _roleManager;
             _userManager = userManager;
+            this.adRep = adRep;
         }
         
 
@@ -101,11 +106,6 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
         public IActionResult SignUsersToRoles()
         {
 
-            var Roles = roleManager.Roles.ToList();
-            var Users = _userManager.Users.ToList();
-            ViewBag.Roles = new SelectList(Roles, "Name", "Name");
-            ViewBag.Users = new SelectList(Users, "UserName", "UserName");
-
             return View();
         }
         [HttpPost]
@@ -136,6 +136,19 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
             return View();
         }
 #endregion
+
+
+
+        [HttpPost]
+        public IActionResult AddFeedBack(string Name , string Email , string Content )
+        {
+
+            adRep.CreateFeedBack(Name, Email, Content);
+            return RedirectToAction("Index","Home",new { area=""});
+        }
+
+        public IActionResult ViewFeedBacks() => View(adRep.GetAllFeedBacks());
+        
 
     }
 }

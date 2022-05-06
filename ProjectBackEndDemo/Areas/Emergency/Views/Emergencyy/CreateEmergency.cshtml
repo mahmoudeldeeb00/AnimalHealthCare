@@ -1,44 +1,48 @@
-﻿
+﻿@inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slct
 @{
     ViewData["Title"] = "CreateEmergency";
     Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var anilist = new SelectList(slct.GetAnimals(), "Name", "Name");
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
-@{
-}
 @model ProjectBackEndDemo.Areas.Emergency.Models.EmergencyVM
 
-<h1>CreateEmergency</h1>
-<div asp-validation-summary="All" class="text-danger">   </div>
-<form asp-area="Emergency" asp-controller="Emergencyy" asp-action="CreateEmergency" method="post">
-
-    <select asp-items="@ViewBag.AnimalList" asp-for="Animal">
-        <option value="">choose Pet</option>
-    </select>
-    <span class="text-danger" asp-validation-for="Animal">  </span>
-
-    <br />
-    <label asp-for="Name">Name</label>
-    <input type="text" asp-for="Name" placeholder="Name " />
-    <span class="text-danger" asp-validation-for="Name">  </span>
-    <br />
-    <label asp-for="Description">Description</label>
-    <textarea asp-for="Description"></textarea>
-    <span class="text-danger" asp-validation-for="Description">  </span>
-    <br />
-    <label asp-for="HowToDeal">HowToDeal</label>
-    <textarea asp-for="HowToDeal"></textarea>
-    <span class="text-danger" asp-validation-for="HowToDeal">  </span>
-    <br />
-
-    <input type="submit" class="btn btn-primary" name="name" value="submit" />
 
 
+<div class="container">
+    <h1>CreateEmergency</h1>
+    <div asp-validation-summary="All" class="text-danger">   </div>
+    <form asp-area="Emergency" asp-controller="Emergencyy" asp-action="CreateEmergency" method="post" class="form-group">
+
+        <select asp-items="@anilist" asp-for="Animal" class="custom-select">
+            <option value="">choose Pet</option>
+        </select>
+        <span class="text-danger" asp-validation-for="Animal">  </span>
+
+        <br />
+        <label asp-for="Name">Name</label>
+        <input type="text" asp-for="Name" placeholder="Name " class="form-control" />
+        <span class="text-danger" asp-validation-for="Name">  </span>
+        <br />
+        <label asp-for="Description">Description</label>
+        <textarea class="form-control" asp-for="Description"></textarea>
+        <span class="text-danger" asp-validation-for="Description">  </span>
+        <br />
+        <label asp-for="HowToDeal">HowToDeal</label>
+        <textarea class="form-control" asp-for="HowToDeal"></textarea>
+        <span class="text-danger" asp-validation-for="HowToDeal">  </span>
+        <br />
+
+        <input type="submit" class="btn btn-primary" name="name" value="submit" />
 
 
 
-</form>
+
+
+    </form>
+
+
+</div>
 
 <script src="~/jquery/jquery.min.js"></script>
 <script src="~/jquery-validate/jquery.validate.min.js"></script>

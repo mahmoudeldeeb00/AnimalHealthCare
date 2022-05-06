@@ -20,7 +20,15 @@ namespace ProjectBackEndDemo.Areas.Identity.Models
         public string PhoneNumber { get; set; }
         public DateTime BirthDay { get; set; }
         public string ProfilePic { get; set; }
-        public IFormFile ProfilePicture { get; set; }
+       // public IFormFile ProfilePicture { get; set; }
+        public int AnimalId { get; set; }
+        public string AnimalName { get; set; }
+       
+        [EmailAddress(ErrorMessage = "enter Valid Gmail")]
+        public string Gmail { get; set; }
+
+
+
 
 
 

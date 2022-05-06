@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "GetSensorData";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+@model ProjectBackEndDemo.Areas.Sensor.Models.SensorDataVM
+<h1>GetSensorData</h1>
+
+<div class="Container">
+
+    Your <span class="text-primary"> @Model.AnimalName </span> his healthy is <span class="text-primary"> @Model.Name </span> the description Is
+    <span class="text-primary"> @Model.Description </span> and might Ill with the Dieases <span class="text-primary"> @Model.DiseaseName </span>
+    this Dieases is
+
+    @if (Model.IsEmergency == true)
+    {
+
+
+        <span class="text-primary"> An Emergency </span>
+    }
+    else
+    {
+        <span class="text-primary">this Dieases is not Emergency </span>
+
+    }
+
+
+
+
+    You should to do <span class="text-primary"> @Model.HowToDeal </span>
+</div>

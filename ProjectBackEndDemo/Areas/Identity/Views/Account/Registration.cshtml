@@ -18,32 +18,41 @@
 
 </head>
 <body>
+    <div style="height:100px">   </div>
 
 
-    <div asp-validation-summary="All" class="text-danger" >  </div>
+    <div asp-validation-summary="All" class="text-danger">  </div>
+
+    <div class="container">
+
+        <form asp-area="Identity" asp-controller="Account" asp-action="Registration" method="post" class=" card form-group" style="padding:15px">
+            <label asp-for="UserName"> Enter UserName  </label>
+            <input type="text" asp-for="UserName" placeholder="user name" class="form-control" />
+            <span asp-validation-for="UserName" class="text-danger">  </span>
+            <br />
+            <label asp-for="Email"> enter email </label>
+            <input type="email" asp-for="Email" placeholder="email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger">  </span>
+            <br />
+            <label asp-for="Password"> enter Password </label>
+
+            <input type="password" asp-for="Password" placeholder="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger">  </span>
+            <br />
+            <label asp-for="ConfirmPassword"> enter Password </label>
+
+            <input type="password" asp-for="ConfirmPassword" placeholder="ConfirmPassword" class="form-control" />
+
+            <span asp-validation-for="ConfirmPassword" class="text-danger">  </span>
 
 
-    <form asp-area="Identity" asp-controller="Account" asp-action="Registration" method="post" class="form-group">
-        <input type="text" asp-for="UserName" placeholder="user name" class="form-control" />
-        <span asp-validation-for="UserName" class="text-danger">  </span>
 
-        <input type="email" asp-for="Email" placeholder="email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger">  </span>
-
-        <input type="password" asp-for="Password" placeholder="password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger">  </span>
-
-        <input type="password" asp-for="ConfirmPassword" placeholder="ConfirmPassword" class="form-control" />
-
-        <span asp-validation-for="ConfirmPassword" class="text-danger">  </span>
+            <input type="submit" value="Sign Up" class="btn btn-primary" />
+            <div class="text-sm-center">Already Have Account ! <a asp-area="Identity" asp-controller="Account" asp-action="Login"> LogIn </a></div>
 
 
-
-        <input type="submit" value="Sign Up" class="btn btn-primary" />
-        <div class="text-sm-center">Already Have Account ! <a asp-area="Identity" asp-controller="Account" asp-action="Login"> LogIn </a></div>
-
-
-    </form>
+        </form>
+    </div>
     <script src="~/jquery/jquery.min.js"></script>
     <script src="~/jquery-validate/jquery.validate.min.js"></script>
     <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

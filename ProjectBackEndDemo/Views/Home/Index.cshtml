@@ -1,9 +1,261 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Cura";
+}
+@inject ProjectBackEndDemo.Areas.Vets.Rep.IVetRep Vrep
+@inject ProjectBackEndDemo.Areas.Emergency.EmergencyServices.IEmergencyRep EmergencyRep
+@inject ProjectBackEndDemo.Areas.Diseases.Rep.IDiseaseRep DieaseRep
+@{ 
+    var VetList = Vrep.GetAllVets().Take(5);
+    var EmergencyList = EmergencyRep.GetAllEmergences().Take(5);
+    var FAQList = DieaseRep.GetFAQS().Take(5);
 }
 
-<h1>Index</h1>
-<h2>Hello from Home Page</h2>
+<!-- Start Landing -->
+<section class="landing">
+    <div class="container">
+        <h1>@AppLng["Let'stakecareofouranimals"]<i class="fa-solid fa-heart"></i></h1>
+        <p>@AppLng["Because every life matters, including our animals lives and their health too."]</p>
+        <p>We are here to help you take care your PET.</p>
+        <p>We hope we can help you with what you need.</p>
+        <a asp-action="GetAllNotification" asp-controller="Notification" asp-area="">@AppLng["ViewMonitoringPage"]</a>
+    </div>
+</section>
+<!-- End Landing -->
+<!-- Start Main Heading -->
+<main>
+    <div class="container">
+        <img src="/assets/imgs/cura-red.webp" alt="Cura" class="logo" />
+        <h2>@AppLng["AHealthcare&LifestyleSystem"]</h2>
+        <p>We seek to make the way you treat and care your pet easier, and to put them in a healthier state too.</p>
+    </div>
+</main>
+<!-- End Main Heading -->
+<!-- Start Emergency Section -->
+<section class="emergency">
+    <h3 class="heading">@AppLng["Emergency"]</h3>
+    <div class="container">
+        <div class="emergency-note">
+            <p>Negligence in dealing with emergency situations in which your pet is exposed, such as fractures or burns, can lead to serious consequences, including death.</p>
+            <p>You must deal with these situations quickly and carefully, and it is recommended to communicate with a specialized veterinarian to deal properly.</p>
+        </div>
+        <div class="emergency-faq">
+            <div class="faq-box">
+                <div class="faq-que open">
+                    A foreign body in your cat's throat
+                    <i class="fa-solid fa-caret-up"></i>
+                </div>
+                <div class="faq-ans show">
+                    If you fear your cat has a foreign object trapped in the throat, visit a veterinarian right away. Depending on the size and location of the object, an esophageal or pharyngeal blockage can be a life-threatening condition Try to pull it out with tongs.
+                    If you cannot remove the stuck object with the forceps, Put your cat on your lap and try to get the object out by pressing on it
+                </div>
+            </div>
+            @foreach (var item in EmergencyList)
+            {
+                <div class="faq-box">
+                    <div class="faq-que">
+                        @item.Animal   @item.Name
+                        <i class="fa-solid fa-caret-up"></i>
+                    </div>
+                    <div class="faq-ans" style="width:100%">
+                        <div>@item.Description</div>
+                        <div>@item.HowToDeal</div>
+
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="emergency-btns">
+            <a asp-area="Emergency" asp-controller="Emergencyy" asp-action="Index">@AppLng["Haveanemergencycase"]</a>
+            <a asp-area="Vets" asp-controller="Vet" asp-action="Index">@AppLng["Contactaveterinarian"]</a>
+        </div>
+    </div>
+</section>
+<!-- End Emergency Section -->
+<!-- Start Health Section -->
+<section class="health">
+    <h3 class="heading">@AppLng["Health"]</h3>
+    <div class="container">
+        <div class="health-note">
+            <p>When you are in a less healthy state or feel sick, you can express it and quickly try to treat it before it gets worse.</p>
+            <p>But your pet can't do that, so we are here to help you deal with it and treat it when any symptoms appear.</p>
+        </div>
+        <div class="health-search">
+
+            <form class="health-search" asp-action="Search" asp-controller="Disease" asp-area="Diseases" method="get">
+                <input required type="search" name="search" id="disease" placeholder="@AppLng["What'swrongwithyourpet?"]" />
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i>@AppLng["Search"]</button>
+            </form>
+        </div>
+        <div class="health-faq">
+            <span>@AppLng["SomeFAQs"]</span>
+            <div class="faq-box">
+                <div class="que-box open">
+                    My dog can't move normally.
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+                <div class="ans-box show">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic voluptates consequuntur quam, dolor odit modi consectetur molestiae, at quisquam sapiente, quaerat excepturi. Assumenda maiores, quam ipsa eaque doloremque blanditiis quidem. Lorem ipsum dolor
+                    sit amet consectetur adipisicing elit. Hic voluptates consequuntur quam, dolor odit modi consectetur molestiae, at quisquam sapiente, quaerat excepturi. Assumenda maiores, quam ipsa eaque doloremque blanditiis quidem.
+                </div>
+            </div>
+
+            @foreach (var item in FAQList)
+            {
+                <div class="faq-box">
+                    <div class="que-box">
+                        @item.Question
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <div class="ans-box  ">
+                        @item.Answer
+                    </div>
+                </div>
 
 
+            }
+
+
+        </div>
+        <a asp-action="ViewFAQs" asp-controller="Disease" asp-area="Diseases">@AppLng["ViewAllCases"]</a>
+    </div>
+</section>
+<!-- End Health Section -->
+<!-- Start Care Section -->
+<section class="care">
+    <h3 class="heading">@AppLng["Care"]</h3>
+    <div class="container">
+        <div class="care-box">
+            <i class="fa-solid fa-calendar-plus fa-3x"></i>
+            <h4>Follow Up</h4>
+            <p>If your pet is sick and on a treatment regimen, we can help guide you on how to monitor his condition, in:</p>
+            <ul>
+                <li>
+                    <i class="fa-solid fa-check"></i> What is the proper way to follow up on his condition?
+                </li>
+                <li>
+                    <i class="fa-solid fa-check"></i> How do you know if its condition is improving?
+                </li>
+                <li>
+                    <i class="fa-solid fa-check"></i> How and when to give him medicine?
+                </li>
+            </ul>
+        </div>
+        <div class="care-box">
+            <i class="fa-solid fa-arrows-to-eye fa-3x"></i>
+            <h4>Behavior Assessment</h4>
+            <p>If you have a pet and are having difficulty assessing and understanding its behaviour, we can help you with that, in:</p>
+            <ul>
+                <li>
+                    <i class="fa-solid fa-check"></i> How can you assess a pet behavior?
+                </li>
+                <li>
+                    <i class="fa-solid fa-check"></i> What is the normal behavior of this pet?
+                </li>
+                <li>
+                    <i class="fa-solid fa-check"></i> What are the unusual cases and how to deal with?
+                </li>
+            </ul>
+        </div>
+        <div class="care-box">
+            <i class="fa-solid fa-road-circle-check fa-3x"></i>
+            <h4>Husbandry Method</h4>
+            <p>Husbandry is always complicated, so if you are having difficulty raising your pet, we can help you with that, in:</p>
+            <ul>
+                <li>
+                    <i class="fa-solid fa-check"></i> ًWhy you need a husbandry method?
+                </li>
+                <li>
+                    <i class="fa-solid fa-check"></i> What is the best method to husbandry a pet?
+                </li>
+                <li>
+                    <i class="fa-solid fa-check"></i> What behaviors should you avoid in husbandry?
+                </li>
+            </ul>
+        </div>
+        <div class="care-box">
+            <i class="fa-solid fa-house-circle-check fa-3x"></i>
+            <h4>Lifestyle</h4>
+            <p>The lifestyle you live and the environment around you always affects you and your pet, we can help you with that, in:</p>
+            <ul>
+                <li>
+                    <i class="fa-solid fa-check"></i> What is the best lifestyle for your pet to live in?
+                </li>
+                <li>
+                    <i class="fa-solid fa-check"></i> What is the best environment to put it in?
+                </li>
+                <li>
+                    <i class="fa-solid fa-check"></i> What is the right food for it?
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End Care Section -->
+<!-- Start Vets Section -->
+<section class="vets">
+    <h3 class="heading">@AppLng["Veterinaries"]</h3>
+    <div class="container swiper mySwiper">
+        <div class="vet-content swiper-wrapper">
+
+
+            @foreach (var item in VetList)
+            {
+                <div class="vet-box swiper-slide">
+                    <div class="vet-card">
+                        <img src="/Files/VetPictures/@item.PictureUrl" alt="Vet one" />
+                        <div class="card-back">
+                            <h4>@item.Name</h4>
+                            <span>Emergency Specialist</span>
+                            <address>@item.Address</address>
+                            <address>@item.CityName</address>
+                            <address>@item.Telephone</address>
+
+                            <div class="vet-rate">
+                                <i class="fa-solid fa-star fill"></i>
+                                <i class="fa-solid fa-star fill"></i>
+                                <i class="fa-solid fa-star fill"></i>
+                                <i class="fa-solid fa-star fill"></i>
+                                <i class="fa-regular fa-star"></i>
+                            </div>
+                            <a asp-area="Vets" asp-controller="Vet" asp-action="ViewVet" asp-route-id="@item.Id">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+        <a asp-area="Vets" asp-controller="Vet" asp-action="Index">@AppLng["ViewAllVets"]</a>
+    </div>
+</section>
+<!-- End Vets Section -->
+<!-- Start About Us Section -->
+<section class="about">
+    <h3 class="heading">@AppLng["AboutUs"]</h3>
+    <div class="container">
+        <form asp-area="Identity" asp-controller="Admin" asp-action="AddFeedBack" method="post">
+            <input type="text" name="Name" id="feed-user" placeholder="@AppLng["Enteryourname"]" />
+            <input type="email" name="Email" id="feed-email" placeholder="@AppLng["Enteryouremail"]" />
+            <textarea name="Content" id="feed-text" placeholder="@AppLng["TellUsyourfeedback"]"></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <div class="details">
+            <div class="address">
+                <i class="fa-solid fa-location-dot"></i>
+                <address>
+                    <span>Egypt, Menoufia University.</span>
+                    <span>Department of Physics and Computer Science.</span>
+                </address>
+            </div>
+            <div class="phone">
+                <i class="fa-solid fa-phone-volume"></i>
+                <div>
+                    <span>+012 3456 789</span>
+                    <span>+012 3456 789</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End About Us Section -->

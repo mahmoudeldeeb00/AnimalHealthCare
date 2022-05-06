@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "CreateNotification";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+<h1>CreateNotification</h1>
+@model ProjectBackEndDemo.DAL.Entities.Notification
+<form asp-area="" asp-controller="Notification" asp-action="CreateNotification" method="post">
+    <label asp-for="Text"> enter message text </label> <br /><br />
+    <input type="text" asp-for="Text" /> <br /><br />
+
+    <input type="submit" value="Send Notification" />
+</form>

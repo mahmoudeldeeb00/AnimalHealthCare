@@ -16,9 +16,11 @@ namespace ProjectBackEndDemo.DAL.Entities
         public string Temperature { get; set; }
         public bool HasSideEffect { get; set; }
         public string Expirty { get; set; }
+        public string KeyWords { get; set; }
 
 
-        public virtual ICollection<Disease> Disease { get; set; }
+        public virtual ICollection<DiseasMedicine> DiseasMedicines { get; set; }
+
 
     }
 }

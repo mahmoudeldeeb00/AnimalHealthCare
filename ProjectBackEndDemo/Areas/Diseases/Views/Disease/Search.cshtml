@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<ProjectBackEndDemo.Areas.Diseases.Models.DieseaseVM>
+<h1>Hello to Diseases Page </h1>
+<form asp-action="Search" asp-controller="Disease" asp-area="Diseases" method="get">
+    <input id="search" name="search" type="search" placeholder="Search Diseases " />
+    <input type="submit" hidden />
+</form>
+
+
+
+<div class="container DiseaseBody">
+
+
+    @foreach (var item in Model)
+    {
+        <ul class="list-group">
+            <li class="list-group-item">
+                Name : <span class="text-primary"> @item.Name</span>
+            </li>
+            <li class="list-group-item">
+                is infect : <span class="text-primary"> @item.IsInfect</span>
+            </li>
+
+            <li class="list-group-item">
+                Animal : <span class="text-primary"> @item.AnimalName</span>
+            </li>
+
+            <li class="list-group-item">
+                Medicine : <span class="text-primary">
+                    @foreach (var (x, y) in item.MedicineNames.Zip(item.MedicineIds))
+                    {
+                        <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewMedicine" asp-route-id="@y"> @x  </a>
+                    }
+
+
+                </span>
+            </li>
+
+            <li class="list-group-item">
+                symptom : <span class="text-primary">
+
+                    @foreach (var (x, y) in item.SymptomNames.Zip(item.SymptomIds))
+                    {
+                        <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewSymptom" asp-route-id="@y"> @x  </a>
+                    }
+
+                </span>
+            </li>
+        </ul>
+
+        <br /><br /><br />
+    }
+
+</div>

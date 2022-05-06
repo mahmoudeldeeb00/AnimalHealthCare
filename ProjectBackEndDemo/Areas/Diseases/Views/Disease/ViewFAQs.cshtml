@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "ViewFAQs";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<ProjectBackEndDemo.Areas.Diseases.Models.FAQVM>
+
+<div class="container">
+
+    <form asp-action="SearchFAQs" asp-controller="Disease" asp-area="Diseases" method="get">
+        <input type="search" name="search" value="" placeholder="Whats Wrong with your Pet!"/>
+        <input type="submit" hidden name="" value="Search" />
+    </form>
+
+    <h1>ViewFAQs</h1>
+
+
+    @foreach (var item in Model)
+    {
+        <div>
+            @item.Question
+        </div>
+        <div style="margin:0 0 0 30px">
+            @item.Answer
+        </div>
+    }
+
+
+
+</div>
+
+

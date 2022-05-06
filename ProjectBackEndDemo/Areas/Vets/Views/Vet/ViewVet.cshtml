@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "ViewVet";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+
+@model ProjectBackEndDemo.Areas.Vets.Models.VetVM
+
+<style>
+    .VetPicture {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    .vet {
+        padding: 10px;
+        display: inline-block;
+    }
+</style>
+<div class="container text-center">
+
+   
+        <div class="vet">
+            <img class="VetPicture" src="/Files/VetPictures/@Model.PictureUrl" /> <br />
+            Name : <span class="text-primary"> @Model.Name </span> <br />
+            age : <span class="text-primary"> @Model.age </span> <br />
+            Addresse : <span class="text-primary"> @Model.Address </span> <br />
+            Telephone : <span class="text-primary"> @Model.Telephone </span> <br />
+            City : <span class="text-primary"> @Model.CityName </span> <br />
+
+            <a href="/Vets/Vet/EditVet/@Model.Id" class="btn btn-primary"> Edit Vet  </a>
+
+        </div>
+    
+
+
+</div>
+
+

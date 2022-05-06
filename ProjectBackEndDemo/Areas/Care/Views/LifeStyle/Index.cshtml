@@ -1,0 +1,60 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model ProjectBackEndDemo.Areas.Care.Models.LifeStyleVM
+@inject SignInManager<AppUser> signinmanager
+@inject UserManager<AppUser> usermanager
+
+@using Microsoft.AspNetCore.Identity
+@using ProjectBackEndDemo.Areas.Identity.Models
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+
+}
+
+ @if (signinmanager.IsSignedIn(User))
+    {
+        var currentUser = await usermanager.FindByNameAsync(User.Identity.Name);
+   
+
+<div class="container">
+    <h1>Life Style</h1>
+    <div>
+        <h2> cleanliness </h2>
+        @Model.Cleanliness
+    </div>
+    <div>
+        <h2> Care </h2>
+        @Model.Care
+    </div>
+    <div>
+        <h2> Mating </h2>
+        @Model.Mating
+    </div>
+
+    <div>
+        <h2> Foods </h2>
+        <ul>
+            @foreach (var item in Model.Foods)
+            {
+                <li>
+                    Name : @item.Name <br />
+                    Descroption  : @item.Description <br />
+
+                </li>
+            }
+        </ul>
+    </div>
+
+
+
+    @foreach (var role in await usermanager.GetRolesAsync(currentUser))
+    {
+        if(role=="Admin" || role == "Vet")
+                    {
+            <a asp-area="Care" asp-controller="LifeStyle" asp-action="EditLifeStyle" asp-route-id="@Model.Id"> Edit This Life Style </a>
+                    }
+    }
+
+
+</div>
+ }

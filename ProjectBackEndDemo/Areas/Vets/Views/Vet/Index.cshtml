@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+@model List<ProjectBackEndDemo.Areas.Vets.Models.VetVM>
+
+<style>
+    .VetPicture{
+        width: 50px;
+        height:50px;
+        border-radius:50% ;
+    }
+    .vet{
+        padding:10px;
+        display : inline-block;
+    }
+
+</style>
+<div class="container text-center">
+    
+    @foreach(var item in Model)
+     {
+    <div class="vet">
+        <img class="VetPicture" src="/Files/VetPictures/@item.PictureUrl" /> <br />
+        Name : <span class="text-primary"> @item.Name </span> <br />
+        age : <span class="text-primary"> @item.age </span> <br />
+        Addresse : <span class="text-primary"> @item.Address </span> <br />
+        Telephone : <span class="text-primary"> @item.Telephone </span> <br />
+        City : <span class="text-primary"> @item.CityName </span> <br />
+
+        <a href="/Vets/Vet/EditVet/@item.Id" class="btn btn-primary"> Edit Vet  </a>
+        <a href="/Vets/Vet/ViewVet/@item.Id" class="btn btn-primary"> View Vet  </a>
+
+    </div>
+     }
+
+
+</div>
+

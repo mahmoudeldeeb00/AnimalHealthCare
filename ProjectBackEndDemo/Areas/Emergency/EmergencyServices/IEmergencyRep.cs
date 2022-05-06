@@ -16,6 +16,8 @@ namespace ProjectBackEndDemo.Areas.Emergency.EmergencyServices
     {
 
         public IEnumerable<EmergencyVM> GetAllEmergences();
+        public List<EmergencyVM> GetAllEmergences(string search);
+
         public IEnumerable<Animal> GetAnimals();
 
         public void AddEmergency(EmergencyVM model);

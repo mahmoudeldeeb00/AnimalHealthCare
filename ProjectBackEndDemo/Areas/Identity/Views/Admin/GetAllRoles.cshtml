@@ -1,47 +1,81 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿
+@{
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+    ViewData["Title"] = "GetAllRoles";
+}
+@using Microsoft.AspNetCore.Identity
 @using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
 @model IEnumerable<IdentityRole>
 
 
-@using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResource> AppLng
 
-@{
-    Layout = "~/Views/Layouts/MainLayout.cshtml";
-}
 @addTagHelper * , Microsoft.AspNetCore.Mvc.TagHelpers
 
-@{
-    ViewData["Title"] = "GetAllRoles";
-}
 
 <h1>GetAllRoles</h1>
 
+<style>
+    td {
+        padding: 15px;
+        text-align: center;
+    }
+
+    a {
+        margin: 10px;
+    }
+</style>
+<a class="btn btn-primary" asp-area="Identity" asp-controller="Admin" asp-action="CreateRole"> Add Role </a>
+<a class="btn btn-primary" asp-area="Identity" asp-controller="Admin" asp-action="SignUsersToRoles"> SignUsersToRoles </a>
+<a class="btn btn-primary" asp-area="Identity" asp-controller="Admin" asp-action="ViewFeedBacks"> View FeedBacks </a>
+
+<a class="btn btn-primary" asp-area="Sensor" asp-controller="SSensor" asp-action="CreateSensorData"> Add Sensor data  </a>
+
+<a class="btn btn-primary" asp-area="Diseases" asp-controller="Disease" asp-action="CreateDisease"> Add Disease </a>
+<a class="btn btn-primary" asp-area="Diseases" asp-controller="Disease" asp-action="CreateMedicine"> Add Medicine </a>
+<a class="btn btn-primary" asp-area="Diseases" asp-controller="Disease" asp-action="CreateSymptom"> Add Symptom </a>
+<a class="btn btn-primary" asp-area="Vets" asp-controller="Vet" asp-action="CreateVet"> Add Vet </a>
+<br />
+<a class="btn btn-primary" asp-area="Care" asp-controller="LifeStyle" asp-action="CreateFood"> Add Animal Food </a>
+<a class="btn btn-primary" asp-area="Care" asp-controller="LifeStyle" asp-action="CreateLiFeStyle"> Add Animal LifeStyle </a>
 
 
-<table class="table-bordered" border="1px solid #ccc">
+<a class="btn btn-primary"  asp-action="AddFaq" asp-area="Diseases" asp-controller="Disease">Add Faq</a>
 
-    <tr>
-        <td> Role Id </td>
-        <td> Role Name </td>
-        <td> @AppLng["edit"] </td>
 
-        <td> @AppLng["delete"]</td>
+
+
+
+<br />
+<br />
+
+
+
+<table class="table-bordered">
+
+    <tr class="th">
+        <td class="text-primary"> Role Id </td>
+        <td class="text-primary"> Role Name </td>
+        <td class="text-primary"> @AppLng["edit"] </td>
+
+        <td class="text-primary"> @AppLng["delete"]</td>
 
 
     </tr>
     @foreach (var item in Model)
     {
-<tr>
-    <td> @item.Id</td>
-    <td> @item.Name </td>
-    <td> <a class="btn btn-primary" asp-area="Identity" asp-controller="Admin" asp-action="EditRole" asp-route-id="@item.Id"> @AppLng["edit"] </a></td>
+        <tr>
+            <td> @item.Id</td>
+            <td> @item.Name </td>
+            <td> <a class="btn btn-primary" asp-area="Identity" asp-controller="Admin" asp-action="EditRole" asp-route-id="@item.Id"> @AppLng["edit"] </a></td>
 
-    <td> <a class="btn btn-danger" asp-area="Identity" asp-controller="Admin" asp-action="DeleteRole" asp-route-id="@item.Id"> @AppLng["delete"] </a></td>
+            <td> <a class="btn btn-danger" asp-area="Identity" asp-controller="Admin" asp-action="DeleteRole" asp-route-id="@item.Id"> @AppLng["delete"] </a></td>
 
-</tr>
+        </tr>
     }
 
 
 </table>
+
 

@@ -12,10 +12,8 @@ namespace ProjectBackEndDemo.DAL.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-
-
-
-        public virtual ICollection<Disease> Disease { get; set; }
+        public string KeyWords { get; set; }
+        public virtual ICollection<DiseaseSymptom> DiseaseSymptom { get; set; }
 
     }
 }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,13 +11,24 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using ProjectBackEndDemo.Areas.Emergency.EmergencyServices;
 using ProjectBackEndDemo.Areas.Identity.Models;
+using ProjectBackEndDemo.BL.Helpers;
+using ProjectBackEndDemo.BL.IRepository;
 using ProjectBackEndDemo.BL.Mapper;
+using ProjectBackEndDemo.BL.Repository;
 using ProjectBackEndDemo.DAL.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using ProjectBackEndDemo.Infrastructure;
+using Microsoft.AspNetCore.SignalR;
+using ProjectBackEndDemo.Areas.Sensor.SensorRep;
+using ProjectBackEndDemo.Areas.Diseases.Rep;
+using ProjectBackEndDemo.Areas.Vets.Rep;
+using ProjectBackEndDemo.Areas.Care.Rep;
+using ProjectBackEndDemo.Areas.Identity.Rep;
+using NToastNotify;
 
 namespace ProjectBackEndDemo
 {
@@ -33,17 +45,40 @@ namespace ProjectBackEndDemo
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+            {
+                ProgressBar = true,
+                PositionClass = ToastPositions.BottomRight,
+                PreventDuplicates = true,
+                CloseButton = true,
+                TimeOut = 10000
+
+            });
             services.AddControllersWithViews()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization()
-                 .AddNewtonsoftJson(opt => {
+                 .AddNewtonsoftJson(opt =>
+                 {
                      opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
                  });
+           
 
+            services.AddSignalR();
 
             services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
             services.AddScoped<DbContainer>();
             services.AddScoped<IEmergencyRep , EmergencyRep>();
+            services.AddScoped<MailHelper>();
+            services.AddScoped<SaveFileHelper>();
+            services.AddScoped<ISensorRep , SensorRep>();
+            services.AddScoped<ISelectHelper, SelectHelper>();
+            services.AddScoped<IDiseaseRep,DiseaseRep>();
+            services.AddScoped<IVetRep,VetRep>(); 
+            services.AddScoped<ILifeStyleRep, LifeStyleRep>();
+            services.AddScoped<IAdminRep, AdminRep>();
+         
+
+            services.AddTransient<INotificationRep, NotificationRep>();
 
 
 
@@ -57,13 +92,14 @@ namespace ProjectBackEndDemo
                 options.Password.RequiredLength = 3;
                 options.Password.RequiredUniqueChars = 0;
                
-            }).AddEntityFrameworkStores<DbContainer>() ;
+            }).AddEntityFrameworkStores<DbContainer>()
+              .AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider); ;
           
             services.AddDbContextPool<DbContainer>(opts => opts.UseSqlServer(Configuration.GetConnectionString("AnimalHealthCare")));
 
 
             services.AddRazorPages();
-            // services.ConfigureApplicationCookie(cke => { cke.LoginPath = "/Identity/Account/Login"; });
+          
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = $"/Identity/Account/Login";
@@ -71,11 +107,14 @@ namespace ProjectBackEndDemo
           
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseNToastNotify();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -89,10 +128,9 @@ namespace ProjectBackEndDemo
 
             app.UseRouting();
 
-
+      
             app.UseAuthentication();
             app.UseAuthorization();
-      
             var supportedCultures = new[] {
                           new CultureInfo("ar-EG"),
                           new CultureInfo("en-US"),
@@ -108,6 +146,11 @@ namespace ProjectBackEndDemo
                 new QueryStringRequestCultureProvider(),
                 new CookieRequestCultureProvider()
                 }
+            });
+          
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<SignalServer>("/signalServer");
             });
 
 

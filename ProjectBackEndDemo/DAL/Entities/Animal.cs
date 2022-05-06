@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjectBackEndDemo.Areas.Identity.Models;
+using ProjectBackEndDemo.Areas.Sensor.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,10 +13,13 @@ namespace ProjectBackEndDemo.DAL.Entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-       // public int Age { get; set; }
+       
+       
+        public List<Disease> Disease { get; set; }
+       public virtual ICollection<AppUser> AppUser { get; set; }
+        public virtual ICollection<SensorData> SensorDatas { get; set; }
+        public virtual ICollection<AnimalFood> AnimalFood { get; set; }
 
 
-
-        public virtual ICollection<Disease> Disease { get; set; }
     }
 }

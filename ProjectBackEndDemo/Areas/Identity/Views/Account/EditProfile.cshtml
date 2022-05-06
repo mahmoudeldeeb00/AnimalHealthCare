@@ -1,44 +1,62 @@
 ﻿@model ProjectBackEndDemo.Areas.Identity.Models.EditProfileVM
 
 @addTagHelper * , Microsoft.AspNetCore.Mvc.TagHelpers
-
+@inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slct
 @{
     ViewData["Title"] = "EditProfile";
     Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var aniList = new SelectList(slct.GetAnimals(), "Id", "Name");
+
 }
 
-<h1>EditProfile</h1>
-<div asp-validation-summary="All" class="text-danger"></div>
-<form asp-area="Identity" asp-controller="Account" asp-action="EditProfile" method="post" enctype="multipart/form-data">
-    <input hidden type="text" asp-for="Id" />
+<div class="container">
+    <h1>EditProfile</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <form style="padding:15px" class=" card form-group" asp-area="Identity" asp-controller="Account" asp-action="EditProfile" method="post">
+        <input hidden type="text" asp-for="Id" />
 
-    <label asp-for="UserName">User Name</label>
-    <input type="text" asp-for="UserName" />
-    <span asp-validation-for="UserName" class="text-danger"></span>
-    <br />
-    <label asp-for="Email">Email</label>
-    <input type="email" asp-for="Email" />
-    <span asp-validation-for="Email" class="text-danger"></span>
+        <label asp-for="UserName">User Name</label>
+        <input class="form-control" type="text" asp-for="UserName" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+        <br />
+        <label asp-for="Email">Email</label>
+        <input class="form-control" type="email" asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
 
-    <br />
-    <label asp-for="PhoneNumber">PhoneNumber</label>
-    <input type="text" asp-for="PhoneNumber" />
-    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        <br />
+        <label asp-for="PhoneNumber">PhoneNumber</label>
+        <input class="form-control" type="text" asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
 
-    <br />
-    <label asp-for="BirthDay">BirthDay</label>
-    <input type="datetime" asp-for="BirthDay" />
-    <span asp-validation-for="BirthDay" class="text-danger"></span>
+        <br />
+        <label asp-for="Gmail">Gmail <span class="text-sm-center">gmail that we send notification</span></label>
+        <input class="form-control" type="email" asp-for="Gmail" />
+        <span asp-validation-for="Gmail" class="text-danger"></span>
+        <br />
+        <label asp-for="BirthDay">BirthDay</label>
+        <input class="form-control" type="datetime" asp-for="BirthDay" />
+        <span asp-validation-for="BirthDay" class="text-danger"></span>
 
-    <br />
-    <label asp-for="ProfilePicture">Profile Picture</label>
-    <input type="file" asp-for="ProfilePicture" />
-    <br />
+        <br />
+     
+        <a class="btn btn-primary" asp-area="Identity" asp-controller="Account" asp-action="EditProfilePicture" asp-route-id="@Model.Id"> Edit Profile Picture</a>
+        <br />
+
+        <label asp-for="AnimalId">Select Your Animal</label>
+
+        <select asp-items="@aniList" asp-for="AnimalId" class="">
+            <option value="">Select Pet</option>
+        </select>
+        <br />
+
+        <input class="btn btn-primary" value="submit" type="submit" />
+
+    </form>
 
 
-    <input class="btn btn-primary" value="submit" type="submit" />
 
-</form>
+
+</div>
 <script src="~/jquery/jquery.min.js"></script>
 <script src="~/jquery-validate/jquery.validate.min.js"></script>
 <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

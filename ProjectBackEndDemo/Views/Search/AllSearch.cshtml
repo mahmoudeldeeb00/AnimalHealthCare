@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "AllSearch";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+
+@inject ProjectBackEndDemo.Areas.Diseases.Rep.IDiseaseRep Drep
+@inject ProjectBackEndDemo.Areas.Emergency.EmergencyServices.IEmergencyRep ERep
+@{
+
+    var search = ViewBag.search;
+
+    var SympList = Drep.GetAllSymptoms(search);
+    var medicineList = Drep.GetAllMedicines(search);
+    var EmergencyList = ERep.GetAllEmergences(search);
+}
+
+@model List<ProjectBackEndDemo.Areas.Diseases.Models.DieseaseVM>
+<h1>AllSearch</h1>
+
+
+
+
+@if (Model.Count != 0)
+{
+    <h1> Dieases </h1>
+    @foreach (var item in Model)
+    {
+        <div> @item.Name  </div>
+
+    }
+}
+
+@if(EmergencyList.Count != 0)
+{
+    <h1>Emergincies</h1>
+    @foreach (var item in EmergencyList)
+    {
+        <div>
+            @item.Name , @item.Description , @item.HowToDeal
+            <div> another One ------------------------------- </div>
+        </div>
+    }
+
+}
+
+@if (SympList.Count != 0)
+{
+    <h1>Symptoms</h1>
+
+    @foreach (var item in SympList)
+    {
+        <div> Name : @item.Name </div>
+
+        <div> another One ------------------------------- </div>
+
+
+    }
+
+}
+
+
+@if (medicineList.Count != 0)
+{
+    <h1>Medicines</h1>
+    @foreach (var item in medicineList)
+    {
+        <div>
+            @item.Name , @item.Price
+            <div> another One ------------------------------- </div>
+        </div>
+    }
+
+}
+
+
+
+
+

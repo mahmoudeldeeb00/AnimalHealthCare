@@ -1,4 +1,4 @@
-﻿
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @using Microsoft.AspNetCore.Identity
 @using ProjectBackEndDemo.Areas.Identity.Models
@@ -7,61 +7,379 @@
 
 @{
     var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
 }
 
-
 <!DOCTYPE html>
+<html lang="en">
 
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!-- Logo Icon -->
+    <link rel="icon" href="/assets/imgs/App-icon.webp" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/all.min.css" />
+    <!-- Swipper Link -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!-- Font Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Page Style -->
+
+
+    <link rel="stylesheet" href="/css/home - Copy.css" class="style-en" />
+
+
+    @if (Culuture == "ar-EG")
+    {
+        <link href="~/css/home-ar.css" rel="stylesheet" />
+        <style>
+            body{
+                direction:rtl;
+            }
+        </style>
+    }
+
+
 </head>
-<body>
-    <form asp-area="Identity" asp-controller="Account" asp-action="LogOut" method="post">
-        <input type="submit" name="name" value="LogOut" />
-    </form>
 
-    <a href="@Url.PageLink()"> english</a>
+<body translate="no">
+    <!-- Start PreLoader -->
+    <div class="preload">
+        <div class="heart"></div>
+    </div>
+    <!-- End PreLoader -->
+    <!-- Start Header -->
+    <header>
+        <div class="container">
+            <div class="toggle-menu">
+                <span class="out"></span>
+                <span class="in"></span>
+                <span class="out"></span>
+            </div>
+            <picture class="logo-icon">
+                <img src="/assets/imgs/Red-logo.webp" alt="Cura" class="logo" />
+            </picture>
 
-    <a href="@Url.PageLink()?Culture=ar-Eg"> arabic  </a>
+            <form class="search-input" asp-action="AllSearch" asp-controller="Search" asp-area="" method="get">
+                <input type="search" name="search" id="search-input" placeholder="@AppLng["WhatsWrongwithyourPet!"]" />
+            </form>
+
+
+
+            @if (signinmanager.IsSignedIn(User))
+            {
+                var currentUser = await usermanager.FindByNameAsync(User.Identity.Name);
+                if (currentUser.Id != null)
+                {
+                    <div class="user-section">
+                        <div class="profile">
+                            <picture class="profile-img">
+                                <img src="/Files/UsersProfilePictures/@currentUser.ProfilePic" alt="profile picture" />
+                            </picture>
+                            <div class="profile-name">
+                                <span class="name">@currentUser.UserName</span>
+                                <i class="fa-solid fa-caret-down caret"></i>
+                            </div>
+                        </div>
+                        <div class="notification-icon">
+                            <i class="fa-solid fa-bell"></i>
+                            <span class="notification-counter" id="notificationCount"></span>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="user-section">
+                    <div class="profile">
+                        <picture class="profile-img">
+                            <img src="/Files/UsersProfilePictures/DefaultProfilePicture.png" alt="profile picture" />
+                        </picture>
+                        <div class="profile-name">
+                            <span class="name">User Name </span>
+                            @*<i class="fa-solid fa-caret-down caret"></i>*@
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+
+
+
+
+        </div>
+    </header>
+    <!-- End Header -->
+    <!-- Start Profile Menu -->
 
     @if (signinmanager.IsSignedIn(User))
     {
-        var x = User.Identity.Name;
+        var currentUser = await usermanager.FindByNameAsync(User.Identity.Name);
 
-        var result = await usermanager.FindByNameAsync(x);
-        if (result != null)
-        {
-            var currentUserId = result.Id;
-            <div> @x  </div>
-            <a asp-area="Identity" asp-controller="Account" asp-action="EditProfile" asp-route-id="@currentUserId"> Edit Profile  </a>
-            <a asp-area="Identity" asp-controller="Account" asp-action="ViewProfile" asp-route-id="@currentUserId"> View Profile  </a>
+        <section class="profile-pop">
+            <ul class="profilemenu">
+                <li>
+                    <i class="fa-solid fa-user"></i>
+                    <a asp-area="Identity" asp-controller="Account" asp-action="ViewProfile" asp-route-id="@currentUser.Id">@AppLng["Profile"]</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-chart-line"></i>
+                    <a href="#">Activity</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-user-gear"></i>
+                    <a asp-area="Identity" asp-controller="Account" asp-action="EditProfile" asp-route-id="@currentUser.Id">@AppLng["Setting"]</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-question"></i>
+                    <a href="#">Help</a>
+                </li>
+                @foreach (var role in await usermanager.GetRolesAsync(currentUser))
+                {
+                    if (role == "Admin")
+                    {
+                        <li>
+                            <i class="fa-solid fa-user-gear"></i>
 
-        }
+                            <a asp-area="Identity" asp-controller="Admin" asp-action="GetAllRoles">@AppLng["RolesSitting"]  </a>
+                        </li>
+
+                    }
+                }
+                <li>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <a href="#">
+                        <form asp-area="Identity" asp-controller="Account" asp-action="LogOut" method="post">
+                            <input style=" border:none" type="submit" name="name" value="@AppLng["LogOut"]" />
+                        </form>
+                    </a>
+                </li>
+            </ul>
+        </section>
 
 
     }
-    else
-    {
-        <div> User is not Sign In  </div>
-    }
 
+    <!-- End Profile Menu -->
+    <!-- Start Notification List -->
+    <div class="notification">
+        <div class="notification-setting">
+            <i class="fa-solid fa-gear"></i>
+            <ul class="setting-content">
+                <li><a href='/Notification/GetAllNotification'>@AppLng["Notificationshistory"]</a></li>
+                <li>@AppLng["Managenotifications"]</li>
+            </ul>
+        </div>
+        <span class="notification-exit">X</span>
+        <div id="notification-content">
 
-
-    @*      <a asp-area="Identity" asp-controller="Account" asp-action="EditProfile" asp-route-Id="@currentUserId"> Edit Profile  </a>*@
-
-    <div>
-        Hi from @AppLng["test"]  and  @AppLng["test1"]
+        </div>
     </div>
-    <div>
-        @RenderBody()
+    <!-- End Notification List -->
+    <!-- Start Navbar -->
+    <nav>
+        <ul class="container">
+            <li class="active">
+                <i class="fa-solid fa-house"></i>
+                <a asp-controller="Home" asp-action="Index" asp-area=""> @AppLng["Home"]</a>
+            </li>
+            <li>
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <a href="#">@AppLng["Emergencies"]</a>
+
+                <ul class="megamenu">
+                    <li>
+                        <i class="fa-solid fa-comment-medical"></i>
+                        <a asp-area="Emergency" asp-controller="Emergencyy" asp-action="Index">@AppLng["Emergencies"]</a>
+                    </li>
+
+                    @if (signinmanager.IsSignedIn(User))
+                    {
+
+                        foreach (var item in await usermanager.GetRolesAsync(await usermanager.FindByNameAsync(User.Identity.Name)))
+                        {
+                            if (item == "Admin" || item == "Vet")
+                            {
+                                <li>
+                                    <i class="fa-solid fa-comment-medical"></i>
+                                    <a asp-area="Emergency" asp-controller="Emergencyy" asp-action="CreateEmergency"> @AppLng["CreateEmergency"] </a>
+                                </li>
+                            }
+                        }
+                    }
+                </ul>
+
+
+
+            </li>
+            <li>
+                <i class="fa-solid fa-heart-pulse"></i>
+                <a href="#">@AppLng["Health"]</a>
+                <ul class="megamenu">
+                    <li>
+                        <i class="fa-solid fa-comment-medical"></i>
+                        <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewSymptoms">@AppLng["Symptoms"]  </a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-capsules"></i>
+                        <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewMedicines">@AppLng["Medicines"]</a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-notes-medical"></i>
+                        <a asp-area="Diseases" asp-controller="Disease" asp-action="Index">@AppLng["Diseases"] </a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-clipboard-question"></i>
+                        <a asp-action="ViewFAQs" asp-area="Diseases" asp-controller="Disease">@AppLng["FAQ"]</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <i class="fa-solid fa-house-medical-circle-check"></i>
+                <a href="#">@AppLng["Care"] </a>
+                <ul class="megamenu">
+                    <li>
+                        <i class="fa-solid fa-calendar-plus"></i>
+                        <a asp-action="Index" asp-controller="LifeStyle" asp-area="Care">@AppLng["LifeStyle"]  </a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-arrows-to-eye"></i>
+                        <a href="#">@AppLng["Assessment"] </a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-road-circle-check"></i>
+                        <a href="#">@AppLng["Husbandry"] </a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-check-to-slot"></i>
+                        <a href="#">@AppLng["Instructions"] </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <i class="fa-solid fa-user-doctor"></i>
+                <a asp-area="Vets" asp-controller="Vet" asp-action="Index">@AppLng["Vets"] </a>
+            </li>
+            <li>
+                <i class="fa-solid fa-users"></i>
+                <a href="#">@AppLng["AboutUs"] </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- End Navbar -->
+    <!-- Start Options Box -->
+    <div class="option">
+        <div class="option-icon">
+            <i class="fa-solid fa-gear"></i>
+        </div>
+        <div class="option-box">
+            <div class="color-option">
+                <span class="option-heading">@AppLng["ThemeColor"]</span>
+                <ul class="color">
+                    <li class="active" data-color="#c82222" data-logo="Red-logo.webp" data-main="cura-red.webp"></li>
+                    <li data-color="#FB4E93" data-logo="Pink-logo.webp" data-main="cura-pink.webp"></li>
+                    <li data-color="#00e57f" data-logo="Green-logo.webp" data-main="cura-green.webp"></li>
+                    <li data-color="#04dede" data-logo="Blue-logo.webp" data-main="cura-blue.webp"></li>
+                    <li data-color="#ffc107" data-logo="Yellow-logo.webp" data-main="cura-yellow.webp"></li>
+                </ul>
+            </div>
+            <div class="mood-option">
+                <span class="option-heading">@AppLng["ThemeMood"]</span>
+                <div class="mood">
+                    <div class="moon">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+                    <div class="mood-bar light">
+                        <span class="mood-btn"></span>
+                    </div>
+                    <div class="sun">
+                        <i class="fa-solid fa-sun"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="lang-option">
+                @*if (Culuture == "ar-EG")*@
+                <span class="option-heading">Language</span>
+                <div class="lang-box" translate="no">
+                    <a class="english active" asp-area="" asp-controller="home" asp-action="ChangeCulture" asp-route-culture="en-US" asp-route-returnUrl="@Url.ActionLink()">English</a>
+                    <a class="arabic" asp-area="" asp-controller="home" asp-action="ChangeCulture" asp-route-culture="ar-EG" asp-route-returnUrl="@Url.ActionLink()">العربية</a>
+                </div>
+
+
+            </div>
+        </div>
     </div>
+    <!-- End Options Box -->
+    <!-- Start Theme Box -->
+    <!-- <div class="theme light">
+        <i class="fa-solid fa-sun"></i>
+    </div> -->
+    <!-- End Theme Box -->
+    <!-- Start Go Up -->
+    <div class="go-up">
+        <i class="fa-solid fa-angle-up"></i>
+    </div>
+    <!-- End Go Up -->
 
 
 
-    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+    @RenderBody()
+
+
+
+
+    <!-- Start Footer -->
+    <footer>
+        <div class="container">
+            <div class="top">
+                <div class="end-wish">
+                    <img src="/assets/imgs/Red-logo.webp" alt="Cura" class="logo" />
+                    <span>@AppLng["Wewishthatwehelpyouwithwhatyouneed"]<i class="fa-solid fa-heart"></i></span>
+                </div>
+                <div class="social">
+                    <i class="fa-brands fa-facebook-f facebook"><a href="#"></a></i>
+                    <i class="fa-brands fa-google-plus-g google"><a href="#"></a></i>
+                    <i class="fa-brands fa-twitter twitter"><a href="#"></a></i>
+                    <i class="fa-brands fa-whatsapp whatsapp"><a href="#"></a></i>
+                    <i class="fa-brands fa-linkedin-in linkedin"><a href="#"></a></i>
+                    <i class="fa-brands fa-instagram instagram"><a href="#"></a></i>
+                </div>
+            </div>
+            <div class="bottom">
+                <span translate="no">Cura<i class="fa-solid fa-heart"></i></span> 2022 &copy; Copyright. All Rights &reg; is reserved.
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+    <!-- JS -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/all.min.js"></script>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script type="text/javascript" src="/js/Notification.Js"></script>
+    <script src="/js/home.js"></script>
+    <script>
+
+
+
+
+
+       // setTimeout(GetRandomIdNotification(),5000);
+     
+
+    </script>
+
+   @await Component.InvokeAsync("NToastNotify")
+
 </body>
+
 </html>

@@ -19,51 +19,6 @@ namespace ProjectBackEndDemo.Migrations
                 .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AnimalDisease", b =>
-                {
-                    b.Property<int>("AnimalId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DiseaseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AnimalId", "DiseaseId");
-
-                    b.HasIndex("DiseaseId");
-
-                    b.ToTable("AnimalDisease");
-                });
-
-            modelBuilder.Entity("DiseaseMedicine", b =>
-                {
-                    b.Property<int>("DiseaseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MedicineId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DiseaseId", "MedicineId");
-
-                    b.HasIndex("MedicineId");
-
-                    b.ToTable("DiseaseMedicine");
-                });
-
-            modelBuilder.Entity("DiseaseSymptom", b =>
-                {
-                    b.Property<int>("DiseaseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SymptomId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DiseaseId", "SymptomId");
-
-                    b.HasIndex("SymptomId");
-
-                    b.ToTable("DiseaseSymptom");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -195,7 +150,7 @@ namespace ProjectBackEndDemo.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ProjectBackEndDemo.Areas.Emergency.Data.Emergency", b =>
+            modelBuilder.Entity("ProjectBackEndDemo.Areas.Emergency.Data.Emergencyy", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -230,6 +185,9 @@ namespace ProjectBackEndDemo.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("BirthDay")
                         .HasColumnType("datetime2");
 
@@ -243,6 +201,9 @@ namespace ProjectBackEndDemo.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Gmail")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -282,6 +243,8 @@ namespace ProjectBackEndDemo.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AnimalId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -291,6 +254,61 @@ namespace ProjectBackEndDemo.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.Areas.Identity.Models.FeedBack", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FeedBacks");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.Areas.Sensor.Data.SensorData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DiseaseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HowToDeal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsEmergency")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.HasIndex("DiseaseId");
+
+                    b.ToTable("SensorDatas");
                 });
 
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Animal", b =>
@@ -308,6 +326,21 @@ namespace ProjectBackEndDemo.Migrations
                     b.ToTable("Animals");
                 });
 
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.AnimalFood", b =>
+                {
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FoodId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AnimalId", "FoodId");
+
+                    b.HasIndex("FoodId");
+
+                    b.ToTable("AnimalFoods");
+                });
+
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.City", b =>
                 {
                     b.Property<int>("Id")
@@ -323,6 +356,21 @@ namespace ProjectBackEndDemo.Migrations
                     b.ToTable("Cities");
                 });
 
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.DiseasMedicine", b =>
+                {
+                    b.Property<int>("DiseaseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DiseaseId", "MedicineId");
+
+                    b.HasIndex("MedicineId");
+
+                    b.ToTable("DiseaseMedicines");
+                });
+
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Disease", b =>
                 {
                     b.Property<int>("Id")
@@ -330,15 +378,100 @@ namespace ProjectBackEndDemo.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AnimalId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsInfect")
                         .HasColumnType("bit");
+
+                    b.Property<string>("KeyWords")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AnimalId");
+
                     b.ToTable("Diseases");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.DiseaseSymptom", b =>
+                {
+                    b.Property<int>("symptomId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiseaseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("symptomId", "DiseaseId");
+
+                    b.HasIndex("DiseaseId");
+
+                    b.ToTable("DiseaseSymptoms");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.FAQ", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Answer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Question")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("fAQs");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Food", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Foods");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.LifeStyle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Care")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cleanliness")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mating")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.ToTable("LifeStyles");
                 });
 
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Medicine", b =>
@@ -354,6 +487,9 @@ namespace ProjectBackEndDemo.Migrations
                     b.Property<bool>("HasSideEffect")
                         .HasColumnType("bit");
 
+                    b.Property<string>("KeyWords")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -366,6 +502,45 @@ namespace ProjectBackEndDemo.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Medicines");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UrlReference")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.NotificationApplicationUser", b =>
+                {
+                    b.Property<int>("NotificationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("NotificationId", "ApplicationUserId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("UserNotifications");
                 });
 
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Shop", b =>
@@ -401,6 +576,9 @@ namespace ProjectBackEndDemo.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("KeyWords")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -425,6 +603,9 @@ namespace ProjectBackEndDemo.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PictureUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Telephone")
                         .HasColumnType("nvarchar(max)");
 
@@ -436,51 +617,6 @@ namespace ProjectBackEndDemo.Migrations
                     b.HasIndex("CityId");
 
                     b.ToTable("Vets");
-                });
-
-            modelBuilder.Entity("AnimalDisease", b =>
-                {
-                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Animal", null)
-                        .WithMany()
-                        .HasForeignKey("AnimalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Disease", null)
-                        .WithMany()
-                        .HasForeignKey("DiseaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DiseaseMedicine", b =>
-                {
-                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Disease", null)
-                        .WithMany()
-                        .HasForeignKey("DiseaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Medicine", null)
-                        .WithMany()
-                        .HasForeignKey("MedicineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DiseaseSymptom", b =>
-                {
-                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Disease", null)
-                        .WithMany()
-                        .HasForeignKey("DiseaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Symptom", null)
-                        .WithMany()
-                        .HasForeignKey("SymptomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -534,6 +670,132 @@ namespace ProjectBackEndDemo.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProjectBackEndDemo.Areas.Identity.Models.AppUser", b =>
+                {
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Animal", "Animal")
+                        .WithMany("AppUser")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.Areas.Sensor.Data.SensorData", b =>
+                {
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Animal", "Animal")
+                        .WithMany("SensorDatas")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Disease", "Disease")
+                        .WithMany("SensorDatas")
+                        .HasForeignKey("DiseaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
+
+                    b.Navigation("Disease");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.AnimalFood", b =>
+                {
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Animal", "Animal")
+                        .WithMany("AnimalFood")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Food", "Food")
+                        .WithMany("AnimalFood")
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
+
+                    b.Navigation("Food");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.DiseasMedicine", b =>
+                {
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Disease", "Disease")
+                        .WithMany("DiseasMedicines")
+                        .HasForeignKey("DiseaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Medicine", "Medicine")
+                        .WithMany("DiseasMedicines")
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Disease");
+
+                    b.Navigation("Medicine");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Disease", b =>
+                {
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Animal", "Animal")
+                        .WithMany("Disease")
+                        .HasForeignKey("AnimalId");
+
+                    b.Navigation("Animal");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.DiseaseSymptom", b =>
+                {
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Disease", "Disease")
+                        .WithMany("DiseaseSymptom")
+                        .HasForeignKey("DiseaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Symptom", "Symptom")
+                        .WithMany("DiseaseSymptom")
+                        .HasForeignKey("symptomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Disease");
+
+                    b.Navigation("Symptom");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.LifeStyle", b =>
+                {
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Animal", "Animal")
+                        .WithMany()
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.NotificationApplicationUser", b =>
+                {
+                    b.HasOne("ProjectBackEndDemo.Areas.Identity.Models.AppUser", "ApplicationUser")
+                        .WithMany("NotificationApplicationUsers")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Notification", "Notification")
+                        .WithMany("NotificationApplicationUsers")
+                        .HasForeignKey("NotificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Notification");
+                });
+
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Shop", b =>
                 {
                     b.HasOne("ProjectBackEndDemo.DAL.Entities.City", "City")
@@ -556,11 +818,56 @@ namespace ProjectBackEndDemo.Migrations
                     b.Navigation("City");
                 });
 
+            modelBuilder.Entity("ProjectBackEndDemo.Areas.Identity.Models.AppUser", b =>
+                {
+                    b.Navigation("NotificationApplicationUsers");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Animal", b =>
+                {
+                    b.Navigation("AnimalFood");
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Disease");
+
+                    b.Navigation("SensorDatas");
+                });
+
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.City", b =>
                 {
                     b.Navigation("Shop");
 
                     b.Navigation("Vet");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Disease", b =>
+                {
+                    b.Navigation("DiseaseSymptom");
+
+                    b.Navigation("DiseasMedicines");
+
+                    b.Navigation("SensorDatas");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Food", b =>
+                {
+                    b.Navigation("AnimalFood");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Medicine", b =>
+                {
+                    b.Navigation("DiseasMedicines");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Notification", b =>
+                {
+                    b.Navigation("NotificationApplicationUsers");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Symptom", b =>
+                {
+                    b.Navigation("DiseaseSymptom");
                 });
 #pragma warning restore 612, 618
         }

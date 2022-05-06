@@ -3,49 +3,69 @@
 
 @inject UserManager<AppUser> usermanager
 @inject SignInManager<AppUser> signinmanager
-
-
-
+@inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slct
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Emergencies";
     Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var anilist = new SelectList(slct.GetAnimals(), "Name", "Name");
+
 }
-@model IEnumerable<ProjectBackEndDemo.Areas.Emergency.Models.EmergencyVM>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <script src="~/jquery/jquery.min.js"></script>
-<h1>Index</h1>
 
 
-@if (signinmanager.IsSignedIn(User))
-{
-    var x = User.Identity.Name;
 
-    var result = await usermanager.FindByNameAsync(x);
-    foreach (var item in await usermanager.GetRolesAsync(result))
+<br />
+<br />
+<br />
+<br />
+
+<div class="container">
+
+
+    @if (signinmanager.IsSignedIn(User))
     {
-        if (item == "Admin")
-        {
-            <a asp-area="Emergency" asp-controller="Emergencyy" asp-action="CreateEmergency" class="btn btn-primary"> Create Emergency </a>
+        var x = User.Identity.Name;
 
+        var result = await usermanager.FindByNameAsync(x);
+        foreach (var item in await usermanager.GetRolesAsync(result))
+        {
+            if (item == "Admin" || item == "Vet")
+            {
+                <a asp-area="Emergency" asp-controller="Emergencyy" asp-action="CreateEmergency" class="btn btn-primary"> Create Emergency </a>
+
+            }
         }
+
+
     }
 
 
-}
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <select id="selectPet" asp-items="@anilist" class="custom-select">
+        <option value="">Select Pet</option>
+    </select>
 
 
 
-<br />
-<br />
-<br />
-<br />
 
-<select id="selectPet" asp-items="@ViewBag.AnimalList">
-    <option value="">Select Pet</option>
-</select>
-<div class="text-primary">Medical emergencies in pets, by definition, are sudden, unplanned events. It's hard to stay calm when your pet is facing a medical emergency, but being prepared will make it easier. So, get the phone number of the nearest veterinary clinic, and the nearest veterinary hospital that has an emergency department</div>
-<div id="view">
+    <div>Medical emergencies in pets, by definition, are sudden, unplanned events. It's hard to stay calm when your pet is facing a medical emergency, but being prepared will make it easier. So, get the phone number of the nearest veterinary clinic, and the nearest veterinary hospital that has an emergency department</div>
+    <div id="view">
 
+    </div>
+
+
+
+
+
+
+
+    @*COntainer*@
 </div>
 
 <script>
@@ -66,7 +86,7 @@
                     $.each(res, function (i, e) {
                         $("#view").append(
 
-                            "<h2>" + e.Name + " </h2 ><div>" + e.Description + " </div><div>" + e.HowToDeal + " </div>"
+                            "<h2>" + e.Name + " </h2 ><div>" + e.Description + " </div><div class='text-primary'>" + e.HowToDeal + " </div>"
 
 
                         )
@@ -85,15 +105,5 @@
 
 
 
-
-
-@*@foreach (var Item in Model)
-    {
-        <div>
-            <h2> @Item.Name</h2>
-            <div>@Item.Description</div>
-            <div>@Item.HowToDeal</div>
-        </div>
-    }*@
 
 

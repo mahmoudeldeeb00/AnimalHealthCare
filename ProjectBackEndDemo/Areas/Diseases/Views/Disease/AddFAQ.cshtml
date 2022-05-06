@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "AddFAQ";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model ProjectBackEndDemo.Areas.Diseases.Models.FAQVM
+
+
+
+<div class="container">
+    <h1>Create FAQ </h1>
+    <div asp-validation-summary="All" class="text-danger">   </div>
+    <form asp-area="Diseases" asp-controller="Disease" asp-action="AddFAQ" method="post" class="form-group">
+        <label asp-for="Question">Question</label>
+        <input type="text" asp-for="Question" placeholder="Question " class="form-control" />
+        <span class="text-danger" asp-validation-for="Question">  </span>
+        <br />
+
+
+        <label asp-for="Answer">Answer</label>
+
+        <textarea asp-for="Answer" placeholder="Answer " class="form-control">
+
+        </textarea>
+        <span class="text-danger" asp-validation-for="Answer">  </span>
+        <br />
+      
+
+
+        <input type="submit" class="btn btn-primary"  value="submit" />
+
+
+
+
+
+    </form>
+
+
+</div>
+
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+
+

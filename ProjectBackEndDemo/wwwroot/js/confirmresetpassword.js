@@ -26,7 +26,7 @@ if (saveLanguagee !== null) {
             $(langArabicc).addClass("active");
             $("html").attr("lang", "ar");
             $("body").attr("translate", "yes");
-            $(englishStylee).after(`<link rel="stylesheet" href="css/confirmresetpassword-ar.css" class="style-ar" />`);
+            $(englishStylee).after(`<link rel="stylesheet" href="/css/confirmresetpassword-ar.css" class="style-ar" />`);
         }
     }
 }
@@ -38,7 +38,7 @@ $(langArabicc).on("click", function(e) {
         $(langArabicc).addClass("active");
         $("html").attr("lang", "ar");
         $("body").attr("translate", "yes");
-        $(englishStylee).after(`<link rel="stylesheet" href="css/confirmresetpassword-ar.css" class="style-ar" />`);
+        $(englishStylee).after(`<link rel="stylesheet" href="/css/confirmresetpassword-ar.css" class="style-ar" />`);
         localStorage.setItem("page-language", "ar");
     } else {
         e.preventDefault();

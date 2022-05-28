@@ -30,15 +30,7 @@
 
 
 
-@*<div class="container">
 
-
-
-        <div>Medical emergencies in pets, by definition, are sudden, unplanned events. It's hard to stay calm when your pet is facing a medical emergency, but being prepared will make it easier. So, get the phone number of the nearest veterinary clinic, and the nearest veterinary hospital that has an emergency department</div>
-        <div id="view">
-
-        </div>
-    </div>*@
 <section class="emergency">
     <h3 class="heading">All Emergencies</h3>
     <select name="pet" id="selectPet" asp-items="@anilist" hidden>
@@ -46,8 +38,15 @@
 
     </select>
     <div class="container emergency-filter">
+        <form asp-action="SearchEmerginces" asp-controller="Emergencyy" asp-area="Emergency" method="get">
+            <input type="search" name="search" id="" placeholder="What do you want to know?" required />
+            <button>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </button>
+        </form>
         <div class="emergency-pet">
-            <picture class="pet-box dog-box active" data-value="dog">
+            <picture class="pet-box dog-box " data-value="dog">
                 <img src="/assets/imgs/dog-life.webp" alt="Dog">
             </picture>
             <picture class="pet-box cat-box" data-value="cat">
@@ -57,17 +56,12 @@
                 <img src="/assets/imgs/turtle-life.webp" alt="Turtle">
             </picture>
         </div>
-        @*<form action="">
-            <input type="search" name="search" id="" placeholder="What do you want to know?" required />
-            <button>
-                <i class="fa-solid fa-magnifying-glass"></i>
-                Search
-            </button>
-        </form>*@
+
     </div>
+
     <div class="container emergency-section " id="view">
-       Please select animal 
-       
+        <h1> Please select animal you want to search for </h1>
+
     </div>
     <span class="emergency-link more">
         <span>View More</span>
@@ -88,7 +82,7 @@
 
 <script>
     $(function () {
-    
+
         $("#selectPet").change(function () {
 
             var x = $("#selectPet").val();
@@ -106,9 +100,9 @@
 
                             " <div class='emergency-box'><div class='emergency-name'><h4>" + e.Name + "</h4></div><div class='emergency-info'><div class='info-box name-box'>" +
                             "<div class= 'info-title' > <h5>Emergency Name</h5></div > <div class='info-value'><span>" + e.Name + "</span> </div></div > " +
-                                 "<div class='info-box descrip-box'><div class='info-title'><h5>Emergency Description</h5></div>"+
-                            "<div class='info-value'><p>" + e.Description+"</p> </div></div><div class='info-box deal-box'> <div class='info-title'><h5>How To Deal With Emergency</h5></div>"+
-                            "<div class='info-value'> <p>" + e.HowToDeal+"</p> </div> </div></div> </div>"
+                            "<div class='info-box descrip-box'><div class='info-title'><h5>Emergency Description</h5></div>" +
+                            "<div class='info-value'><p>" + e.Description + "</p> </div></div><div class='info-box deal-box'> <div class='info-title'><h5>How To Deal With Emergency</h5></div>" +
+                            "<div class='info-value'> <p>" + e.HowToDeal + "</p> </div> </div></div> </div>"
 
 
                         )
@@ -123,7 +117,9 @@
 
         })
     })
+
 </script>
+
 
 <script src="~/js/viewemergencies.js"></script>
 

@@ -35,7 +35,7 @@ if (petsaveLanuage !== null) {
             $(petlangArabic).addClass("active");
             $("html").attr("lang", "ar");
             $("body").attr("translate", "yes");
-            $(petenglishStyle).after(`<link rel="stylesheet" href="css/editpet-ar.css" class="style-ar" />`);
+            $(petenglishStyle).after(`<link rel="stylesheet" href="/css/editpet-ar.css" class="style-ar" />`);
         }
     }
 }
@@ -43,7 +43,7 @@ if (petsaveLanuage !== null) {
 // click on arabic btn
 $(petlangArabic).on("click", function(e) {
     if (!$(petlangArabic).hasClass("active")) {
-        $(petenglishStyle).after(`<link rel="stylesheet" href="css/editpet-ar.css" class="style-ar" />`);
+        $(petenglishStyle).after(`<link rel="stylesheet" href="/css/editpet-ar.css" class="style-ar" />`);
     }
 });
 // Toggle pet icon by focusing

@@ -40,6 +40,7 @@ namespace ProjectBackEndDemo.Areas.Emergency.Controllers
 
         }
 
+        public IActionResult SearchEmerginces(string search) => View(erep.GetAllEmergences(search));
 
 
         /// ajax call ---------------- ////

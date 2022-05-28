@@ -25,7 +25,7 @@ if (ThesaveLanguage !== null) {
             $(langArabicc).addClass("active");
             $("html").attr("lang", "ar");
             $("body").attr("translate", "yes");
-            $(englishStylee).after(`<link rel="stylesheet" href="css/aboutus-ar.css" class="style-ar" />`);
+            $(englishStylee).after(`<link rel="stylesheet" href="/css/aboutus-ar.css" class="style-ar" />`);
         }
     }
 }
@@ -33,6 +33,6 @@ if (ThesaveLanguage !== null) {
 // click on arabic btn
 $(langArabicc).on("click", function(e) {
     if (!$(langArabicc).hasClass("active")) {
-        $(englishStylee).after(`<link rel="stylesheet" href="css/aboutus-ar.css" class="style-ar" />`);
+        $(englishStylee).after(`<link rel="stylesheet" href="/css/aboutus-ar.css" class="style-ar" />`);
     }
 });

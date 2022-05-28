@@ -62,7 +62,7 @@ if (customsaveLanuage !== null) {
             $(customlangArabic).addClass("active");
             $("html").attr("lang", "ar");
             $("body").attr("translate", "yes");
-            $(customenglishStyle).after(`<link rel="stylesheet" href="css/monitoring-ar.css" class="style-ar" />`);
+            $(customenglishStyle).after(`<link rel="stylesheet" href="/css/monitoring-ar.css" class="style-ar" />`);
         }
     }
 }
@@ -80,7 +80,7 @@ $(document).ready(() => {
 // click on arabic btn
 $(customlangArabic).on("click", function (e) {
     if (!$(customlangArabic).hasClass("active")) {
-        $(customenglishStyle).after(`<link rel="stylesheet" href="css/monitoring-ar.css" class="style-ar" />`);
+        $(customenglishStyle).after(`<link rel="stylesheet" href="/css/monitoring-ar.css" class="style-ar" />`);
     }
 });
 // Changing scales & status

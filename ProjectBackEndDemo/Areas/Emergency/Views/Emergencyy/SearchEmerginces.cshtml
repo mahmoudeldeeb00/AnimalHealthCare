@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewData["Title"] = "Search Emerginces";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<ProjectBackEndDemo.Areas.Emergency.Models.EmergencyVM>  
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
+
+
+
+
+
+
+@inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slct
+@{
+    ViewBag.Title = "Emergencies";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var anilist = new SelectList(slct.GetAnimals(), "Name", "Name");
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
+}
+
+<link href="~/css/viewemergencies.css" rel="stylesheet" />
+
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/viewemergencies-ar.css" rel="stylesheet" />
+
+}
+
+
+
+
+
+<section class="emergency">
+    <h3 class="heading">All Emergencies</h3>
+    
+    <div class="container emergency-filter">
+       
+        <form asp-action="SearchEmerginces" asp-controller="Emergencyy" asp-area="Emergency" method="get">
+            <input type="search" name="search" id="" placeholder="What do you want to know?" required />
+            <button>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </button>
+        </form>
+    </div>
+    <div class="container emergency-section " id="view">
+        @foreach (var item in Model)
+        {
+          
+
+
+            <div class="emergency-box">
+                <div class="emergency-name">
+                    <h4>@item.Name</h4>
+                    
+                </div>
+                <div class="emergency-info">
+                    <div class="info-box name-box">
+                        <div class="info-title">
+                            <h5>@AppLng["Emergency Name"]</h5>
+                        </div>
+                        <div class="info-value">
+                            <span>@item.Name</span>
+                        </div>
+                    </div>
+
+
+                    <div class="info-box name-box">
+                        <div class="info-title">
+                            <h5>  @AppLng["For Which Pet"]</h5>
+                        </div>
+                        <div class="info-value">
+                            <span> @item.Animal</span>
+                        </div>
+                    </div>
+                    <div class="info-box descrip-box">
+                        <div class="info-title">
+                            <h5> @AppLng["Emergency Description"]</h5>
+                        </div>
+                        <div class="info-value">
+                            @item.Description
+                        </div>
+                    </div>
+                    <div class="info-box deal-box">
+                        <div class="info-title">
+                            <h5> @AppLng["How To Deal With Emergency"]</h5>
+                        </div>
+                        <div class="info-value">
+                            <p>
+                                @item.HowToDeal
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+    </div>
+    <span class="emergency-link more">
+        <span>View More</span>
+        <i class="fa-solid fa-angles-down"></i>
+    </span>
+</section>
+
+
+
+
+
+
+
+
+
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/js/viewemergencies.js"></script>
+
+
+

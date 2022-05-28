@@ -28,7 +28,7 @@ if (LifeStylesaveLanguage !== null) {
             $(LifeStylelangArabic).addClass("active");
             $("html").attr("lang", "ar");
             $("body").attr("translate", "yes");
-            $(LifeStylearabicStyle).after(`<link rel="stylesheet" href="css/lifestyle-ar.css" class="style-ar" />`);
+            $(LifeStylearabicStyle).after(`<link rel="stylesheet" href="/css/lifestyle-ar.css" class="style-ar" />`);
         }
     }
 }
@@ -42,7 +42,7 @@ petBoxes.forEach(pet => {
 // click on arabic btn
 $(LifeStylelangArabic).on("click", function(e) {
     if (!$(LifeStylelangArabic).hasClass("active")) {
-        $(LifeStyleenglishStyle).after(`<link rel="stylesheet" href="css/lifestyle-ar.css" class="style-ar" />`);
+        $(LifeStyleenglishStyle).after(`<link rel="stylesheet" href="/css/lifestyle-ar.css" class="style-ar" />`);
     }
 });
 // Clicking on pet img

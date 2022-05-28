@@ -29,45 +29,75 @@ namespace ProjectBackEndDemo.Areas.Diseases.Rep
        
         public List<DieseaseVM> GetAllDiseases(int AnimalId)
         {
-            var myList = new List<DieseaseVM>();
-            foreach(var item in db.Diseases.ToList())
+            try
             {
-                DieseaseVM m = mapper.Map<DieseaseVM>(item);
-                m.MedicineNames = new List<string>();
-                m.SymptomNames = new List<string>();
-                m.AnimalName = db.Animals.Where(w => w.Id == AnimalId).Select(s => s.Name).FirstOrDefault();
-            
-                m.MedicineIds = db.DiseaseMedicines.Where(w => w.DiseaseId == item.Id).Select(a=>a.MedicineId).ToList();
-                foreach (var i in m.MedicineIds) {m.MedicineNames.Add(db.Medicines.Where(w => w.Id == i).Select(s => s.Name).FirstOrDefault());}           
-                             
-                m.SymptomIds = db.DiseaseSymptoms.Where(w => w.DiseaseId == item.Id).Select(a => a.symptomId).ToList();   
-                foreach (var i in m.SymptomIds){ m.SymptomNames.Add(db.Symptoms.Where(w => w.Id == i).Select(n => n.Name).FirstOrDefault());}
-                myList.Add(m);
+                var myList = new List<DieseaseVM>();
+                foreach (var item in db.Diseases.Where(w => w.AnimalId == AnimalId).Include(i => i.Animal).ToList())
+                {
+                    DieseaseVM m = mapper.Map<DieseaseVM>(item);
+                    m.MedicineNames = new List<string>();
+                    m.SymptomNames = new List<string>();
+                    m.AnimalName = item.Animal.Name;
+
+                    m.MedicineIds = db.DiseaseMedicines.Where(w => w.DiseaseId == item.Id).Select(a => a.MedicineId).ToList();
+                    foreach (var i in m.MedicineIds) { m.MedicineNames.Add(db.Medicines.Where(w => w.Id == i).Select(s => s.Name).FirstOrDefault()); }
+
+                    m.SymptomIds = db.DiseaseSymptoms.Where(w => w.DiseaseId == item.Id).Select(a => a.symptomId).ToList();
+                    foreach (var i in m.SymptomIds) { m.SymptomNames.Add(db.Symptoms.Where(w => w.Id == i).Select(n => n.Name).FirstOrDefault()); }
+                    myList.Add(m);
+                }
+
+                return (myList);
             }
-           
-            return (myList);
+            catch
+            {
+                var myList = new List<DieseaseVM>();
+                foreach (var item in db.Diseases.Include(i => i.Animal).ToList())
+                {
+                    DieseaseVM m = mapper.Map<DieseaseVM>(item);
+                    m.MedicineNames = new List<string>();
+                    m.SymptomNames = new List<string>();
+                    m.AnimalName = item.Animal.Name;
+
+                    m.MedicineIds = db.DiseaseMedicines.Where(w => w.DiseaseId == item.Id).Select(a => a.MedicineId).ToList();
+                    foreach (var i in m.MedicineIds) { m.MedicineNames.Add(db.Medicines.Where(w => w.Id == i).Select(s => s.Name).FirstOrDefault()); }
+
+                    m.SymptomIds = db.DiseaseSymptoms.Where(w => w.DiseaseId == item.Id).Select(a => a.symptomId).ToList();
+                    foreach (var i in m.SymptomIds) { m.SymptomNames.Add(db.Symptoms.Where(w => w.Id == i).Select(n => n.Name).FirstOrDefault()); }
+                    myList.Add(m);
+                }
+
+                return (myList);
+            }
+
+            
+            
         }
-        //public List<DieseaseVM> GetAllDiseases(int AnimalId, string search) => GetAllDiseases(AnimalId).Where(w => w.Name.Contains(search) || w.KeyWords.Contains(search)).ToList();      
 
         public List<DieseaseVM> GetAllDiseases(int AnimalId, string search)
         {
-            var myList = new List<DieseaseVM>();
-            foreach (var item in db.Diseases.Where(w => w.Name.Contains(search) || w.KeyWords.Contains(search)).ToList())
-            {
-                DieseaseVM m = mapper.Map<DieseaseVM>(item);
-                m.MedicineNames = new List<string>();
-                m.SymptomNames = new List<string>();
-                m.AnimalName = db.Animals.Where(w => w.Id == AnimalId).Select(s => s.Name).FirstOrDefault();
+                    
+                var myList = new List<DieseaseVM>();
+                foreach (var item in db.Diseases.Include(i => i.Animal).Where(w=> w.Name.Contains(search) || w.KeyWords.Contains(search)).ToList())
+                {
+                    
+                        DieseaseVM m = mapper.Map<DieseaseVM>(item);
+                        m.MedicineNames = new List<string>();
+                        m.SymptomNames = new List<string>();
+                        m.AnimalName = item.Animal.Name;
 
-                m.MedicineIds = db.DiseaseMedicines.Where(w => w.DiseaseId == item.Id).Select(a => a.MedicineId).ToList();
-                foreach (var i in m.MedicineIds) { m.MedicineNames.Add(db.Medicines.Where(w => w.Id == i).Select(s => s.Name).FirstOrDefault()); }
+                        m.MedicineIds = db.DiseaseMedicines.Where(w => w.DiseaseId == item.Id).Select(a => a.MedicineId).ToList();
+                        foreach (var i in m.MedicineIds) { m.MedicineNames.Add(db.Medicines.Where(w => w.Id == i).Select(s => s.Name).FirstOrDefault()); }
 
-                m.SymptomIds = db.DiseaseSymptoms.Where(w => w.DiseaseId == item.Id).Select(a => a.symptomId).ToList();
-                foreach (var i in m.SymptomIds) { m.SymptomNames.Add(db.Symptoms.Where(w => w.Id == i).Select(n => n.Name).FirstOrDefault()); }
-                myList.Add(m);
-            }
+                        m.SymptomIds = db.DiseaseSymptoms.Where(w => w.DiseaseId == item.Id).Select(a => a.symptomId).ToList();
+                        foreach (var i in m.SymptomIds) { m.SymptomNames.Add(db.Symptoms.Where(w => w.Id == i).Select(n => n.Name).FirstOrDefault()); }
+                        myList.Add(m);
+                    
 
-            return (myList);
+                }
+
+                return (myList);
+            
 
 
         }

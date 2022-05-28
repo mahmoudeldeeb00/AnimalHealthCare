@@ -37,6 +37,7 @@ namespace ProjectBackEndDemo.Areas.Diseases.Controllers
                      return View(myList);
 
             }
+            
 
             return View();
 

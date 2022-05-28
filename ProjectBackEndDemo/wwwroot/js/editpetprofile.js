@@ -28,7 +28,7 @@ if (customsaveLanguage !== null) {
             $(customlangArabic).addClass("active");
             $("html").attr("lang", "ar");
             $("body").attr("translate", "yes");
-            $(customenglishStyle).after(`<link rel="stylesheet" href="css/editpetprofile-ar.css" class="style-ar" />`);
+            $(customenglishStyle).after(`<link rel="stylesheet" href="/css/editpetprofile-ar.css" class="style-ar" />`);
         }
     }
 }
@@ -40,7 +40,7 @@ $(customlangArabic).on("click", function(e) {
         $(customlangArabic).addClass("active");
         $("html").attr("lang", "ar");
         $("body").attr("translate", "yes");
-        $(customenglishStyle).after(`<link rel="stylesheet" href="css/editpetprofile-ar.css" class="style-ar" />`);
+        $(customenglishStyle).after(`<link rel="stylesheet" href="/css/editpetprofile-ar.css" class="style-ar" />`);
         localStorage.setItem("page-language", "ar");
     } else {
         e.preventDefault();

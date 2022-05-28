@@ -38,7 +38,10 @@ namespace ProjectBackEndDemo.Areas.Vets.Rep
 
                 VetVM vet = mapper.Map<VetVM>(item);
                 vet.CityName = item.City.Name;
+                
+
                 VetList.Add(vet);
+
             }
 
             return (VetList);

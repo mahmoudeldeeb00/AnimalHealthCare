@@ -1,34 +1,65 @@
 ﻿
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
+
+
 @{
-    ViewData["Title"] = "SearchFAQs";
+    ViewData["Title"] = AppLng["FAQ"];
     Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
 }
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
-
 @model List<ProjectBackEndDemo.Areas.Diseases.Models.FAQVM>
 
-<div class="container">
+
+<link href="~/css/viewfaqs.css" rel="stylesheet" />
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/viewfaqs-ar.css" rel="stylesheet" />
+}
 
 
 
-    <h1>FAQs</h1>
-
-
-    <form asp-action="SearchFAQs" asp-controller="Disease" asp-area="Diseases" method="get">
-        <input type="search" name="search" value="" placeholder="Whats Wrong with your Pet!" />
-        <input type="submit" hidden name="" value="Search" />
-    </form>
-
-    @foreach (var item in Model)
-    {
-        <div>
-            @item.Question
-        </div>
-        <div style="margin:0 0 0 30px">
-            @item.Answer
-        </div>
-    }
 
 
 
+<div class="faq-section">
+    <h3 class="heading">@AppLng["FAQ"]</h3>
+    <div class="container">
+        <form asp-action="SearchFAQs" asp-controller="Disease" asp-area="Diseases" method="get">
+            <input type="search" name="search" id="" placeholder="@AppLng["What do you want to know?"]" required />
+            <button>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                @AppLng["Search"]
+            </button>
+        </form>
+        @foreach (var item in Model)
+        {
+
+
+            <div class="faq-box">
+                <div class="faq-que">
+                    @item.Question
+
+                </div>
+                <div class="faq-ans">
+                    <p>
+                        @item.Answer
+                    </p>
+
+                </div>
+            </div>
+        }
+    </div>
+    <span class="faq-link more">
+        <span>@AppLng["View More"]</span>
+        <i class="fa-solid fa-angles-down"></i>
+    </span>
 </div>
+
+
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/viewfaqs.js"></script>

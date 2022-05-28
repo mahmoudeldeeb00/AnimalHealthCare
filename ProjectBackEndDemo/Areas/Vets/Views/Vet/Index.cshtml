@@ -1,40 +1,125 @@
-﻿
+﻿@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@using ProjectBackEndDemo.Areas.Identity.Models
+@using Microsoft.AspNetCore.Identity;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IStringLocalizer<SharedResource> AppLng;
+@inject UserManager<AppUser> userManager;
+@inject SignInManager<AppUser> signInManager;
+
 @{
-    ViewData["Title"] = "Index";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+    ViewData["Title"] = @AppLng["Vets"];
     Layout = "~/Views/Layouts/MainLayout.cshtml";
 }
 @model List<ProjectBackEndDemo.Areas.Vets.Models.VetVM>
 
-<style>
-    .VetPicture{
-        width: 50px;
-        height:50px;
-        border-radius:50% ;
-    }
-    .vet{
-        padding:10px;
-        display : inline-block;
-    }
+<link href="~/css/allvets.css" rel="stylesheet" />
 
-</style>
-<div class="container text-center">
-    
-    @foreach(var item in Model)
-     {
-    <div class="vet">
-        <img class="VetPicture" src="/Files/VetPictures/@item.PictureUrl" /> <br />
-        Name : <span class="text-primary"> @item.Name </span> <br />
-        age : <span class="text-primary"> @item.age </span> <br />
-        Addresse : <span class="text-primary"> @item.Address </span> <br />
-        Telephone : <span class="text-primary"> @item.Telephone </span> <br />
-        City : <span class="text-primary"> @item.CityName </span> <br />
 
-        <a href="/Vets/Vet/EditVet/@item.Id" class="btn btn-primary"> Edit Vet  </a>
-        <a href="/Vets/Vet/ViewVet/@item.Id" class="btn btn-primary"> View Vet  </a>
+@if (Culuture == "ar-EG")
+{
+
+    <link href="~/css/allvets-ar.css" rel="stylesheet" />
+}
+
+<div class="vet-section">
+    <h3 class="heading"> @AppLng["All vets"]  </h3>
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <div class="vet-box">
+                <picture>
+                    <img src="/Files/VetPictures/@item.PictureUrl" alt="">
+                </picture>
+                <div class="box-header">
+                    <span class="vet-name">
+                        @item.Name
+                    </span>
+                    <span class="vet-speciality">
+                        @item.Speciality
+                    </span>
+                    <span class="vet-address">
+                        <address>@item.Address</address>
+                    </span>
+                </div>
+                <div class="box-content">
+                    <div class="vet-info name-info">
+                        <div class="info-title">
+                            <h5> @AppLng["Name"] </h5>
+                        </div>
+                        <div class="info-value">
+                            @item.Name
+                        </div>
+                    </div>
+                    <div class="vet-info age-info">
+                        <div class="info-title">
+                            <h5> @AppLng["Age"] </h5>
+                        </div>
+                        <div class="info-value">
+                            @item.age Years
+                        </div>
+                    </div>
+                    <div class="vet-info speciality-info">
+                        <div class="info-title">
+                            <h5> @AppLng["Speciality"] </h5>
+                        </div>
+                        <div class="info-value">
+                            @item.Speciality
+                        </div>
+                    </div>
+                    <div class="vet-info address-info">
+                        <div class="info-title">
+                            <h5> @AppLng["Address"] </h5>
+                        </div>
+                        <div class="info-value">
+                            <address>@item.Address</address>
+                        </div>
+                    </div>
+                    @*<div class="vet-info gmail-info">
+                            <div class="info-title">
+                                <h5>Gmail</h5>
+                            </div>
+                            <div class="info-value">
+                                <a href="mailto:ahmedabdoelhewala1211@gmail.com">
+                                    <i class="fa-solid fa-envelope"></i> ahmedabdoelhewala1211@gmail.com
+                                </a>
+                            </div>
+                        </div>*@
+                    <div class="vet-info phone-info">
+                        <div class="info-title">
+                            <h5> @AppLng["Phone Number"]</h5>
+                        </div>
+                        <div class="info-value">
+                            <a href="tel:01060170368">
+                                <i class="fa-solid fa-phone"></i> @item.Telephone
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @if (signInManager.IsSignedIn(User))
+                {
+                    var currentUser = await userManager.FindByNameAsync(User.Identity.Name);
+                    foreach (var role in await userManager.GetRolesAsync(currentUser))
+                    {
+                        if (role == "Admin")
+                        {
+                            <a asp-area="Vets" asp-controller="Vet" asp-action="EditVet" asp-route-Id="@item.Id"> @AppLng["Edit"]</a>
+                        }
+                    }
+                }
+
+            </div>
+        }
 
     </div>
-     }
-
-
+    <span class="vet-link more">
+        <span> @AppLng["View More"] </span>
+        <i class="fa-solid fa-angles-down"></i>
+    </span>
 </div>
 
+
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/allvets.js"></script>

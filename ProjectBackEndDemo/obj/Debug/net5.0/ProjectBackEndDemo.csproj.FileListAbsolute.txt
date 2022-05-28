@@ -486,3 +486,10 @@ D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Raz
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Diseases\Views\Disease\ViewFAQs.cshtml.g.cs
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Diseases\Views\Disease\SearchFAQs.cshtml.g.cs
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Views\Search\AllSearch.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Sensor\Views\SSensor\Monitoring.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Sensor\Views\SSensor\AddSensorMeter.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Sensor\Views\SSensor\EditPetProfile.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Sensor\Views\SSensor\EditPetProfilePicture.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Views\Home\AboutUs.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Sensor\Views\SSensor\ViewPet.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Vets\Views\Vet\VetAreaToManageData.cshtml.g.cs

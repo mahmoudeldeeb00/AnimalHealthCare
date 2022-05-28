@@ -1,0 +1,364 @@
+﻿
+@{
+    ViewData["Title"] = @AppLng["Monitoring"];
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+}
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
+@using ProjectBackEndDemo.Areas.Diseases.Models
+@using Microsoft.AspNetCore.Identity
+@using ProjectBackEndDemo.Areas.Identity.Models
+@inject SignInManager<AppUser> signinmanager
+@inject UserManager<AppUser> usermanager
+
+@model ProjectBackEndDemo.Areas.Sensor.Models.MonitoringVM
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link href="~/css/monitoring.css" rel="stylesheet" />
+
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/monitoring-ar.css" rel="stylesheet" />
+
+}
+
+<section class="monitoring swiper mySwiper">
+    <h3 class="heading">@AppLng["Monitoring Page"]</h3>
+    <div class="container top-container">
+        <picture class="pet-picture">
+            <img src="/Files/UserAnimalPictures/@Model.AnimalPicSource" alt="Pet Profile">
+        </picture>
+        <div class="monitoring-head normal">
+            <i class="fa-solid fa-square-check"></i> @AppLng["Your pet condition is ......"]
+        </div>
+    </div>
+    <div class="swiper-wrapper">
+        <!-- Temperature section -->
+        <div class="monitoring-box monitoring-temperature swiper-slide">
+            <div class="monitoring-section pet-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Monitored Pet"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <span>@Model.AnimalType</span>
+                </div>
+            </div>
+            <div class="monitoring-section pet-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Pet Name"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <span>@Model.AnimalNickName</span>
+                </div>
+            </div>
+            <div class="monitoring-section pet-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Pet Age"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <span>@Model.AnimalAge</span>
+                </div>
+            </div>
+            <div class="monitoring-section pet-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Pet gender"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <span>@Model.AnimalGenderType</span>
+                </div>
+            </div>
+            <div class="monitoring-section system-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Monitored System"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <i class="fa-solid fa-temperature-half"></i>
+                    <span>@AppLng["Temperature"]</span>
+                </div>
+            </div>
+            <div class="monitoring-section normal-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Normal Range"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <div class="normal-range">
+                        <span class="normal-min">@Model.StartTempreture</span>
+                        <span class="normal-max">@Model.EndTempreture</span>
+                    </div>
+                </div>
+            </div>
+            <div class="monitoring-section current-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Current Status"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <div class="current-range">
+                        <div class="current-scale current-emergency">
+                            <span class="scale-value">@Model.CurrentTempreture</span>
+                        </div>
+                        <span class="normal-min">@Model.StartTempreture</span>
+                        <span class="normal-max">@Model.EndTempreture</span>
+                    </div>
+                </div>
+            </div>
+            <div class="monitoring-section description-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Status Decription"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <p>
+                        @Model.LastTempretureSend.Description
+                    </p>
+                </div>
+            </div>
+            <div class="monitoring-section deal-section show">
+                <div class="monitoring-title">
+                    <h5>@AppLng["How To Deal"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <p>
+                        @Model.LastTempretureSend.HowToDeal
+                    </p>
+                </div>
+            </div>
+            <div class="monitoring-section medicine-section show">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Recommended Medicines"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <ul class="medicine-list">
+                      
+
+                        @foreach (var item in Model.LastTempretureSend.RecommendedMedicines)
+                        {
+                            <li> @item.Name</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Pulse Section -->
+        <div class="monitoring-box monitoring-pulse swiper-slide">
+            <div class="monitoring-section pet-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Monitored Pet"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <span>@Model.AnimalType</span>
+                </div>
+            </div>
+            <div class="monitoring-section pet-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Pet Name"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <span>@Model.AnimalNickName</span>
+                </div>
+            </div>
+            <div class="monitoring-section pet-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Pet Age"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <span>@Model.AnimalAge</span>
+                </div>
+            </div>
+            <div class="monitoring-section pet-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Pet gender"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <span>@Model.AnimalGenderType</span>
+                </div>
+            </div>
+            <div class="monitoring-section system-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Monitored System"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <i class="fa-solid fa-lungs"></i>
+                    <span>@AppLng["Pulse"]</span>
+                </div>
+            </div>
+            <div class="monitoring-section normal-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Normal Range"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <div class="normal-range">
+                        <span class="normal-min">@Model.StartPulse</span>
+                        <span class="normal-max">@Model.EndPulse</span>
+                    </div>
+                </div>
+            </div>
+            <div class="monitoring-section current-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Current Status"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <div class="current-range">
+                        <div class="current-scale current-emergency">
+                            <span class="scale-value">@Model.CurrentPulse</span>
+                        </div>
+                        <span class="normal-min">@Model.StartPulse</span>
+                        <span class="normal-max">@Model.EndPulse</span>
+                    </div>
+                </div>
+            </div>
+            <div class="monitoring-section description-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Status Decription"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <p>
+                        @Model.LastPulseSend.Description
+                    </p>
+                </div>
+            </div>
+            <div class="monitoring-section deal-section show">
+                <div class="monitoring-title">
+                    <h5>@AppLng["How To Deal"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <p>
+                        @Model.LastPulseSend.HowToDeal
+
+                    </p>
+                </div>
+            </div>
+            <div class="monitoring-section medicine-section show">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Recommended Medicines"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <ul class="medicine-list">
+                        @foreach (var item in Model.LastPulseSend.RecommendedMedicines)
+                        {
+                            <li>@item.Name</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Glukose Section -->
+        <div class="monitoring-box monitoring-glukose swiper-slide">
+            <div class="monitoring-section pet-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Monitored Pet"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <span>@Model.AnimalType</span>
+                </div>
+            </div>
+            <div class="monitoring-section pet-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Pet Name"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <span>@Model.AnimalNickName</span>
+                </div>
+            </div>
+            <div class="monitoring-section pet-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Pet Age"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <span>@Model.AnimalAge</span>
+                </div>
+            </div>
+            <div class="monitoring-section pet-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Pet gender"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <span>@Model.AnimalGenderType</span>
+                </div>
+            </div>
+            <div class="monitoring-section system-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Monitored System"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    <span>@AppLng["Glukose"]</span>
+                </div>
+            </div>
+            <div class="monitoring-section normal-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Normal Range"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <div class="normal-range">
+                        <span class="normal-min">@Model.StartClucose</span>
+                        <span class="normal-max">@Model.EndClucose</span>
+                    </div>
+                </div>
+            </div>
+            <div class="monitoring-section current-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Current Status"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <div class="current-range">
+                        <div class="current-scale current-emergency">
+                            <span class="scale-value">@Model.CurrentClucose</span>
+                        </div>
+                        <span class="normal-min">@Model.StartClucose</span>
+                        <span class="normal-max">@Model.EndClucose</span>
+                    </div>
+                </div>
+            </div>
+            <div class="monitoring-section description-section">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Status Decription"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <p>
+                        @Model.LastGlucoseSend.Description
+                    </p>
+                </div>
+            </div>
+            <div class="monitoring-section deal-section show">
+                <div class="monitoring-title">
+                    <h5>@AppLng["How To Deal"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <p>
+                        @Model.LastGlucoseSend.HowToDeal
+
+                    </p>
+                </div>
+            </div>
+            <div class="monitoring-section medicine-section show">
+                <div class="monitoring-title">
+                    <h5>@AppLng["Recommended Medicines"]</h5>
+                </div>
+                <div class="monitoring-value">
+                    <ul class="medicine-list">
+                        @foreach (var item in Model.LastGlucoseSend.RecommendedMedicines)
+                        {
+                            <li>@item.Name</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="monitoring-link">
+            <a href="">View Monitoring History</a>
+        </div>*@
+</section>
+
+
+
+
+
+
+
+
+<script src="~/js/jquery-3.6.0.min.js"></script>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="~/js/monitoring.js"></script>

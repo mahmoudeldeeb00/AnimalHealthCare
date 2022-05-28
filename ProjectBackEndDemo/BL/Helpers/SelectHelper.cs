@@ -1,4 +1,6 @@
-﻿using ProjectBackEndDemo.DAL.DataBase;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectBackEndDemo.Areas.Sensor.Data;
+using ProjectBackEndDemo.DAL.DataBase;
 using ProjectBackEndDemo.DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,10 @@ namespace ProjectBackEndDemo.BL.Helpers
 
         public List<Symptom> GetSymptoms() => db.Symptoms.ToList();
         public List<City> GetCities() => db.Cities.ToList();
+        public List<Gender> GetGender() => db.Genders.ToList();
 
+        public List<SensorMeter> GetSensorMeters() => db.SensorMeters.ToList();
+        public List<LifeStyle> GetLifeStyles()=>db.LifeStyles.Include(i =>i.Animal).ToList();
 
     }
 }

@@ -1,31 +1,98 @@
-﻿
+﻿@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
+
+
+
 @{
-    ViewData["Title"] = "GetSensorData";
+    ViewData["Title"] = AppLng["View the case"];
     Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
 }
 @model ProjectBackEndDemo.Areas.Sensor.Models.SensorDataVM
-<h1>GetSensorData</h1>
-
-<div class="Container">
-
-    Your <span class="text-primary"> @Model.AnimalName </span> his healthy is <span class="text-primary"> @Model.Name </span> the description Is
-    <span class="text-primary"> @Model.Description </span> and might Ill with the Dieases <span class="text-primary"> @Model.DiseaseName </span>
-    this Dieases is
-
-    @if (Model.IsEmergency == true)
-    {
-
-
-        <span class="text-primary"> An Emergency </span>
-    }
-    else
-    {
-        <span class="text-primary">this Dieases is not Emergency </span>
-
-    }
 
 
 
+<link href="~/css/getsensordata.css" rel="stylesheet" />
 
-    You should to do <span class="text-primary"> @Model.HowToDeal </span>
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/getsensordata-ar.css" rel="stylesheet" />
+
+}
+
+@*<h1>GetSensorData</h1>
+
+    <div class="Container">
+
+        Your <span class="text-primary"> @Model.AnimalName </span> his healthy is <span class="text-primary"> @Model.Name </span> the description Is
+        <span class="text-primary"> @Model.Description </span> and might Ill with the Dieases <span class="text-primary"> @Model.DiseaseName </span>
+        this Dieases is
+
+        @if (Model.IsEmergency == true)
+        {
+
+
+            <span class="text-primary"> An Emergency </span>
+        }
+        else
+        {
+            <span class="text-primary">this Dieases is not Emergency </span>
+
+        }
+
+        value : <span class="text-primary">@Model.Value</span>
+
+
+        You should to do <span class="text-primary"> @Model.HowToDeal </span>
+    </div>*@
+
+
+
+<div class="case-section">
+    <h3 class="heading">@AppLng["View the case"]</h3>
+    <div class="container">
+        <div class="case-box">
+            
+            <div class="info-box descrip-box">
+                <div class="info-title">
+                    <h5>@AppLng["Case Description"]</h5>
+                </div>
+                <div class="info-value">
+                    <p>
+                        Your  @Model.AnimalName  healthy is  @Model.Name : ( @Model.Value )
+                     
+                    </p>
+                    <p>
+                        @Model.Description
+                    </p>
+                   
+                </div>
+            </div>
+            <div class="info-box deal-box">
+                <div class="info-title">
+                    <h5>@AppLng["How To Deal"]</h5>
+                </div>
+                <div class="info-value">
+             <p>@Model.HowToDeal</p> 
+                </div>
+            </div>
+            <div class="info-box medicine-box">
+                <div class="info-title">
+                    <h5>@AppLng["Disease"] </h5>
+                </div>
+                <div class="info-value">
+                    <ul>
+                        <li> @Model.DiseaseName</li>
+                      
+                    </ul>
+                </div>
+            </div>
+           
+        </div>
+    </div>
 </div>
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/getsensordata.js"></script>

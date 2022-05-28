@@ -32,11 +32,12 @@ namespace ProjectBackEndDemo.Contrrollers
             if (signInManager.IsSignedIn(User))
             {
                 var currentUser =  userManager.FindByNameAsync(User.Identity.Name).Result;
-                var DList = dRep.GetAllDiseases(currentUser.AnimalId , search);
-                ViewBag.search = search; 
-                return View(DList);
+                 var DList = dRep.GetAllDiseases((int)currentUser.AnimalId , search);
+                ViewBag.search = search;
+                 return View(DList);
+              
             }
-          
+
             return View();
         }
      

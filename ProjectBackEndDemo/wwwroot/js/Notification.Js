@@ -9,6 +9,7 @@ $(document).ready(function () {
             success: function (result) {
                 if (result.length == 0) {
                     $("#notificationCount").html("");
+                    $("#notificationCount").hide();
                 }
                 else {
                     $("#notificationCount").html(result.length);
@@ -16,7 +17,7 @@ $(document).ready(function () {
 
                         res = res + "<li class='notification-box' ><div class='box-content'><span class='notifi-text' >" + e.text + "</span> <span class='notifi-time'>" + e.time + "</span></div><div class='box-links'> " + "<a href='" + e.UrlReference + "'> View the case " + " </a> " + " <a data-id='" + e.id + "'  class='marknotificationasread text-primary'>Mark as read</a></div > </li>";
                     });
-                    res = res + " <br> <a class='' href='/Notification/GetAllNotification'>@AppLng['Notificationshistory'] dvs</a>" + "</ul>";
+                    res = res + " <br> <a class='' href='/Notification/GetAllNotification'>Notifications history </a>" + "</ul>";
                     $("#notification-content").html(res);
                     r()
                 }
@@ -55,18 +56,30 @@ $(document).ready(function () {
         })
     }
     ;
-
-
+    function readAllNotification() {
+        console.log("clicked")
+        $.ajax({
+            url: "/Notification/ReadAllNotification",
+            method: "Post",        
+            success: function () {
+                getNotification();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    }
+    ;
+    $("#readAllNotification").on("click", readAllNotification);
 
     function GetRandomIdNotification() {
         $.ajax({
             url: "/Sensor/SSensor/GetRandomSensorId",
             method: "POST",
             success: function (result) {
-             //   console.log(result);
-
-
-                createautonotification(result)
+             
+                createautonotification(result);
+                changeCurrentMonitoring(result);
             },
             error: function (error) {
                 console.log("Use Might Not Sign In ");
@@ -82,7 +95,24 @@ $(document).ready(function () {
             }
         })
     }
- 
+
+
+    function changeCurrentMonitoring(e) {
+        $.ajax({
+            url: "/Sensor/SSensor/ChangeLastMonitoring",
+            method: "POST",
+            data: { ID : e},
+            success: function (result) {
+                               
+            },
+            error: function (error) {
+                console.log("Use Might Not Sign In ");
+            }
+        })
+    }
+
+
+
     "use strict";
     var connection = new signalR.HubConnectionBuilder().withUrl("/signalServer").build();
     connection.start();

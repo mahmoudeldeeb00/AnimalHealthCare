@@ -45,6 +45,9 @@ namespace ProjectBackEndDemo.BL.Mapper
 
             CreateMap<FAQ, FAQVM>();
             CreateMap<FAQVM, FAQ>();
+
+            CreateMap<UserAnimal, UserAnimalVM>();
+            CreateMap<UserAnimalVM, UserAnimal>();
         }
 
     }

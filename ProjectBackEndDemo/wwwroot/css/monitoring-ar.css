@@ -1,0 +1,66 @@
+
+
+/* Start Monitoring */
+
+.monitoring .monitoring-box .monitoring-section .monitoring-title h5:after {
+    left: unset;
+    right: 0;
+}
+
+.monitoring .monitoring-box .normal-section .monitoring-value .normal-range span.normal-min {
+    left: unset;
+    right: -15px;
+}
+
+.monitoring .monitoring-box .normal-section .monitoring-value .normal-range span.normal-max {
+    right: unset;
+    left: -15px;
+}
+
+.monitoring .monitoring-box .current-section .monitoring-value .current-range .current-scale span.scale-value {
+    right: unset;
+    left: -15px;
+}
+
+.monitoring .monitoring-temperature .current-section .monitoring-value .current-range span.normal-min {
+    left: unset;
+    right: calc(var(--normal-temp-min) - 15px);
+}
+
+.monitoring .monitoring-pulse .current-section .monitoring-value .current-range span.normal-min {
+    left: unset;
+    right: calc(var(--normal-pulse-min) - 15px);
+}
+
+.monitoring .monitoring-glukose .current-section .monitoring-value .current-range span.normal-min {
+    left: unset;
+    right: calc(var(--normal-glukose-min) - 15px);
+}
+
+.monitoring .monitoring-temperature .current-section .monitoring-value .current-range span.normal-max {
+    left: unset;
+    right: calc(var(--normal-temp-max) - 15px);
+}
+
+.monitoring .monitoring-pulse .current-section .monitoring-value .current-range span.normal-max {
+    left: unset;
+    right: calc(var(--normal-pulse-max) - 15px);
+}
+
+.monitoring .monitoring-glukose .current-section .monitoring-value .current-range span.normal-max {
+    left: unset;
+    right: calc(var(--normal-glukose-max) - 15px);
+}
+
+.monitoring .monitoring-link a::after {
+    left: unset;
+    right: 0;
+}
+
+.monitoring .monitoring-link a:hover::after {
+    left: unset;
+    right: 105%;
+}
+
+
+/* End Monitoring */

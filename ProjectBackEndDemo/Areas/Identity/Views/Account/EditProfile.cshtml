@@ -1,62 +1,143 @@
 ﻿@model ProjectBackEndDemo.Areas.Identity.Models.EditProfileVM
-
+@using Microsoft.AspNetCore.Identity
+@using ProjectBackEndDemo.Areas.Identity.Models
 @addTagHelper * , Microsoft.AspNetCore.Mvc.TagHelpers
 @inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slct
+
+@inject SignInManager<AppUser> signinmanager
+@inject UserManager<AppUser> usermanager
+
 @{
     ViewData["Title"] = "EditProfile";
     Layout = "~/Views/Layouts/MainLayout.cshtml";
     var aniList = new SelectList(slct.GetAnimals(), "Id", "Name");
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+}
+}
+<link href="~/css/editprofile.css" rel="stylesheet" />
 
+@if (Culuture == "ar-EG")
+{
+
+    <link href="~/css/editprofile-ar.css" rel="stylesheet" />
 }
 
-<div class="container">
-    <h1>EditProfile</h1>
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <form style="padding:15px" class=" card form-group" asp-area="Identity" asp-controller="Account" asp-action="EditProfile" method="post">
+
+<div class="user-form">
+    <h3 class="heading">Edit Profile</h3>
+    <form asp-area="Identity" asp-controller="Account" asp-action="EditProfile" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
         <input hidden type="text" asp-for="Id" />
 
-        <label asp-for="UserName">User Name</label>
-        <input class="form-control" type="text" asp-for="UserName" />
-        <span asp-validation-for="UserName" class="text-danger"></span>
-        <br />
-        <label asp-for="Email">Email</label>
-        <input class="form-control" type="email" asp-for="Email" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+        @if (signinmanager.IsSignedIn(User))
+        {
+            var currentUser = await usermanager.FindByNameAsync(User.Identity.Name);
+            <div class="editprofile-section">
+                <img src="/Files//UsersProfilePictures/@currentUser.ProfilePic" alt="profile" class="editprofile-img">
+                <div class="editprofile-link">
+                    <i class="fa-solid fa-camera"></i>
+                    <a asp-area="Identity" asp-controller="Account" asp-action="EditProfilePicture" asp-route-id="@Model.Id">Edit Picture</a>
+                </div>
+            </div>
+        }
 
-        <br />
-        <label asp-for="PhoneNumber">PhoneNumber</label>
-        <input class="form-control" type="text" asp-for="PhoneNumber" />
-        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        <div class="form-section name-section">
+            <label for="my-username">User Name</label>
+            <div class="input-section">
+                <input type="text" asp-for="UserName" id="my-username" class="user-name" placeholder="Enter Your Name" required />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+                <div class="name-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-section email-section site-email">
+            <label for="my-email">Email</label>
+            <div class="input-section">
+                <input type="email" asp-for="Email" id="my-email" class="user-email" placeholder="Enter Your Email" required />
 
-        <br />
-        <label asp-for="Gmail">Gmail <span class="text-sm-center">gmail that we send notification</span></label>
-        <input class="form-control" type="email" asp-for="Gmail" />
-        <span asp-validation-for="Gmail" class="text-danger"></span>
-        <br />
-        <label asp-for="BirthDay">BirthDay</label>
-        <input class="form-control" type="datetime" asp-for="BirthDay" />
-        <span asp-validation-for="BirthDay" class="text-danger"></span>
+                <div class="email-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-section email-section gmail-email">
+            <label for="my-gmail">Gmail</label>
+            <div class="input-section">
+                <input type="email" asp-for="Gmail" id="my-gmail" class="user-email" placeholder="Enter Your Gmail" />
+                <span asp-validation-for="Gmail" class="text-danger"></span>
+                <div class="email-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-section phone-section">
+            <label for="my-phone">Phone Number</label>
+            <div class="input-section">
+                <input type="tel" asp-for="PhoneNumber" id="my-phone" class="user-phone" placeholder="Enter Your Phone Number" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
 
-        <br />
-     
-        <a class="btn btn-primary" asp-area="Identity" asp-controller="Account" asp-action="EditProfilePicture" asp-route-id="@Model.Id"> Edit Profile Picture</a>
-        <br />
+                <div class="phone-icon">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-section birthday-section">
+            <label for="my-birthday">Birthday</label>
+            <div class="input-section">
+                <input type="date" asp-for="BirthDay" id="my-birthday" class="user-birthday" value="2000-06-01" />
+                <span asp-validation-for="BirthDay" class="text-danger"></span>
 
-        <label asp-for="AnimalId">Select Your Animal</label>
+                <div class="birthday-icon">
+                    <i class="fa-solid fa-calendar"></i>
+                </div>
+            </div>
+        </div>
 
-        <select asp-items="@aniList" asp-for="AnimalId" class="">
-            <option value="">Select Pet</option>
-        </select>
-        <br />
+        <input type="number" hidden asp-for="AnimalId" />
 
-        <input class="btn btn-primary" value="submit" type="submit" />
+        <div class="editprofile-link">         
+            <a asp-area="Sensor" asp-controller="SSensor" asp-action="EditPetProfile">Edit My PET</a>
+        </div>
+        @*<div class="form-section select-section pet-section">
+            <label for="my-pet">User Pet</label>
+            <div class="input-section">
+                <select asp-items="@aniList" asp-for="AnimalId" id="my-pet" class="user-pet">
+                    <option disabled selected>Choose Your Pet</option>
 
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+            </div>
+        </div>*@
+        @*<div class="form-section select-section sensor-section">
+            <label for="my-sensor">Pet Sensor</label>
+            <div class="input-section">
+                <select name="sensor" id="my-sensor" class="pet-sensor">
+                    <option disabled selected>Choose Your Pet Sensor</option>
+                    <option value="Temperature">Temperature</option>
+                    <option value="Glukoz">Glukoz</option>
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+            </div>
+        </div>*@
+
+        <div class="form-section save-section">
+            <button type="submit" class="save-btn">Save</button>
+        </div>
     </form>
-
-
-
-
 </div>
+
+
+
+
+<script src="~/js/editprofile.js"></script>
+
+
 <script src="~/jquery/jquery.min.js"></script>
 <script src="~/jquery-validate/jquery.validate.min.js"></script>
 <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

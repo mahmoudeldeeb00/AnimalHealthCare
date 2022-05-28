@@ -120,8 +120,20 @@
   <data name="AboutUs" xml:space="preserve">
     <value>معلومات عننا</value>
   </data>
+  <data name="Address" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>العمر </value>
+  </data>
   <data name="AHealthcare&amp;LifestyleSystem" xml:space="preserve">
     <value>الاهتمام بالصحة واسلوب الحياة</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>الكل</value>
+  </data>
+  <data name="AllSearch" xml:space="preserve">
+    <value>جميع البحث</value>
   </data>
   <data name="arabic" xml:space="preserve">
     <value>لغة عربية</value>
@@ -135,14 +147,56 @@
   <data name="Care" xml:space="preserve">
     <value>الرعاية</value>
   </data>
+  <data name="Case Description" xml:space="preserve">
+    <value>وصف الحالة</value>
+  </data>
+  <data name="Choose Your Pet" xml:space="preserve">
+    <value>اختر أليفك</value>
+  </data>
+  <data name="Choose Your Pet Gender" xml:space="preserve">
+    <value>اختر نوع أليفك</value>
+  </data>
+  <data name="Cleanliness" xml:space="preserve">
+    <value>النظافة</value>
+  </data>
+  <data name="Confirm Forget Password" xml:space="preserve">
+    <value>تاكيد نسيان كلمة السر </value>
+  </data>
+  <data name="Confirm Reset Password" xml:space="preserve">
+    <value>تاكيد اعادة تغيير كلمة السر</value>
+  </data>
   <data name="Contactaveterinarian" xml:space="preserve">
     <value>الاتصال بطبيب</value>
+  </data>
+  <data name="Create new account" xml:space="preserve">
+    <value>إنشاء حساب جديد</value>
   </data>
   <data name="CreateEmergency" xml:space="preserve">
     <value>اضافة حالة خطرة</value>
   </data>
+  <data name="Current Status" xml:space="preserve">
+    <value>الحالة الحالية</value>
+  </data>
   <data name="delete" xml:space="preserve">
     <value>مسح</value>
+  </data>
+  <data name="Department of Physics and Computer Science." xml:space="preserve">
+    <value>قسم الفيزياء وعلوم الحاسب </value>
+  </data>
+  <data name="Disease Infection" xml:space="preserve">
+    <value>معدي ؟</value>
+  </data>
+  <data name="Disease Medicines" xml:space="preserve">
+    <value>أدوية المرض</value>
+  </data>
+  <data name="Disease Name" xml:space="preserve">
+    <value>اسم المرض</value>
+  </data>
+  <data name="Disease Pet" xml:space="preserve">
+    <value>أليف المرض</value>
+  </data>
+  <data name="Disease Symptoms" xml:space="preserve">
+    <value>أعراض المرض </value>
   </data>
   <data name="Diseases" xml:space="preserve">
     <value>الامراض</value>
@@ -150,14 +204,41 @@
   <data name="edit" xml:space="preserve">
     <value>تعديل</value>
   </data>
+  <data name="Edit Pet Profile" xml:space="preserve">
+    <value>تعديل صفحة الأليف</value>
+  </data>
+  <data name="Edit Picture" xml:space="preserve">
+    <value>تعديل الصورة</value>
+  </data>
+  <data name="Egypt, Menoufia University." xml:space="preserve">
+    <value>مصر , جامعة المنوفية</value>
+  </data>
   <data name="Emergencies" xml:space="preserve">
     <value>الحالات الخطرة</value>
   </data>
   <data name="Emergency" xml:space="preserve">
     <value>حالة خطرة</value>
   </data>
+  <data name="Emergency Description" xml:space="preserve">
+    <value>وصف الحالة</value>
+  </data>
+  <data name="Emergency Name" xml:space="preserve">
+    <value>اسم الحالة الخطرة</value>
+  </data>
   <data name="english" xml:space="preserve">
     <value>english</value>
+  </data>
+  <data name="Enter Pet Name" xml:space="preserve">
+    <value>أدخل اسم أليفك</value>
+  </data>
+  <data name="Enter Your password" xml:space="preserve">
+    <value>أدخل كلمة السر</value>
+  </data>
+  <data name="Enter Your UserName" xml:space="preserve">
+    <value>أدخل اسم المستخدم </value>
+  </data>
+  <data name="Enter your username or email" xml:space="preserve">
+    <value>أدخل اسمك او عنوان بريدك </value>
   </data>
   <data name="Enteryouremail" xml:space="preserve">
     <value>ادخل عنوان البريد الاكتروني</value>
@@ -171,6 +252,27 @@
   <data name="FAQ" xml:space="preserve">
     <value>الاسئلة الشائعة</value>
   </data>
+  <data name="FAQs" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Feedbacks" xml:space="preserve">
+    <value>الآراء</value>
+  </data>
+  <data name="Food" xml:space="preserve">
+    <value>الغذاء </value>
+  </data>
+  <data name="For Which Pet" xml:space="preserve">
+    <value>لأي أليف </value>
+  </data>
+  <data name="Forget Password?" xml:space="preserve">
+    <value>نسيت كلمة السر ؟</value>
+  </data>
+  <data name="Glukose" xml:space="preserve">
+    <value>الجلوكوز</value>
+  </data>
+  <data name="Have An Emergency Case?" xml:space="preserve">
+    <value>تمتلك حالة طارئة ؟</value>
+  </data>
   <data name="Haveanemergencycase" xml:space="preserve">
     <value>في حالة خطرة </value>
   </data>
@@ -180,8 +282,17 @@
   <data name="Home" xml:space="preserve">
     <value>الصفحة الرئيسية</value>
   </data>
+  <data name="How To Deal" xml:space="preserve">
+    <value>كيفية التعامل معه</value>
+  </data>
+  <data name="How To Deal With Emergency" xml:space="preserve">
+    <value>كيفية التعامل مع الحالة </value>
+  </data>
   <data name="Husbandry" xml:space="preserve">
     <value>التربية</value>
+  </data>
+  <data name="If You Have An Account, We Sent Reset Password Link To Your Email, Please Check Your Mail Box...." xml:space="preserve">
+    <value>لو لديك حساب بهذا الاسم فنحن ارسلنا لك رابط لتغيير كلمة السر الخاص بك .من فضلك تفقد الجيميل الخاص بك </value>
   </data>
   <data name="Instructions" xml:space="preserve">
     <value>التعليمات</value>
@@ -192,41 +303,167 @@
   <data name="LifeStyle" xml:space="preserve">
     <value>اسلوب الحياة</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>تسجيل الدخول </value>
+  </data>
   <data name="LogOut" xml:space="preserve">
     <value>تسجيل الخروج</value>
   </data>
   <data name="Managenotifications" xml:space="preserve">
     <value>اعدادات الاشعالرات</value>
   </data>
+  <data name="mark all as read" xml:space="preserve">
+    <value>تعليم الكل كمقروء</value>
+  </data>
+  <data name="Mating" xml:space="preserve">
+    <value>التزاوج</value>
+  </data>
+  <data name="Medicine" xml:space="preserve">
+    <value>الدواء</value>
+  </data>
+  <data name="Medicine Diseases" xml:space="preserve">
+    <value>أمراض الدواء</value>
+  </data>
+  <data name="Medicine Expirty" xml:space="preserve">
+    <value>مدة صلاحية الدواء </value>
+  </data>
+  <data name="Medicine Name" xml:space="preserve">
+    <value>اسم الدواء </value>
+  </data>
+  <data name="Medicine Price" xml:space="preserve">
+    <value>سعر الدواء</value>
+  </data>
+  <data name="Medicine Side Effect" xml:space="preserve">
+    <value>هل للمرض أثار جانبية ؟</value>
+  </data>
+  <data name="Medicine Temperature" xml:space="preserve">
+    <value>درجة حرارة الدواء</value>
+  </data>
   <data name="Medicines" xml:space="preserve">
     <value>الأدوية</value>
+  </data>
+  <data name="Monitored Pet" xml:space="preserve">
+    <value>الحيوان المُتابع</value>
+  </data>
+  <data name="Monitored System" xml:space="preserve">
+    <value>نوع المتابعة</value>
+  </data>
+  <data name="Monitoring" xml:space="preserve">
+    <value>المراقبة</value>
+  </data>
+  <data name="Monitoring Page" xml:space="preserve">
+    <value>صفحة المراقبة </value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الاسم </value>
+  </data>
+  <data name="Normal Range" xml:space="preserve">
+    <value>المتوسط الطبيعي</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>الاشعارات </value>
+  </data>
+  <data name="Notifications History" xml:space="preserve">
+    <value>الاشعارات القديمة</value>
   </data>
   <data name="Notificationshistory" xml:space="preserve">
     <value>الاشعارات القديمة</value>
   </data>
+  <data name="Pet" xml:space="preserve">
+    <value>الأليف</value>
+  </data>
+  <data name="Pet Age" xml:space="preserve">
+    <value>عُمر الأليف</value>
+  </data>
+  <data name="Pet Birthday" xml:space="preserve">
+    <value>يوم ميلاد الأليف تقريبا</value>
+  </data>
+  <data name="Pet gender" xml:space="preserve">
+    <value>نوع الأليف</value>
+  </data>
+  <data name="Pet Name" xml:space="preserve">
+    <value>اسم الأليف</value>
+  </data>
+  <data name="Pet Type" xml:space="preserve">
+    <value>نوع الأليف</value>
+  </data>
+  <data name="Phone Number" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
   <data name="Profile" xml:space="preserve">
     <value>الملف الشخصي</value>
+  </data>
+  <data name="Pulse" xml:space="preserve">
+    <value>نبض القلب</value>
+  </data>
+  <data name="Recommended Medicines" xml:space="preserve">
+    <value>الأدوية الموصاة</value>
+  </data>
+  <data name="Remember Me" xml:space="preserve">
+    <value>تذكرني</value>
   </data>
   <data name="RolesSitting" xml:space="preserve">
     <value>اعدادات الادمن</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>بحث</value>
+  </data>
+  <data name="Search Page" xml:space="preserve">
+    <value>صفحة البحث</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>ارسال</value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>الاعدادات</value>
   </data>
+  <data name="Show password" xml:space="preserve">
+    <value>اظهار كلمة المرور</value>
+  </data>
   <data name="SomeFAQs" xml:space="preserve">
     <value>بعض الاسئلة الشائعة</value>
+  </data>
+  <data name="Speciality" xml:space="preserve">
+    <value>التخصص</value>
+  </data>
+  <data name="Status Decription" xml:space="preserve">
+    <value>وصف الحالة</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>كل الاطباء </value>
   </data>
   <data name="String1" xml:space="preserve">
     <value>حالات الطوارئ</value>
   </data>
+  <data name="String2" xml:space="preserve">
+    <value>اسلوب الحياة</value>
+  </data>
+  <data name="Symptom" xml:space="preserve">
+    <value>العرض</value>
+  </data>
+  <data name="Symptom Description" xml:space="preserve">
+    <value>وصف العرض</value>
+  </data>
+  <data name="Symptom Diseases" xml:space="preserve">
+    <value>أمراض العرض</value>
+  </data>
+  <data name="Symptom Name" xml:space="preserve">
+    <value>اسم العرض</value>
+  </data>
   <data name="Symptoms" xml:space="preserve">
     <value>الأعراض</value>
   </data>
+  <data name="Tell Us your feedback" xml:space="preserve">
+    <value>أخبرنا ما هو رايك </value>
+  </data>
   <data name="TellUsyourfeedback" xml:space="preserve">
     <value>اخبرنا عن رأيك</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>درجة الحرارة</value>
   </data>
   <data name="test" xml:space="preserve">
     <value>اختبار</value>
@@ -246,6 +483,33 @@
   <data name="Vets" xml:space="preserve">
     <value>الأطباء</value>
   </data>
+  <data name="View Dieases" xml:space="preserve">
+    <value>عرض المرض</value>
+  </data>
+  <data name="View Disease" xml:space="preserve">
+    <value>عرض المرض </value>
+  </data>
+  <data name="View Medicine" xml:space="preserve">
+    <value>عرض الدواء </value>
+  </data>
+  <data name="View Mine Pet" xml:space="preserve">
+    <value>صفحة الأليف</value>
+  </data>
+  <data name="View More" xml:space="preserve">
+    <value>عرض المزيد</value>
+  </data>
+  <data name="View Our Feedbacks" xml:space="preserve">
+    <value>عرض كل الاراء</value>
+  </data>
+  <data name="View Pet Profile" xml:space="preserve">
+    <value>عرض صفحة الأليف</value>
+  </data>
+  <data name="View Symptom" xml:space="preserve">
+    <value>عرض العرض </value>
+  </data>
+  <data name="View the case" xml:space="preserve">
+    <value>عرض الحالة</value>
+  </data>
   <data name="ViewAllCases" xml:space="preserve">
     <value>عرض كل الحالات</value>
   </data>
@@ -258,10 +522,22 @@
   <data name="Wewishthatwehelpyouwithwhatyouneed" xml:space="preserve">
     <value>نتمني ان نكون قادرين علي مساعدتك</value>
   </data>
+  <data name="What do you want to search?" xml:space="preserve">
+    <value>علي ماذا تريد ان تبحث</value>
+  </data>
   <data name="What'swrongwithyourpet?" xml:space="preserve">
     <value>ما الخطا مع اليفك</value>
   </data>
   <data name="WhatsWrongwithyourPet!" xml:space="preserve">
     <value>ما الخطا مع اليفك</value>
+  </data>
+  <data name="yj" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Your Password Reseted Successfully, Please Sign In Again ..." xml:space="preserve">
+    <value>كلمة السر تغيرت بالفعل . الرجاء تسجيل الدخول من جديد </value>
+  </data>
+  <data name="Your pet condition is ......" xml:space="preserve">
+    <value>حالة أليفك.......</value>
   </data>
 </root>

@@ -34,13 +34,19 @@ namespace ProjectBackEndDemo.Areas.Care.Controllers
             {
                 var currentUser =  await userManager.FindByNameAsync(User.Identity.Name);
 
-                return View(lFRer.GetLifeStyle(currentUser.AnimalId));
+                     return View(lFRer.GetLifeStyle((int)currentUser.AnimalId));
 
-
+               
             }
 
             return View();
         }
+        public IActionResult AjaxGetLifeStyleWithId(int Id)
+        {
+            var x = lFRer.GetLifeStyle(Id);
+            return Ok(x);
+        }
+
 
         [Authorize(Roles = "Admin , Vet")]
         public IActionResult CreateFood() => View();

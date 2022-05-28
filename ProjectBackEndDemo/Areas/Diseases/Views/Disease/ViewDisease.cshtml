@@ -1,58 +1,98 @@
 ﻿
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
-    ViewData["Title"] = "ViewDisese";
+    ViewData["Title"] = AppLng["View Dieases"];
     Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
 }
 
-@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 @model ProjectBackEndDemo.Areas.Diseases.Models.DieseaseVM
+<link href="~/css/viewdisease.css" rel="stylesheet" />
+
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/viewdisease-ar.css" rel="stylesheet" />
+
+}
 
 
-<form asp-action="Search" asp-controller="Disease" asp-area="Diseases" method="get">
-    <input id="search" name="search" type="search" placeholder="Search Diseases " />
-    <input type="submit" hidden />
-</form>
+<div class="disease-section">
+    <h3 class="heading">Disease Page</h3>
+    <div class="container">
+        <form asp-action="Search" asp-controller="Disease" asp-area="Diseases" method="get">
+            <input type="search" name="search" id="" placeholder="@AppLng["What do you want to search?"]" required />
+            <button>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                @AppLng["Search"]
+            </button>
+        </form>
+        <div class="disease-box">
+            <h4 class="disease-name">@Model.Name</h4>
+            <div class="disease-info">
+                <div class="info-box name-box">
+                    <div class="info-title">
+                        <h5>@AppLng["Disease Name"]</h5>
+                    </div>
+                    <div class="info-value">
+                        <span>@Model.Name</span>
+                    </div>
+                </div>
+                <div class="info-box pet-box">
+                    <div class="info-title">
+                        <h5>@AppLng["Disease Pet"]</h5>
+                    </div>
+                    <div class="info-value">
+                        <span>@Model.AnimalName</span>
+                    </div>
+                </div>
+                <div class="info-box infect-box">
+                    <div class="info-title">
+                        <h5>@AppLng["Disease Infection"]</h5>
+                    </div>
+                    <div class="info-value">
+                        <span>@Model.IsInfect</span>
+                    </div>
+                </div>
+                <div class="info-box medicine-box">
+                    <div class="info-title">
+                        <h5>@AppLng["Disease Medicines"]</h5>
+                    </div>
+                    <div class="info-value">
+                        <ul>
+                            @foreach (var (i, e) in Model.MedicineIds.Zip(Model.MedicineNames))
+                            {
+                                <li>@e  <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewMedicine" asp-route-id="@i">@AppLng["View Medicine"]</a></li>
 
+                            }
 
-<div class="container " id="DiseaseBody">
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-box symptom-box">
+                    <div class="info-title">
+                        <h5> @AppLng["Disease Symptoms"]</h5>
+                    </div>
+                    <div class="info-value">
+                        <ul>
+                            @foreach (var (i, e) in Model.SymptomIds.Zip(Model.SymptomNames))
+                            {
+                                <li>@e <a asp-area="Diseases" asp-controller="Disease" asp-action="Viewsymptom" asp-route-id="@i">@AppLng["View Symptom"]</a></li>
+                            }
 
+                        </ul>
+                    </div>
+                </div>
 
-        <ul class="list-group">
-            <li class="list-group-item">
-                Name : <span class="text-primary"> @Model.Name</span>
-            </li>
-            <li class="list-group-item">
-                is infect : <span class="text-primary"> @Model.IsInfect</span>
-            </li>
-
-            <li class="list-group-item">
-                Animal : <span class="text-primary"> @Model.AnimalName</span>
-            </li>
-
-            <li class="list-group-item">
-                Medicines  : <span class="text-primary">
-                    @foreach (var (x, y) in Model.MedicineNames.Zip(Model.MedicineIds))
-                    {
-                        <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewMedicine" asp-route-id="@y"> @x  </a>
-                    }
-
-
-                </span>
-            </li>
-
-            <li class="list-group-item">
-                symptoms : <span class="text-primary">
-
-                    @foreach (var (x, y) in Model.SymptomNames.Zip(Model.SymptomIds))
-                    {
-                        <a asp-area="Diseases" asp-controller="Disease" asp-action="Viewsymptom" asp-route-id="@y"> @x  </a>
-                    }
-
-                </span>
-            </li>
-        </ul>
-
-        <br /><br /><br />
-    
-
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/viewdisease.js"></script>

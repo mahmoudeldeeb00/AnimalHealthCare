@@ -1,78 +1,143 @@
 ﻿
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model ProjectBackEndDemo.Areas.Sensor.Models.SensorDataVM
 @{
     ViewData["Title"] = "CreateSensorData";
     Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
 }
-@inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slct 
-@{ 
-    var aniList = new SelectList(  slct.GetAnimals(),"Id","Name") ;
+@inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slct
+@{
+    var aniList = new SelectList(slct.GetAnimals(), "Id", "Name");
     var diseasList = new SelectList(slct.GetDiseases(), "Id", "Name");
-} 
+    var sensormeterList = new SelectList(slct.GetSensorMeters(), "Id", "Name");
 
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+}
+<link href="~/css/createsensordata.css" rel="stylesheet" />
+@if (Culuture == "ar-EG")
+{
+<link href="~/css/createsensordata-ar.css" rel="stylesheet" />
 
-@model ProjectBackEndDemo.Areas.Sensor.Models.SensorDataVM
-<div class="container">
-    <h1>CreateSensorData</h1>
-    <form asp-area="Sensor" asp-controller="SSensor" asp-action="CreateSensorData" method="post" class="form-group">
+}
+
+
+
+
+<div class="user-form">
+    <h3 class="heading">Create Sensor Data</h3>
+    <form asp-area="Sensor" asp-controller="SSensor" asp-action="CreateSensorData" method="post">
         <div asp-validation-summary="All" class="text-danger">   </div>
 
+        <div class="form-section select-section pet-section">
+            <label for="my-type">Choose Sensor Type</label>
+            <div class="input-section">
+                <select asp-items="@sensormeterList" asp-for="Type" id="my-type" class="data-pet" >
+                    <option disabled selected>Choose Sensor Type</option>
 
-        <br />
-        <label asp-for="Name">Name</label>
-        <input type="text" asp-for="Name" placeholder="Name " class="form-control" />
-        <span class="text-danger" asp-validation-for="Name">  </span>
-        <br />
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+                <span class="text-danger" asp-validation-for="Type">  </span>
 
-        <br />
-        <label asp-for="Description">Description</label>
-        <textarea class="form-control" asp-for="Description"></textarea>
-        <span class="text-danger" asp-validation-for="Description">  </span>
-        <br />
+            </div>
+        </div>
+        <div class="form-section select-section pet-section">
+            <label for="my-pet">Choose Pet</label>
+            <div class="input-section">
+                <select asp-items="@aniList" asp-for="AnimalId" id="my-pet" class="data-pet" >
+                    <option disabled selected>Choose Pet</option>
 
-        <br />
-        <label asp-for="HowToDeal">HowToDeal</label>
-        <textarea class="form-control" asp-for="HowToDeal"></textarea>
-        <span class="text-danger" asp-validation-for="HowToDeal">  </span>
-        <br />
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+                <span class="text-danger" asp-validation-for="AnimalId">  </span>
 
+            </div>
+        </div>
+        <div class="form-section text-section name-section">
+            <div class="label-section">
+                <label for="my-data">Name</label>
+                <div class="emergency-section">
+                    <input type="checkbox" asp-for="IsEmergency" id="is-emergency" class="data-emergency" />
+                    <label for="is-emergency">Is Emergency?</label>
+                </div>
+            </div>
+            <div class="input-section">
+                <input type="text" asp-for="Name" id="my-data" class="data-name" placeholder="Enter Data Name" required />
+                <div class="input-icon">
+                    <i class="fa-solid fa-file"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="Name">  </span>
 
-        <br />
-        <label asp-for="IsEmergency">Is Emergency</label>
-        <input type="checkbox" asp-for="IsEmergency " class="custom-checkbox" />
+        </div>
 
-        <span class="text-danger" asp-validation-for="IsEmergency">  </span>
-        <br />
+        <div class="form-section text-section name-section">
+          
+            <div class="input-section">
+                <input type="number" asp-for="Value" id="my-value" class="data-name" placeholder="Enter Data value" required />
+                <div class="input-icon">
+                    <i class="fa-solid fa-file"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="Value">  </span>
 
+        </div>
 
-        <label asp-for="AnimalId"> Choose Animal </label><br />
-       <select asp-items="@aniList" asp-for="AnimalId" class="custom-select">
-            <option value="">choose Pet</option>
-        </select>
-        <span class="text-danger" asp-validation-for="AnimalId">  </span>
+        <div class="form-section area-section descrip-section">
+            <label for="my-descrip">Description</label>
+            <div class="input-section">
+                <textarea asp-for="Description" id="my-descrip" class="data-descrip" placeholder="Data Description"></textarea>
+                <div class="input-icon">
+                    <i class="fa-solid fa-file"></i>
+                </div>
+                <span class="text-danger" asp-validation-for="Description">  </span>
 
-        <br />
+            </div>
+        </div>
+        <div class="form-section area-section deal-section">
+            <label for="my-deal">How To Deal</label>
+            <div class="input-section">
+                <textarea asp-for="HowToDeal" id="my-deal" class="data-deal" placeholder="Enter How To Deal"></textarea>
+                <div class="input-icon">
+                    <i class="fa-solid fa-file"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="HowToDeal">  </span>
 
-        <label asp-for="DiseaseId"> Choose Disease </label><br />
-        <select asp-items="@diseasList" asp-for="DiseaseId" class="custom-select">
-            <option value="">choose Disease</option>
-        </select>
-        <span class="text-danger" asp-validation-for="DiseaseId">  </span>
+        </div>
 
+        <div class="form-section select-section disease-section">
+            <div class="label-section">
+                <label for="my-disease">Choose Disease</label>
+                <a asp-area="Diseases" asp-controller="Disease" asp-action="CreateDisease">Add Disease</a>
+            </div>
+            <div class="input-section">
+                <select asp-items="@diseasList" asp-for="DiseaseId" id="my-disease" class="data-disease" >
+                    <option disabled selected>Choose Disease</option>
 
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+                <span class="text-danger" asp-validation-for="DiseaseId">  </span>
 
-        <br />
-        <input type="submit" class="btn btn-primary" name="name" value="submit" />
-
-
-
-
-
+            </div>
+        </div>
+        <div class="form-section save-section">
+            <button type="submit" class="save-btn">Create</button>
+        </div>
     </form>
-
-
 </div>
+
+
+
+
 
 <script src="~/jquery/jquery.min.js"></script>
 <script src="~/jquery-validate/jquery.validate.min.js"></script>
 <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/js/createsensordata.js"></script>

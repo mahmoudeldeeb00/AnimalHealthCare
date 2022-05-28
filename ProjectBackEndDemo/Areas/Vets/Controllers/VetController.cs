@@ -52,6 +52,14 @@ namespace ProjectBackEndDemo.Areas.Vets.Controllers
 
             return View(vRep.GetVetById(Id));
         }
+        [Authorize(Roles ="Admin,Vet")]
+        public IActionResult VetAreaToManageData()
+        {
+
+            return View();
+        }
+
+
 
     }
 }

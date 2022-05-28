@@ -32,16 +32,17 @@
 
 
     <link rel="stylesheet" href="/css/home - Copy.css" class="style-en" />
-
-
+ 
     @if (Culuture == "ar-EG")
     {
         <link href="~/css/home-ar.css" rel="stylesheet" />
+       
         <style>
-            body{
-                direction:rtl;
+            body {
+                direction: rtl;
             }
         </style>
+
     }
 
 
@@ -66,7 +67,8 @@
             </picture>
 
             <form class="search-input" asp-action="AllSearch" asp-controller="Search" asp-area="" method="get">
-                <input type="search" name="search" id="search-input" placeholder="@AppLng["WhatsWrongwithyourPet!"]" />
+                <input required type="search" name="search" id="search-input" placeholder="@AppLng["WhatsWrongwithyourPet!"]" />
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
 
 
@@ -95,17 +97,22 @@
             }
             else
             {
-                <div class="user-section">
-                    <div class="profile">
-                        <picture class="profile-img">
-                            <img src="/Files/UsersProfilePictures/DefaultProfilePicture.png" alt="profile picture" />
-                        </picture>
-                        <div class="profile-name">
-                            <span class="name">User Name </span>
-                            @*<i class="fa-solid fa-caret-down caret"></i>*@
-                        </div>
+                <!--<div class="user-section">
+                <div class="profile">
+                    <picture class="profile-img">
+                        <img src="/Files/UsersProfilePictures/DefaultProfilePicture.png" alt="profile picture" />
+                    </picture>
+                    <div class="profile-name">
+                        <span class="name">User Name </span>-->
+                @*<i class="fa-solid fa-caret-down caret"></i>*@
+                <!--</div>
                     </div>
 
+                </div>-->
+
+
+                <div class="header-login">
+                    <a asp-area="Identity" asp-controller="Account" asp-action="LogIn">@AppLng["Login"]</a>
                 </div>
             }
 
@@ -124,14 +131,23 @@
 
         <section class="profile-pop">
             <ul class="profilemenu">
+
                 <li>
                     <i class="fa-solid fa-user"></i>
                     <a asp-area="Identity" asp-controller="Account" asp-action="ViewProfile" asp-route-id="@currentUser.Id">@AppLng["Profile"]</a>
                 </li>
-                <li>
-                    <i class="fa-solid fa-chart-line"></i>
-                    <a href="#">Activity</a>
-                </li>
+                @if (currentUser.AnimalId == null || currentUser.AnimalId == 0)
+                {
+
+                }
+                else
+                {
+                    <li>
+                        <i class="fa-solid fa-chart-line"></i>
+                        <a asp-action="ViewPet" asp-controller="SSensor" asp-area="Sensor">@AppLng["View Mine Pet"]</a>
+                    </li>
+                }
+
                 <li>
                     <i class="fa-solid fa-user-gear"></i>
                     <a asp-area="Identity" asp-controller="Account" asp-action="EditProfile" asp-route-id="@currentUser.Id">@AppLng["Setting"]</a>
@@ -174,6 +190,7 @@
             <ul class="setting-content">
                 <li><a href='/Notification/GetAllNotification'>@AppLng["Notificationshistory"]</a></li>
                 <li>@AppLng["Managenotifications"]</li>
+                <li> <a href="#" id="readAllNotification"> @AppLng["mark all as read"] </a></li>
             </ul>
         </div>
         <span class="notification-exit">X</span>
@@ -222,6 +239,21 @@
                 <i class="fa-solid fa-heart-pulse"></i>
                 <a href="#">@AppLng["Health"]</a>
                 <ul class="megamenu">
+
+                    @if (signinmanager.IsSignedIn(User))
+                    {
+                        var currentUser = await usermanager.FindByNameAsync(User.Identity.Name);
+                        if (currentUser.LastSensorSend != null)
+                        {
+                            <li>
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <a asp-action="Monitoring" asp-controller="SSensor" asp-area="Sensor">@AppLng["Monitoring"]</a>
+                            </li>
+                        }
+                    }
+
+
+
                     <li>
                         <i class="fa-solid fa-comment-medical"></i>
                         <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewSymptoms">@AppLng["Symptoms"]  </a>
@@ -268,7 +300,7 @@
             </li>
             <li>
                 <i class="fa-solid fa-users"></i>
-                <a href="#">@AppLng["AboutUs"] </a>
+                <a asp-area="" asp-controller="Home" asp-action="AboutUs">@AppLng["AboutUs"] </a>
             </li>
         </ul>
     </nav>
@@ -327,9 +359,6 @@
     </div>
     <!-- End Go Up -->
 
-
-
-
     @RenderBody()
 
 
@@ -362,23 +391,20 @@
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/all.min.js"></script>
     <script src="/js/jquery-3.6.0.min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script src="~/js/Layout.js"></script>
 
     <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
     <script type="text/javascript" src="/js/Notification.Js"></script>
-    <script src="/js/home.js"></script>
+    @* <script src="~/js/confirmforgetpassword.js"></script>*@
+
+
     <script>
-
-
-
-
-
-       // setTimeout(GetRandomIdNotification(),5000);
-     
+                                                                               // setTimeout(GetRandomIdNotification(),5000);
 
     </script>
 
-   @await Component.InvokeAsync("NToastNotify")
+    @await Component.InvokeAsync("NToastNotify")
 
 </body>
 

@@ -1,0 +1,20 @@
+
+/* Start View Profile */
+
+.viewprofile .container .viewprofile-section h5:after {
+    left: unset;
+    right: 0;
+}
+
+.viewprofile .container .viewprofile-edit a::after {
+    left: unset;
+    right: 0;
+}
+
+.viewprofile .container .viewprofile-edit a:hover::after {
+    left: unset;
+    right: 105%;
+}
+
+
+/* End View Profile */

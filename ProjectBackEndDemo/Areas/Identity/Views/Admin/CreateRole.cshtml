@@ -1,17 +1,37 @@
-﻿
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
-    ViewData["Title"] = "CreateRole";
+    ViewData["Title"] = "Create Role";
     Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
 
 }
+<link href="~/css/createrole.css" rel="stylesheet" />
 
-<h1>CreateRole</h1>
+@if (Culuture == "ar-EG")
+{
 
-<form asp-area="Identity" asp-controller="Account" asp-action="CreateRole" method="post">
-    <label name="rolename"> Role Name </label>
-    <input type="text" name="rolename" />
+    <link href="~/css/createrole-ar.css" rel="stylesheet" />
+}
+
+<div class="user-form">
+    <h3 class="heading">Create Role</h3>
+    <form asp-area="Identity" asp-controller="Account" asp-action="CreateRole" method="post">
+        <div class="form-section name-section">
+            <label for="my-role">Role Name</label>
+            <div class="input-section">
+                <input type="text" name="rolename" id="my-role" class="user-name" placeholder="Enter Role Name" required />
+                <div class="name-icon">
+                    <i class="fa-solid fa-file"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-section save-section">
+            <button type="submit" class="save-btn">Create Role</button>
+        </div>
+    </form>
+</div>
 
 
-
-    <input type="submit" name="" value="Create Role" />
-</form>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/createrole.js"></script>

@@ -20,7 +20,11 @@ namespace ProjectBackEndDemo.Contrrollers
         {
             return View();
         }
-
+        [Authorize]
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
 
         public ActionResult ChangeCulture(string culture , string returnUrl)
         {

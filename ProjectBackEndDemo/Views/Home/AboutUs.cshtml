@@ -1,0 +1,57 @@
+﻿
+
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
+
+
+@{
+    ViewData["Title"] = AppLng["AboutUs"];
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
+}
+<link href="~/css/aboutus.css" rel="stylesheet" />
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/aboutus-ar.css" rel="stylesheet" />
+
+}
+
+
+<div class="about-section">
+    <h3 class="heading">@AppLng["AboutUs"]</h3>
+    <div class="container">
+        <form asp-area="Identity" asp-controller="Admin" asp-action="AddFeedBack" method="post">
+            <input type="text" name="Name" id="feed-user" placeholder="@AppLng["Enter your username or email"]" />
+            <textarea name="Content" id="feed-text" placeholder="@AppLng["Tell Us your feedback"]" required></textarea>
+            <button type="submit">@AppLng["Send"]</button>
+            <a asp-area="Identity" asp-controller="Admin" asp-action="ViewFeedBacks">@AppLng["View Our Feedbacks"]</a>
+        </form>
+        <div class="details">
+            <div class="address">
+                <i class="fa-solid fa-location-dot"></i>
+                <address>
+                    <span> @AppLng["Egypt, Menoufia University."] </span>
+                    <span>@AppLng["Department of Physics and Computer Science."] </span>
+                </address>
+            </div>
+            <div class="phone">
+                <i class="fa-solid fa-phone-volume"></i>
+                <div>
+                    <a href="tel:+0123456789">+012 3456 789</a>
+                    <a href="tel:+0123456789">+012 3456 789</a>
+                </div>
+            </div>
+            <div class="email">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                    <a href="mailto:lacura@gmail.com">lacura@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery-3.6.0.min.js"></script>
+
+<script src="~/js/aboutus.js"></script>

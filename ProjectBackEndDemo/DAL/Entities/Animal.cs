@@ -13,8 +13,20 @@ namespace ProjectBackEndDemo.DAL.Entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-       
-       
+
+        public int StartTempreture { get; set; }
+        public int EndTempreture { get; set; }
+
+        public int StartGlucose{ get; set; }
+        public int EndGlucose { get; set; }
+
+        public int StartPulse { get; set; }
+        public int EndPulse { get; set; }
+
+
+
+        public UserAnimal UserAnimal { get; set; }
+
         public List<Disease> Disease { get; set; }
        public virtual ICollection<AppUser> AppUser { get; set; }
         public virtual ICollection<SensorData> SensorDatas { get; set; }

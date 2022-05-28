@@ -1,18 +1,44 @@
 ﻿
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
 @{
-    ViewData["Title"] = "GetAllNotification";
+    ViewData["Title"] = @AppLng["Notifications"];
     Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
 }
-@model List<ProjectBackEndDemo.Models.NotificationVM> 
+@model List<ProjectBackEndDemo.Models.NotificationVM>
 
+    <link href="~/css/getallnotifications.css" rel="stylesheet" />
 
-<h1>GetAllNotification</h1>
-
-<ul  class='list-group'>
-    @foreach (var item in Model)
+    @if (Culuture == "ar-EG")
     {
-    <li class='list-group-item notification-text' data-id='@item.id'> @item.text  <a class='text-primary' href='@item.UrlReference'> View Page </a>  @item.time </li>
-
+        <link href="~/css/getallnotifications-ar.css" rel="stylesheet" />
     }
-</ul>
 
+
+    <div class="notification-section">
+        <h3 class="heading">@AppLng["Notifications History"]</h3>
+        <div class="container">
+            <ul class="notification-list">
+                @foreach (var item in Model)
+                {
+                    <li class="notification-box">
+                        <div class="box-content">
+                            <span class="notifi-text">@item.text</span>
+                            <span class="notifi-time">@item.time</span>
+                        </div>
+                        <div class="box-links">
+                            <a href='@item.UrlReference'>@AppLng["View the case"]</a>
+
+                        </div>
+                    </li>
+                }
+            </ul>
+
+        </div>
+    </div>
+
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="~/js/getallnotifications.js"></script>

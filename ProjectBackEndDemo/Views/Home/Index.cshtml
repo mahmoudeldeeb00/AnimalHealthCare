@@ -2,14 +2,21 @@
 @{
     ViewBag.Title = "Cura";
 }
+
+@using Microsoft.AspNetCore.Identity
+@using ProjectBackEndDemo.Areas.Identity.Models
+@inject SignInManager<AppUser> signinmanager
+@inject UserManager<AppUser> usermanager
+
 @inject ProjectBackEndDemo.Areas.Vets.Rep.IVetRep Vrep
 @inject ProjectBackEndDemo.Areas.Emergency.EmergencyServices.IEmergencyRep EmergencyRep
 @inject ProjectBackEndDemo.Areas.Diseases.Rep.IDiseaseRep DieaseRep
-@{ 
+@{
     var VetList = Vrep.GetAllVets().Take(5);
     var EmergencyList = EmergencyRep.GetAllEmergences().Take(5);
     var FAQList = DieaseRep.GetFAQS().Take(5);
 }
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
 <!-- Start Landing -->
 <section class="landing">
@@ -18,7 +25,24 @@
         <p>@AppLng["Because every life matters, including our animals lives and their health too."]</p>
         <p>We are here to help you take care your PET.</p>
         <p>We hope we can help you with what you need.</p>
-        <a asp-action="GetAllNotification" asp-controller="Notification" asp-area="">@AppLng["ViewMonitoringPage"]</a>
+
+        @if (signinmanager.IsSignedIn(User))
+        {
+            var currentUser = await usermanager.FindByNameAsync(User.Identity.Name);
+            if (currentUser.LastSensorSend != null)
+            {
+                <a asp-action="Monitoring" asp-controller="SSensor" asp-area="Sensor">@AppLng["ViewMonitoringPage"]</a>
+
+            }
+            else
+            {
+                <a asp-area="Emergency" asp-controller="Emergencyy" asp-action="Index">@AppLng["Have An Emergency Case?"]</a>
+
+            }
+
+
+
+        }
     </div>
 </section>
 <!-- End Landing -->
@@ -259,3 +283,6 @@
     </div>
 </section>
 <!-- End About Us Section -->
+<script src="~/js/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="~/js/home.js"></script>

@@ -1,76 +1,94 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using ProjectBackEndDemo.Areas.Identity.Models
+﻿
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@inject UserManager<AppUser> usermanager
-@inject SignInManager<AppUser> signinmanager
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
+
+
+
+
+
+
 @inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slct
 @{
     ViewBag.Title = "Emergencies";
     Layout = "~/Views/Layouts/MainLayout.cshtml";
     var anilist = new SelectList(slct.GetAnimals(), "Name", "Name");
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
 
 }
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<link href="~/css/viewemergencies.css" rel="stylesheet" />
+
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/viewemergencies-ar.css" rel="stylesheet" />
+
+}
+
+
+
+
+@*<div class="container">
+
+
+
+        <div>Medical emergencies in pets, by definition, are sudden, unplanned events. It's hard to stay calm when your pet is facing a medical emergency, but being prepared will make it easier. So, get the phone number of the nearest veterinary clinic, and the nearest veterinary hospital that has an emergency department</div>
+        <div id="view">
+
+        </div>
+    </div>*@
+<section class="emergency">
+    <h3 class="heading">All Emergencies</h3>
+    <select name="pet" id="selectPet" asp-items="@anilist" hidden>
+        <option value="">Select Pet</option>
+
+    </select>
+    <div class="container emergency-filter">
+        <div class="emergency-pet">
+            <picture class="pet-box dog-box active" data-value="dog">
+                <img src="/assets/imgs/dog-life.webp" alt="Dog">
+            </picture>
+            <picture class="pet-box cat-box" data-value="cat">
+                <img src="/assets/imgs/cat-life.webp" alt="Cat">
+            </picture>
+            <picture class="pet-box turtle-box" data-value="turtle">
+                <img src="/assets/imgs/turtle-life.webp" alt="Turtle">
+            </picture>
+        </div>
+        @*<form action="">
+            <input type="search" name="search" id="" placeholder="What do you want to know?" required />
+            <button>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </button>
+        </form>*@
+    </div>
+    <div class="container emergency-section " id="view">
+       Please select animal 
+       
+    </div>
+    <span class="emergency-link more">
+        <span>View More</span>
+        <i class="fa-solid fa-angles-down"></i>
+    </span>
+</section>
+
+
+
+
+
+
+
+
+
 <script src="~/jquery/jquery.min.js"></script>
 
 
-
-<br />
-<br />
-<br />
-<br />
-
-<div class="container">
-
-
-    @if (signinmanager.IsSignedIn(User))
-    {
-        var x = User.Identity.Name;
-
-        var result = await usermanager.FindByNameAsync(x);
-        foreach (var item in await usermanager.GetRolesAsync(result))
-        {
-            if (item == "Admin" || item == "Vet")
-            {
-                <a asp-area="Emergency" asp-controller="Emergencyy" asp-action="CreateEmergency" class="btn btn-primary"> Create Emergency </a>
-
-            }
-        }
-
-
-    }
-
-
-
-    <br />
-    <br />
-    <br />
-    <br />
-
-    <select id="selectPet" asp-items="@anilist" class="custom-select">
-        <option value="">Select Pet</option>
-    </select>
-
-
-
-
-    <div>Medical emergencies in pets, by definition, are sudden, unplanned events. It's hard to stay calm when your pet is facing a medical emergency, but being prepared will make it easier. So, get the phone number of the nearest veterinary clinic, and the nearest veterinary hospital that has an emergency department</div>
-    <div id="view">
-
-    </div>
-
-
-
-
-
-
-
-    @*COntainer*@
-</div>
-
 <script>
     $(function () {
-
+    
         $("#selectPet").change(function () {
 
             var x = $("#selectPet").val();
@@ -86,7 +104,11 @@
                     $.each(res, function (i, e) {
                         $("#view").append(
 
-                            "<h2>" + e.Name + " </h2 ><div>" + e.Description + " </div><div class='text-primary'>" + e.HowToDeal + " </div>"
+                            " <div class='emergency-box'><div class='emergency-name'><h4>" + e.Name + "</h4></div><div class='emergency-info'><div class='info-box name-box'>" +
+                            "<div class= 'info-title' > <h5>Emergency Name</h5></div > <div class='info-value'><span>" + e.Name + "</span> </div></div > " +
+                                 "<div class='info-box descrip-box'><div class='info-title'><h5>Emergency Description</h5></div>"+
+                            "<div class='info-value'><p>" + e.Description+"</p> </div></div><div class='info-box deal-box'> <div class='info-title'><h5>How To Deal With Emergency</h5></div>"+
+                            "<div class='info-value'> <p>" + e.HowToDeal+"</p> </div> </div></div> </div>"
 
 
                         )
@@ -103,7 +125,7 @@
     })
 </script>
 
-
+<script src="~/js/viewemergencies.js"></script>
 
 
 

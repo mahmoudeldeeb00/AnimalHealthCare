@@ -20,5 +20,7 @@ namespace ProjectBackEndDemo.Areas.Care.Models
         [Required(ErrorMessage = "Required")]
         public string Care { get; set; }
         public List<Food> Foods { get; set; }
+        public string AnimalTypeName { get; set; }
+
     }
 }

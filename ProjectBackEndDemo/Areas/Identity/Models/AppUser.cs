@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using ProjectBackEndDemo.Areas.Sensor.Data;
 using ProjectBackEndDemo.DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -21,14 +22,17 @@ namespace ProjectBackEndDemo.Areas.Identity.Models
 
 
 
-        public int AnimalId { get; set; }
+        public int? AnimalId { get; set; }
         [ForeignKey("AnimalId")]
 
         public virtual Animal Animal { get; set; }
 
 
 
+        public int? LastSensorSend { get; set; }
 
+      
 
+        public UserAnimal UserAnimal { get; set; }
     }
 }

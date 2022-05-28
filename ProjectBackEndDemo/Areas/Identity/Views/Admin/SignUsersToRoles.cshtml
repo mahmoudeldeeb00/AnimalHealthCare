@@ -8,29 +8,63 @@
     Layout = "~/Views/Layouts/MainLayout.cshtml";
     var UserList = new SelectList(userManager.Users.ToList(), "UserName", "UserName");
     var RoleList = new SelectList(roleManager.Roles.ToList(), "Name", "Name");
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
+}
+
+@model ProjectBackEndDemo.Areas.Identity.Models.UserRoleVM
+<link href="~/css/signuserstoroles.css" rel="stylesheet" />
+
+
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/signuserstoroles-ar.css" rel="stylesheet" />
 
 }
 
 
-<h1>SignUsersToRoles</h1>
-
-@model ProjectBackEndDemo.Areas.Identity.Models.UserRoleVM
 
 
-<form asp-area="Identity" asp-controller="Admin" asp-action="SignUsersToRoles" method="post">
 
-    <label asp-for="RoleName"> Role </label>
-    <select asp-for="RoleName" asp-items="@RoleList">
-        <option>Select Role</option>
-    </select>
-    <br />
-    <label asp-for="UserName"> User Name </label>
-    <select asp-for="UserName" asp-items="@UserList">
-        <option>Select Role </option>
-    </select>
-    <input type="submit" name="" value="submit" class="btn btn-primary" />
 
-</form>
-<span asp-validiation-summary="All"></span>
+<div class="user-form">
+    <h3 class="heading">Sign Users To Roles</h3>
+    <form asp-area="Identity" asp-controller="Admin" asp-action="SignUsersToRoles" method="post">
 
-<div class="text-danger"> @TempData["NoUser"]  </div>
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div class="form-section select-section name-section">
+            <label for="my-name">User Name</label>
+            <div class="input-section">
+                <select asp-for="UserName" asp-items="@UserList" id="my-name" class="user-name">
+                    <option disabled selected>Choose User</option>
+
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-section select-section role-section">
+            <label for="my-role">Role</label>
+            <div class="input-section">
+                <select asp-for="RoleName" asp-items="@RoleList" id="my-role" class="user-role">
+                    <option disabled selected>Choose Role</option>
+
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-section save-section">
+            <button type="submit" class="save-btn">Sign User</button>
+        </div>
+    </form>
+    <div class="text-danger"> @TempData["NoUser"]  </div>
+
+
+
+</div>
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/signuserstoroles.js"></script>

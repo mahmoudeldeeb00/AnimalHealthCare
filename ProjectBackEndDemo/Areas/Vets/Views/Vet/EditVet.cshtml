@@ -1,50 +1,139 @@
-﻿@inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slctHelper
+﻿
 
+@inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slctHelper
+@model ProjectBackEndDemo.Areas.Vets.Models.VetVM
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    ViewData["Title"] = "EditVet";
+    ViewData["Title"] = "Edit Vet";
     Layout = "~/Views/Layouts/MainLayout.cshtml";
     var Cities = new SelectList(slctHelper.GetCities(), "Id", "Name");
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
 
 }
-@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
-@model ProjectBackEndDemo.Areas.Vets.Models.VetVM
 
-<div class="container">
-    <h1>Create Vet </h1>
-    <div asp-validation-summary="All" class="text-danger">   </div>
-    <form asp-area="Vets" asp-controller="Vet" asp-action="EditVet" method="post" class="form-group" enctype="multipart/form-data">
-        <label asp-for="Name">Name</label>
-        <input type="text" asp-for="Name" placeholder="Name " class="form-control" />
-        <span class="text-danger" asp-validation-for="Name">  </span>
-        <br />
-        <label asp-for="Address">Address</label>
-        <input type="text" asp-for="Address" placeholder="Address " class="form-control" />
-        <span class="text-danger" asp-validation-for="Address">  </span>
-        <br />
-        <label asp-for="age">Age</label>
-        <input type="number" asp-for="age" placeholder="age " class="form-control" />
-        <span class="text-danger" asp-validation-for="age">  </span>
-        <br />
-        <label asp-for="Telephone">Telephone</label>
-        <input type="text" asp-for="Telephone" placeholder="Telephone " class="form-control" />
-        <span class="text-danger" asp-validation-for="Telephone">  </span>
-        <br />
-        <label asp-for="CityId"> Select City </label>
-        <select asp-for="CityId" asp-items="@Cities" class="custom-select-sm">
-            <option> Select City </option>
-        </select>
-        <br />
-        <label asp-for="Picture">Picture</label>
-        <input type="file" asp-for="Picture" placeholder="Picture " class="form-control" />
-        <span class="text-danger" asp-validation-for="Picture">  </span>
-        <br />
-        <input type="submit" class="btn btn-primary" name="name" value="submit" />
+
+<link href="~/css/createvet.css" rel="stylesheet" />
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/createvet-ar.css" rel="stylesheet" />
+
+}
+
+
+<div class="user-form">
+    <h3 class="heading">Create Vet</h3>
+    <form asp-area="Vets" asp-controller="Vet" asp-action="EditVet" method="post"  enctype="multipart/form-data">
+        <div class="text-danger" asp-validation-summary="All"> </div>
+        <div class="editprofile-section">
+            <img src="/Files/VetPictures/@Model.PictureUrl" alt="profile" class="editprofile-img">
+            <div class="editprofile-link" id="clickme">
+                <i class="fa-solid fa-camera"></i>
+
+            </div>
+        </div>
+        <div class="form-section text-section name-section">
+            <label for="my-username">Name</label>
+            <div class="input-section">
+                <input type="text" asp-for="Name" id="my-username" class="user-name" placeholder="Enter Vet Name" required />
+                <div class="input-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="Name">  </span>
+
+        </div>
+        <div class="form-section text-section specialty-section">
+            <label for="my-specialty">Specialty</label>
+            <div class="input-section">
+                <input type="text" asp-for="Speciality" id="my-specialty" class="user-specialty" placeholder="Enter Vet specialty" required />
+                <div class="input-icon">
+                    <i class="fa-solid fa-file"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="Speciality">  </span>
+
+        </div>
+        <div class="form-section text-section gmail-section">
+            <label for="my-gmail">Address</label>
+            <div class="input-section">
+                <input type="text" asp-for="Address" id="my-gmail" class="user-email" placeholder="Enter Vet addresse" />
+                <div class="input-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="Address">  </span>
+
+        </div>
+        <div class="form-section text-section phone-section">
+            <label for="my-phone">Phone Number</label>
+            <div class="input-section">
+                <input type="tel" asp-for="Telephone" id="my-phone" class="user-phone" placeholder="Enter Vet Phone Number" />
+                <div class="input-icon">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="Telephone">  </span>
+
+
+        </div>
+        <div class="form-section birthday-section">
+            <label for="my-birthday">Age</label>
+            <div class="input-section">
+                <input type="number" asp-for="age" id="my-birthday" class="user-birthday" />
+                <div class="birthday-icon">
+                    <i class="fa-solid fa-calendar"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="age">  </span>
+
+        </div>
+        <div class="form-section select-section address-section">
+            <label for="my-address">City </label>
+            <div class="input-section">
+                <select asp-for="CityId" asp-items="@Cities" id="my-address" class="user-address">
+                    <option disabled selected>Choose Vet City</option>
+
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+                <span class="text-danger" asp-validation-for="CityId">  </span>
+            </div>
+        </div>
+
+
+        <div hidden class="form-section text-section name-section">
+            <label for="my-pic">Vet picture</label>
+            <div class="input-section">
+                <input type="file" asp-for="Picture" id="my-pic" class="user-name" />
+                <div class="input-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="Picture">  </span>
+
+        </div>
+
+
+        <div class="form-section save-section">
+            <button type="submit" class="save-btn">Edit</button>
+        </div>
     </form>
 </div>
+
+
 
 <script src="~/jquery/jquery.min.js"></script>
 <script src="~/jquery-validate/jquery.validate.min.js"></script>
 <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 
+<script src="~/js/createvet.js"></script>
+<script>
 
+    $("#clickme").on('click', function () {
 
+        document.getElementById("my-pic").click();
+
+    })
+
+</script>

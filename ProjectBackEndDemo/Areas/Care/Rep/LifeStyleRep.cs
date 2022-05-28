@@ -65,13 +65,23 @@ namespace ProjectBackEndDemo.Areas.Care.Rep
 
         public LifeStyleVM GetLifeStyle(int animal)
         {
-            var lifestyle = mapper.Map<LifeStyleVM>(db.LifeStyles.FirstOrDefault(f => f.AnimalId == animal));
-            lifestyle.Foods = new List<Food>();
-            foreach(var item in db.AnimalFoods.Where(w => w.AnimalId == animal).Include(i => i.Food).ToList())
+            try
             {
-                lifestyle.Foods.Add(item.Food);
+                var lf = db.LifeStyles.FirstOrDefault(f => f.AnimalId == animal);
+                var lifestyle = mapper.Map<LifeStyleVM>(lf);
+                lifestyle.AnimalTypeName = db.Animals.Where(w=>w.Id == animal).Select(a=> a.Name).FirstOrDefault();
+                lifestyle.Foods = new List<Food>();
+                foreach (var item in db.AnimalFoods.Where(w => w.AnimalId == animal).Include(i => i.Food).ToList())
+                {
+                    lifestyle.Foods.Add(item.Food);
+                }
+                return lifestyle;
             }
-            return lifestyle;
+            catch
+            {
+                return new LifeStyleVM() { Care = "You might not select any animal to you please go to edit account and select your pet or there is loss of data in data base  "};
+            }
+         
 
         }
 

@@ -1,32 +1,54 @@
 ﻿
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
+
 @{
-    ViewData["Title"] = "ViewFeedBacks";
+    ViewData["Title"] = @AppLng["Feedbacks"];
     Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
 }
 @model List<ProjectBackEndDemo.Areas.Identity.Models.FeedBack>
 
-<div class="container">
-    
-    <table style="border:1px solid #f00">
+
+<link href="~/css/viewfeedbacks.css" rel="stylesheet" />
+@if (Culuture == "ar-EG")
+{
+
+    <link href="~/css/viewfeedbacks-ar.css" rel="stylesheet" />
+}
+
+
+
+<div class="feedbacks-section">
+    <h3 class="heading">@AppLng["Feedbacks"]</h3>
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <div class="feedback-box">
+                <div class="feedback-user">
+                    <picture>
+                        <img src="/Files/UsersProfilePictures/DefaultProfilePicture.png" alt="user">
+                    </picture>
+                    <div class="feedback-owner">
+                        <span class="owner-name"> @item.Name</span>
+                        <span class="owner-email"> @item.Email</span>
+                    </div>
+                </div>
+                <p class="feedback-content">
+                    @item.Content
+                </p>
+            </div>
+        }
+    </div>
         
-        <thead>
-            <tr>
-                <td> Name </td>
-                <td> Email </td>
-                <td> Content </td>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td> @item.Name </td>
-                    <td> @item.Email </td>
-                    <td> @item.Content </td>
-                </tr>
-            }
-
-        </tbody>
-
-    </table>
+    <span class="feedback-link more">
+        <span>@AppLng["View More"]</span>
+        <i class="fa-solid fa-angles-down"></i>
+    </span>
 </div>
+
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/viewfeedbacks.js"></script>

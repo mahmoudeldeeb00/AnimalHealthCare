@@ -64,7 +64,7 @@ namespace ProjectBackEndDemo.Contrrollers
             var notifications = notify.GetUserNotifications(userId);
             return Ok(notifications);
         }
-        
+     
         public IActionResult GetAllNotification()
         {
 
@@ -80,7 +80,12 @@ namespace ProjectBackEndDemo.Contrrollers
             notify.ReadNotification(notificationId, userManager.GetUserId(HttpContext.User));
             return Ok();
         }
-
+        [HttpPost]
+        public IActionResult ReadAllNotification()
+        {
+            notify.ReadAll( userManager.GetUserId(HttpContext.User));
+            return Ok();
+        }
 
         public  void CreateAutoNotification(int id)
         {          
@@ -96,13 +101,17 @@ namespace ProjectBackEndDemo.Contrrollers
             notify.CreateNotification(notification, userId);
 
 
-            if (model.IsEmergency == true)
+            if(model.IsEmergency == false)
+            {
+                not.AddInfoToastMessage(notification.Text);
+            }
+            else
             {
                 if (signInManager.IsSignedIn(User))
                 {
                     not.AddWarningToastMessage(notification.Text);
 
-                    var currentUser =  userManager.FindByNameAsync(User.Identity.Name).Result;
+                    var currentUser = userManager.FindByNameAsync(User.Identity.Name).Result;
                     try
                     {
                         MailHelper.SendMail(currentUser.Gmail, notification.Text, notification.UrlReference);
@@ -114,12 +123,7 @@ namespace ProjectBackEndDemo.Contrrollers
                     }
                 }
             }
-            else
-            {
-                not.AddInfoToastMessage(notification.Text);
-
-            }
-
+         
 
 
 

@@ -106,5 +106,16 @@ namespace ProjectBackEndDemo.BL.Repository
             db.UserNotifications.Update(notification);
             db.SaveChanges();               
         }
+
+        public void ReadAll(string userId)
+        {
+            foreach(var item in db.UserNotifications.Where(w=> w.ApplicationUserId == userId &&  w.IsRead == false  ).ToList())
+            {
+                item.IsRead = true;
+                db.SaveChanges();
+
+            }
+        }
+
     }
 }

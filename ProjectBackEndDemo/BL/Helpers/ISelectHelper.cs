@@ -1,4 +1,5 @@
-﻿using ProjectBackEndDemo.DAL.Entities;
+﻿using ProjectBackEndDemo.Areas.Sensor.Data;
+using ProjectBackEndDemo.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace ProjectBackEndDemo.BL.Helpers
         public List<Symptom> GetSymptoms();
         public List<Medicine> GetMedicines();
         public List<City> GetCities();
+        public List<Gender> GetGender();
+        public List<SensorMeter> GetSensorMeters();
+        public List<LifeStyle> GetLifeStyles();
 
 
 

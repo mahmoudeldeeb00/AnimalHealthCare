@@ -1,60 +1,98 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model ProjectBackEndDemo.Areas.Care.Models.LifeStyleVM
-@inject SignInManager<AppUser> signinmanager
-@inject UserManager<AppUser> usermanager
-
-@using Microsoft.AspNetCore.Identity
 @using ProjectBackEndDemo.Areas.Identity.Models
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Layouts/MainLayout.cshtml";
 
+
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
+
+@{
+    ViewData["Title"] = AppLng["LifeStyle"];
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+}
+<link href="~/css/lifestyle.css" rel="stylesheet" />
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/lifestyle-ar.css" rel="stylesheet" />
 }
 
- @if (signinmanager.IsSignedIn(User))
-    {
-        var currentUser = await usermanager.FindByNameAsync(User.Identity.Name);
-   
 
-<div class="container">
-    <h1>Life Style</h1>
-    <div>
-        <h2> cleanliness </h2>
-        @Model.Cleanliness
-    </div>
-    <div>
-        <h2> Care </h2>
-        @Model.Care
-    </div>
-    <div>
-        <h2> Mating </h2>
-        @Model.Mating
-    </div>
 
-    <div>
-        <h2> Foods </h2>
-        <ul>
-            @foreach (var item in Model.Foods)
-            {
-                <li>
-                    Name : @item.Name <br />
-                    Descroption  : @item.Description <br />
+<section class="lifestyle">
+    @*<select name="pet" id="pet-select" hidden>
+            <option value="dog" >Dog</option>
+            <option value="cat" >Cat</option>
+            <option value="turtle">Turtle</option>
+        </select>*@
+    <h3 class="heading">@AppLng["LifeStyle"]</h3>
+    <div class="container">
 
-                </li>
-            }
-        </ul>
-    </div>
+
+        <div class="lifestyle-box lifestyle-pet">
+            <picture class="pet-box dog-box active" data-value="dog" data-id="4">
+                <img src="/assets/imgs/@Model.AnimalTypeName-life.webp" alt="@Model.AnimalTypeName">
+            </picture>
+            @*<picture class="pet-box cat-box" data-value="cat" data-id="3">
+                    <img src="/assets/imgs/cat-life.webp" alt="Cat">
+                </picture>
+                <picture class="pet-box turtle-box" data-value="turtle" data-id="5">
+                    <img src="/assets/imgs/turtle-life.webp" alt="Turtle">
+                </picture>*@
+        </div>
 
 
 
-    @foreach (var role in await usermanager.GetRolesAsync(currentUser))
-    {
-        if(role=="Admin" || role == "Vet")
+
+
+
+
+        <div class="lifestyle-box cleanliness-box">
+            <h5> @AppLng["Cleanliness"]</h5>
+            <div class="lifestyle-content">
+                @Model.Cleanliness
+            </div>
+        </div>
+        <div class="lifestyle-box care-box">
+            <h5>@AppLng["Care"]</h5>
+            <div class="lifestyle-content">
+                @Model.Care
+            </div>
+        </div>
+        <div class="lifestyle-box mating-box">
+            <h5>@AppLng["Mating"]</h5>
+            <div class="lifestyle-content">
+                @Model.Mating
+            </div>
+        </div>
+        <div class="lifestyle-box food-box">
+            <h5>@AppLng["Food"]</h5>
+            <div class="lifestyle-content">
+
+                <ul>
+                    @if (Model.Foods != null)
                     {
-            <a asp-area="Care" asp-controller="LifeStyle" asp-action="EditLifeStyle" asp-route-id="@Model.Id"> Edit This Life Style </a>
+                        @foreach (var item in Model.Foods)
+                        {
+                            <li>
+                                <span>@item.Name  : </span>
+                                @item.Description
+
+                            </li>
+                        }
                     }
-    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 
 
-</div>
- }
+
+
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+
+<script src="~/js/lifestyle.js"></script>

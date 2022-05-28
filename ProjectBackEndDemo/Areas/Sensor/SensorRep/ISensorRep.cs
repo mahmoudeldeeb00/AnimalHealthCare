@@ -12,6 +12,16 @@ namespace ProjectBackEndDemo.Areas.Sensor.SensorRep
         public void AddSensorData(SensorDataVM model);
         public SensorDataVM GetSensorData(int Id);
 
+        public void AddSensorMeter(string Name);
+
+        public MonitoringVM ViewMonitoring(string UserId);
+
+        public UserAnimalVM GetUserAnimalByUserId(string UserId);
+
+
+        public EditAnimalPictureVM GetUserAnimalPictureToEdit(string UserId);
+        public void EditPetProfile(UserAnimalVM model);
+        public void EditPetProfilePicture(EditAnimalPictureVM model);
 
     }
 }

@@ -18,7 +18,7 @@ namespace ProjectBackEndDemo.DAL.Entities
         public string PictureUrl { get; set; }
 
 
-
+        public string Speciality { get; set; }
 
         //ForeignKey
         public int CityId { get; set; }

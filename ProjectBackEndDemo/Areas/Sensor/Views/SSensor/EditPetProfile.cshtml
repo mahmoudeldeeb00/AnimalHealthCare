@@ -1,0 +1,115 @@
+﻿@inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slct
+@model ProjectBackEndDemo.Areas.Sensor.Models.UserAnimalVM
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
+
+
+@{
+    ViewData["Title"] = @AppLng["Edit Pet Profile"];
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var animallist = new SelectList(slct.GetAnimals(), "Id", "Name");
+    var genderlist = new SelectList(slct.GetGender(), "Id", "Name");
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+    if (Model.pictureSrc == null)
+    {
+        Model.pictureSrc = "DefaultPhoto.jpg";
+    }
+}
+<link href="~/css/editpet.css" rel="stylesheet" />
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/editpet-ar.css" rel="stylesheet" />
+}
+
+
+<div class="user-form">
+    <h3 class="heading">@AppLng["Edit Pet Profile"]</h3>
+    <form asp-area="Sensor" asp-controller="SSensor" asp-action="EditPetProfile" method="post">
+
+        <input hidden type="text" asp-for="ApplicationUserId" value="@Model.ApplicationUserId" />
+
+
+
+        <div class="editprofile-section">
+
+            <img src="/Files/UserAnimalPictures/@Model.pictureSrc" alt="profile" class="editprofile-img">
+            <div class="editprofile-link">
+                <i class="fa-solid fa-camera"></i>
+                <a asp-area="Sensor" asp-controller="SSensor" asp-action="EditPetProfilePicture">@AppLng["Edit Picture"] </a>
+            </div>
+        </div>
+        <div asp-validation-summary="All" class="text-danger">   </div>
+        <div class="form-section select-section pet-section">
+            <label for="my-pet" asp-for="AnimalId">@AppLng["Pet Type"]</label>
+            <div class="input-section">
+                <select asp-for="AnimalId" id="my-pet" class="user-pet" asp-items="@animallist">
+                    <option disabled selected>@AppLng["Choose Your Pet"]</option>
+
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+                <span class="text-danger" asp-validation-for="AnimalId">  </span>
+            </div>
+        </div>
+        <div class="form-section text-section name-section">
+            <label asp-for="Name" for="ny-username">@AppLng["Pet Name"]</label>
+            <div class="input-section">
+                <input type="text" asp-for="Name" id="my-username" class="pet-name" placeholder="@AppLng["Enter Pet Name"]" required />
+                <div class="input-icon">
+                    <i class="fa-solid fa-file"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="Name">  </span>
+
+        </div>
+        <div class="form-section select-section gender-section">
+            <label for="my-gender" asp-for="GenderType">@AppLng["Pet gender"]</label>
+            <div class="input-section">
+                <select asp-for="GenderType" id="my-gender" class="pet-gender" asp-items="@genderlist">
+                    <option disabled selected>@AppLng["Choose Your Pet Gender"]</option>
+
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="GenderType">  </span>
+
+        </div>
+        <div class="form-section birthday-section">
+            <label for="my-birthday" asp-for="BirthDay">@AppLng["Pet Birthday"]</label>
+            <div class="input-section">
+                <input type="date" asp-for="BirthDay" id="my-birthday" class="pet-birthday" />
+                <div class="birthday-icon">
+                    <i class="fa-solid fa-calendar"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="BirthDay">  </span>
+
+        </div>
+        @*<div class="form-section select-section sensor-section">
+                <label for="my-sensor">Pet Sensor</label>
+                <div class="input-section">
+                    <select name="sensor" id="my-sensor" class="pet-sensor">
+                        <option disabled selected>Choose Your Pet Sensor</option>
+                        <option value="Temperature">Temperature</option>
+                        <option value="Glukoz">Glukoz</option>
+                    </select>
+                    <div class="select-icon">
+                        <i class="fa-solid fa-box"></i>
+                    </div>
+                </div>
+            </div>*@
+        <div class="form-section save-section">
+            <button type="submit" class="save-btn">@AppLng["Save"]</button>
+        </div>
+    </form>
+</div>
+<script src="~/js/editpet.js"></script>
+
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

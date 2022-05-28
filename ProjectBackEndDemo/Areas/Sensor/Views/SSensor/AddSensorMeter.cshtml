@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "AddSensorMeter";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+}
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+
+
+<h1>AddSensorMeter</h1>
+
+<form method="post" asp-area="Sensor" asp-controller="SSensor" asp-action="AddSensorMeter">
+
+
+    <input name="Name" type="text" required/>
+    <input type="submit" value="Add"/>
+
+</form>

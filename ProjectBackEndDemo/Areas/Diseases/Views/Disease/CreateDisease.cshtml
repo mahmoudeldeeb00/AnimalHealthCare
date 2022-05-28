@@ -6,8 +6,9 @@
     var animalList = new SelectList(slct.GetAnimals(), "Id", "Name");
     var medicineList = new SelectList(slct.GetMedicines(), "Id", "Name");
     var symptomList = new SelectList(slct.GetSymptoms(), "Id", "Name");
-  //  var symptomList = slct.GetSymptoms();
+    //  var symptomList = slct.GetSymptoms();
 
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
 
 
 
@@ -16,60 +17,109 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model ProjectBackEndDemo.Areas.Diseases.Models.DieseaseVM
 
-<h1>CreateDisease</h1>
+<link href="~/css/createdisease.css" rel="stylesheet" />
 
+@if (Culuture == "ar-EG")
+{
 
-<div class="container">
-    <h1>Create Disease </h1>
-    <div asp-validation-summary="All" class="text-danger">   </div>
-    <form asp-area="Diseases" asp-controller="disease" asp-action="CreateDisease" method="post" class="form-group">
-        <label asp-for="Name">Name</label>
-        <input type="text" asp-for="Name" placeholder="Name " class="form-control" />
-        <span class="text-danger" asp-validation-for="Name">  </span>
-        <br />
-
-        <label asp-for="IsInfect"> Is infect !</label>
-        <input type="checkbox" asp-for="IsInfect" class="" />
-
-        <br />
-
-        <br />
-        <label asp-for="AnimalId"> choose Animal</label>
-        <select asp-items="@animalList" asp-for="AnimalId" class="custom-select">
-            <option value="">choose Pet</option>
-        </select>
-        <span class="text-danger" asp-validation-for="AnimalId">  </span>
-        <br />
-
-        <br />
-        <label asp-for="MedicineIds"> choose Medicines</label>
-        <select multiple asp-items="@medicineList" asp-for="MedicineIds" class="custom-select">
-        </select>
-        <span class="text-danger" asp-validation-for="MedicineIds">  </span>
-
-
-        <label asp-for="SymptomIds"> choose Sympotom</label>
-        <select multiple asp-items="@symptomList" asp-for="SymptomIds" class="custom-select">
-        </select>
-        <span class="text-danger" asp-validation-for="SymptomIds">  </span>
-        <br />
-        <label asp-for="KeyWords">KeyWords</label>
-        <input type="text" asp-for="KeyWords" placeholder="KeyWords " class="form-control" />
-        <span class="text-danger" asp-validation-for="KeyWords">  </span>
-        <br />
-
-
-        <input type="submit" class="btn btn-primary" name="name" value="submit" />
+    <link href="~/css/createdisease-ar.css" rel="stylesheet" />
+}
 
 
 
 
 
+
+<div class="user-form">
+    <h3 class="heading">Create Disease</h3>
+    <form asp-area="Diseases" asp-controller="disease" asp-action="CreateDisease" method="post">
+        <div asp-validation-summary="All" class="text-danger">   </div>
+
+        <div class="form-section text-section name-section">
+            <div class="label-section">
+                <label asp-for="Name">Disease Name</label>
+                <div class="inficit-section">
+                    <input type="checkbox" asp-for="IsInfect" id="is-inficit" class="disease-inficit" />
+                    <label asp-for="IsInfect">Is Inficit?</label>
+                </div>
+            </div>
+            <div class="input-section">
+                <input type="text" asp-for="Name" id="my-disease" class="disease-name" placeholder="Enter Disease Name" required />
+                <div class="input-icon">
+                    <i class="fa-solid fa-file"></i>
+                </div>
+                <span class="text-danger" asp-validation-for="Name">  </span>
+
+            </div>
+        </div>
+       
+        <div class="form-section select-section pet-section">
+            <label asp-for="AnimalId">Choose Pet</label>
+            <div class="input-section">
+                <select asp-items="@animalList" asp-for="AnimalId" id="my-pet" class="disease-pet">
+                    <option disabled selected>Choose Pet</option>
+
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="AnimalId">  </span>
+
+        </div>
+        <div class="form-section select-section medicine-section">
+            <div class="label-section">
+                <label asp-for="MedicineIds">Choose medicine</label>
+                <a asp-area="Diseases" asp-controller="Disease" asp-action="CreateMedicine">Add Medicine</a>
+            </div>
+            <div class="input-section">
+                <select asp-items="@medicineList" asp-for="MedicineIds" id="my-medicine" class="disease-medicine" multiple>
+                    <option disabled selected>Choose Medicine</option>
+
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="MedicineIds">  </span>
+
+        </div>
+        <div class="form-section select-section symptom-section">
+            <div class="label-section">
+                <label for="my-symptom">Choose Symptom</label>
+                <a asp-area="Diseases" asp-controller="Disease" asp-action="CreateSymptom">Add Symptom</a>
+            </div>
+            <div class="input-section">
+                <select asp-items="@symptomList" asp-for="SymptomIds" id="my-symptom" class="disease-symptom" multiple>
+                    <option disabled selected>Choose Symptom</option>
+
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="SymptomIds">  </span>
+
+        </div>
+        <div class="form-section text-section keyword-section">
+            <label for="my-keyword">Disease Keywords</label>
+            <div class="input-section">
+                <input type="text" asp-for="KeyWords" id="my-keyword" class="disease-keyword" placeholder="Enter Disease Keywords" required />
+                <div class="input-icon">
+                    <i class="fa-solid fa-file"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-section save-section">
+            <button type="submit" class="save-btn">Create</button>
+        </div>
     </form>
-
-
 </div>
+
+
+
 
 <script src="~/jquery/jquery.min.js"></script>
 <script src="~/jquery-validate/jquery.validate.min.js"></script>
 <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/js/createdisease.js"></script>

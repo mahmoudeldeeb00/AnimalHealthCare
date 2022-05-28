@@ -185,7 +185,7 @@ namespace ProjectBackEndDemo.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int>("AnimalId")
+                    b.Property<int?>("AnimalId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("BirthDay")
@@ -204,6 +204,9 @@ namespace ProjectBackEndDemo.Migrations
 
                     b.Property<string>("Gmail")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("LastSensorSend")
+                        .HasColumnType("int");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -302,13 +305,37 @@ namespace ProjectBackEndDemo.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AnimalId");
 
                     b.HasIndex("DiseaseId");
 
+                    b.HasIndex("Type");
+
                     b.ToTable("SensorDatas");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.Areas.Sensor.Data.SensorMeter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SensorMeters");
                 });
 
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Animal", b =>
@@ -318,8 +345,26 @@ namespace ProjectBackEndDemo.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("EndGlucose")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EndPulse")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EndTempreture")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StartGlucose")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StartPulse")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StartTempreture")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -446,6 +491,21 @@ namespace ProjectBackEndDemo.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Foods");
+                });
+
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Gender", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genders");
                 });
 
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.LifeStyle", b =>
@@ -587,6 +647,57 @@ namespace ProjectBackEndDemo.Migrations
                     b.ToTable("Symptoms");
                 });
 
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.UserAnimal", b =>
+                {
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("BirthDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CurrentPulse")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CurrentTempreture")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Currentlucose")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GenderType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LastSensorGlucoseSend")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LastSensorPulseSend")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LastSensorTempretureSend")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pictureSrc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ApplicationUserId", "AnimalId");
+
+                    b.HasIndex("AnimalId")
+                        .IsUnique();
+
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique();
+
+                    b.HasIndex("GenderType");
+
+                    b.ToTable("UserAnimals");
+                });
+
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Vet", b =>
                 {
                     b.Property<int>("Id")
@@ -604,6 +715,9 @@ namespace ProjectBackEndDemo.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PictureUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Speciality")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telephone")
@@ -674,9 +788,7 @@ namespace ProjectBackEndDemo.Migrations
                 {
                     b.HasOne("ProjectBackEndDemo.DAL.Entities.Animal", "Animal")
                         .WithMany("AppUser")
-                        .HasForeignKey("AnimalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AnimalId");
 
                     b.Navigation("Animal");
                 });
@@ -695,9 +807,15 @@ namespace ProjectBackEndDemo.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ProjectBackEndDemo.Areas.Sensor.Data.SensorMeter", "SensorMeter")
+                        .WithMany()
+                        .HasForeignKey("Type");
+
                     b.Navigation("Animal");
 
                     b.Navigation("Disease");
+
+                    b.Navigation("SensorMeter");
                 });
 
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.AnimalFood", b =>
@@ -807,6 +925,33 @@ namespace ProjectBackEndDemo.Migrations
                     b.Navigation("City");
                 });
 
+            modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.UserAnimal", b =>
+                {
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Animal", "Animal")
+                        .WithOne("UserAnimal")
+                        .HasForeignKey("ProjectBackEndDemo.DAL.Entities.UserAnimal", "AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectBackEndDemo.Areas.Identity.Models.AppUser", "AppUser")
+                        .WithOne("UserAnimal")
+                        .HasForeignKey("ProjectBackEndDemo.DAL.Entities.UserAnimal", "ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectBackEndDemo.DAL.Entities.Gender", "Gender")
+                        .WithMany()
+                        .HasForeignKey("GenderType")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Gender");
+                });
+
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Vet", b =>
                 {
                     b.HasOne("ProjectBackEndDemo.DAL.Entities.City", "City")
@@ -821,6 +966,8 @@ namespace ProjectBackEndDemo.Migrations
             modelBuilder.Entity("ProjectBackEndDemo.Areas.Identity.Models.AppUser", b =>
                 {
                     b.Navigation("NotificationApplicationUsers");
+
+                    b.Navigation("UserAnimal");
                 });
 
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.Animal", b =>
@@ -832,6 +979,8 @@ namespace ProjectBackEndDemo.Migrations
                     b.Navigation("Disease");
 
                     b.Navigation("SensorDatas");
+
+                    b.Navigation("UserAnimal");
                 });
 
             modelBuilder.Entity("ProjectBackEndDemo.DAL.Entities.City", b =>

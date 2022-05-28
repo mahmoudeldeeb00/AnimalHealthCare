@@ -36,18 +36,21 @@ namespace ProjectBackEndDemo.DAL.DataBase
 
         public DbSet<FeedBack> FeedBacks { get;  set; }
 
-
-
+        public DbSet<UserAnimal> UserAnimals { get; set; }
+        public DbSet<Gender> Genders { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<NotificationApplicationUser> UserNotifications { get; set; }
-        
 
+        public DbSet<SensorMeter> SensorMeters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-          
 
-      
+            builder.Entity<AppUser>()
+            .HasOne(a => a.UserAnimal)
+            .WithOne(a => a.AppUser)
+            .HasForeignKey<UserAnimal>(c => c.ApplicationUserId);
+
 
             builder.Entity<DiseaseSymptom>()
                 .HasKey(k => new { k.symptomId, k.DiseaseId });
@@ -61,6 +64,9 @@ namespace ProjectBackEndDemo.DAL.DataBase
 
             builder.Entity<AnimalFood>()
                 .HasKey(k => new { k.AnimalId, k.FoodId });
+
+            builder.Entity<UserAnimal>()
+                .HasKey(k => new { k.ApplicationUserId, k.AnimalId });
 
 
             base.OnModelCreating(builder);

@@ -22,6 +22,9 @@ namespace ProjectBackEndDemo.Areas.Vets.Models
         [Required(ErrorMessage = "Picture Required")]
         public IFormFile Picture { get; set; }
         public string CityName { get; set; }
-
+  
+        [Required(ErrorMessage = "Speciality Required")]
+        public string Speciality { get; set; }
+        
     }
 }

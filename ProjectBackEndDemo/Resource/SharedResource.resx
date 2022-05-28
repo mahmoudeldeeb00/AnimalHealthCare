@@ -118,10 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutUs" xml:space="preserve">
-    <value>AboutUs</value>
+    <value>About Us</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
   </data>
   <data name="AHealthcare&amp;LifestyleSystem" xml:space="preserve">
     <value>A Healthcare &amp; Lifestyle System</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="All vets" xml:space="preserve">
+    <value>All vets</value>
+  </data>
+  <data name="AllSearch" xml:space="preserve">
+    <value>AllSearch</value>
   </data>
   <data name="arabic" xml:space="preserve">
     <value>لغة عربية</value>
@@ -135,14 +150,59 @@
   <data name="Care" xml:space="preserve">
     <value>Care</value>
   </data>
+  <data name="Case Description" xml:space="preserve">
+    <value>Case Description</value>
+  </data>
+  <data name="Choose Your Pet" xml:space="preserve">
+    <value>Choose Your Pet</value>
+  </data>
+  <data name="Choose Your Pet Gender" xml:space="preserve">
+    <value>Choose Your Pet Gender</value>
+  </data>
+  <data name="Cleanliness" xml:space="preserve">
+    <value>Cleanliness</value>
+  </data>
+  <data name="Confirm Forget Password" xml:space="preserve">
+    <value>Confirm Forget Password</value>
+  </data>
+  <data name="Confirm Reset Password" xml:space="preserve">
+    <value>Confirm Reset Password</value>
+  </data>
   <data name="Contactaveterinarian" xml:space="preserve">
     <value>Contact a veterinarian</value>
+  </data>
+  <data name="Create new account" xml:space="preserve">
+    <value>Create new account</value>
   </data>
   <data name="CreateEmergency" xml:space="preserve">
     <value>Create Emergency</value>
   </data>
+  <data name="Current Status" xml:space="preserve">
+    <value>Current Status</value>
+  </data>
   <data name="delete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="Department of Physics and Computer Science." xml:space="preserve">
+    <value>Department of Physics and Computer Science.</value>
+  </data>
+  <data name="Disease" xml:space="preserve">
+    <value>Disease</value>
+  </data>
+  <data name="Disease Infection" xml:space="preserve">
+    <value>Disease Infection</value>
+  </data>
+  <data name="Disease Medicines" xml:space="preserve">
+    <value>Disease Medicines</value>
+  </data>
+  <data name="Disease Name" xml:space="preserve">
+    <value>Disease Name</value>
+  </data>
+  <data name="Disease Pet" xml:space="preserve">
+    <value>Disease Pet</value>
+  </data>
+  <data name="Disease Symptoms" xml:space="preserve">
+    <value>Disease Symptoms</value>
   </data>
   <data name="Diseases" xml:space="preserve">
     <value>Diseases</value>
@@ -150,14 +210,41 @@
   <data name="edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="Edit Pet Profile" xml:space="preserve">
+    <value>Edit Pet Profile</value>
+  </data>
+  <data name="Edit Picture" xml:space="preserve">
+    <value>Edit Picture</value>
+  </data>
+  <data name="Egypt, Menoufia University." xml:space="preserve">
+    <value>Egypt, Menoufia University.</value>
+  </data>
   <data name="Emergencies" xml:space="preserve">
     <value>Emergencies</value>
   </data>
   <data name="Emergency" xml:space="preserve">
     <value>Emergency</value>
   </data>
+  <data name="Emergency Description" xml:space="preserve">
+    <value>Emergency Description</value>
+  </data>
+  <data name="Emergency Name" xml:space="preserve">
+    <value>Emergency Name</value>
+  </data>
   <data name="english" xml:space="preserve">
     <value>english</value>
+  </data>
+  <data name="Enter Pet Name" xml:space="preserve">
+    <value>Enter Pet Name</value>
+  </data>
+  <data name="Enter Your password" xml:space="preserve">
+    <value>Enter Your password</value>
+  </data>
+  <data name="Enter Your UserName" xml:space="preserve">
+    <value>Enter Your UserName</value>
+  </data>
+  <data name="Enter your username or email" xml:space="preserve">
+    <value>Enter your username or email</value>
   </data>
   <data name="Enteryouremail" xml:space="preserve">
     <value>Enter your email</value>
@@ -168,6 +255,24 @@
   <data name="FAQ" xml:space="preserve">
     <value>FAQ</value>
   </data>
+  <data name="Feedbacks" xml:space="preserve">
+    <value>Feedbacks</value>
+  </data>
+  <data name="Food" xml:space="preserve">
+    <value>Food</value>
+  </data>
+  <data name="For Which Pet" xml:space="preserve">
+    <value>For Which Pet</value>
+  </data>
+  <data name="Forget Password?" xml:space="preserve">
+    <value>Forget Password?</value>
+  </data>
+  <data name="Glukose" xml:space="preserve">
+    <value>Glukose</value>
+  </data>
+  <data name="Have An Emergency Case?" xml:space="preserve">
+    <value>Have An Emergency Case?</value>
+  </data>
   <data name="Haveanemergencycase" xml:space="preserve">
     <value>Have an emergency case</value>
   </data>
@@ -177,8 +282,17 @@
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="How To Deal" xml:space="preserve">
+    <value>How To Deal</value>
+  </data>
+  <data name="How To Deal With Emergency" xml:space="preserve">
+    <value>How To Deal With Emergency</value>
+  </data>
   <data name="Husbandry" xml:space="preserve">
     <value>Husbandry</value>
+  </data>
+  <data name="If You Have An Account, We Sent Reset Password Link To Your Email, Please Check Your Mail Box...." xml:space="preserve">
+    <value>If You Have An Account, We Sent Reset Password Link To Your Email, Please Check Your Mail Box....</value>
   </data>
   <data name="Instructions" xml:space="preserve">
     <value>Instructions</value>
@@ -189,41 +303,164 @@
   <data name="LifeStyle" xml:space="preserve">
     <value>Life Style</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Log In</value>
+  </data>
   <data name="LogOut" xml:space="preserve">
     <value>LogOut</value>
   </data>
   <data name="Managenotifications" xml:space="preserve">
     <value>Manage Notifications</value>
   </data>
+  <data name="mark all as read" xml:space="preserve">
+    <value>mark all as read</value>
+  </data>
+  <data name="Mating" xml:space="preserve">
+    <value>Mating</value>
+  </data>
+  <data name="Medicine" xml:space="preserve">
+    <value>Medicine</value>
+  </data>
+  <data name="Medicine Diseases" xml:space="preserve">
+    <value>Medicine Diseases</value>
+  </data>
+  <data name="Medicine Expirty" xml:space="preserve">
+    <value>Medicine Expirty</value>
+  </data>
+  <data name="Medicine Name" xml:space="preserve">
+    <value>Medicine Name</value>
+  </data>
+  <data name="Medicine Price" xml:space="preserve">
+    <value>Medicine Price</value>
+  </data>
+  <data name="Medicine Side Effect" xml:space="preserve">
+    <value>Medicine Side Effect</value>
+  </data>
+  <data name="Medicine Temperature" xml:space="preserve">
+    <value>Medicine Temperature</value>
+  </data>
   <data name="Medicines" xml:space="preserve">
     <value>Medicines</value>
+  </data>
+  <data name="Monitored Pet" xml:space="preserve">
+    <value>Monitored Pet</value>
+  </data>
+  <data name="Monitored System" xml:space="preserve">
+    <value>Monitored System</value>
+  </data>
+  <data name="Monitoring" xml:space="preserve">
+    <value>Monitoring</value>
+  </data>
+  <data name="Monitoring Page" xml:space="preserve">
+    <value>Monitoring Page</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Normal Range" xml:space="preserve">
+    <value>Normal Range</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Notifications History" xml:space="preserve">
+    <value>Notifications History</value>
   </data>
   <data name="Notificationshistory" xml:space="preserve">
     <value>Notifications history</value>
   </data>
+  <data name="Pet" xml:space="preserve">
+    <value>Pet</value>
+  </data>
+  <data name="Pet Age" xml:space="preserve">
+    <value>Pet Age</value>
+  </data>
+  <data name="Pet Birthday" xml:space="preserve">
+    <value>Pet Birthday</value>
+  </data>
+  <data name="Pet gender" xml:space="preserve">
+    <value>Pet gender</value>
+  </data>
+  <data name="Pet Name" xml:space="preserve">
+    <value>Pet Name</value>
+  </data>
+  <data name="Pet Type" xml:space="preserve">
+    <value>Pet Type</value>
+  </data>
+  <data name="Phone Number" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
+  </data>
+  <data name="Pulse" xml:space="preserve">
+    <value>Pulse</value>
+  </data>
+  <data name="Recommended Medicines" xml:space="preserve">
+    <value>Recommended Medicines</value>
+  </data>
+  <data name="Remember Me" xml:space="preserve">
+    <value>Remember Me</value>
   </data>
   <data name="RolesSitting" xml:space="preserve">
     <value>Roles Sitting</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="Search Page" xml:space="preserve">
+    <value>Search Page</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>Setting</value>
   </data>
+  <data name="Show password" xml:space="preserve">
+    <value>Show password</value>
+  </data>
   <data name="SomeFAQs" xml:space="preserve">
     <value>Some FAQs</value>
+  </data>
+  <data name="Speciality" xml:space="preserve">
+    <value>Speciality</value>
+  </data>
+  <data name="Status Decription" xml:space="preserve">
+    <value>Status Decription</value>
   </data>
   <data name="String1" xml:space="preserve">
     <value>Emergencies</value>
   </data>
+  <data name="String2" xml:space="preserve">
+    <value>Pet Gender</value>
+  </data>
+  <data name="String3" xml:space="preserve">
+    <value>LifeStyle</value>
+  </data>
+  <data name="Symptom" xml:space="preserve">
+    <value>Symptom</value>
+  </data>
+  <data name="Symptom Diseases" xml:space="preserve">
+    <value>Symptom Diseases</value>
+  </data>
+  <data name="Symptom Name" xml:space="preserve">
+    <value>Symptom Name</value>
+  </data>
   <data name="Symptoms" xml:space="preserve">
     <value>Symptoms</value>
   </data>
+  <data name="Tell Us your feedback" xml:space="preserve">
+    <value>Tell Us your feedback</value>
+  </data>
   <data name="TellUsyourfeedback" xml:space="preserve">
     <value>Tell Us your feedback</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Temperature</value>
   </data>
   <data name="test" xml:space="preserve">
     <value>Test</value>
@@ -243,6 +480,33 @@
   <data name="Vets" xml:space="preserve">
     <value>Vets</value>
   </data>
+  <data name="View Dieases" xml:space="preserve">
+    <value>View Dieases</value>
+  </data>
+  <data name="View Disease" xml:space="preserve">
+    <value>View Disease</value>
+  </data>
+  <data name="View Medicine" xml:space="preserve">
+    <value>View Medicine</value>
+  </data>
+  <data name="View Mine Pet" xml:space="preserve">
+    <value>Pet Profile</value>
+  </data>
+  <data name="View More" xml:space="preserve">
+    <value>View More</value>
+  </data>
+  <data name="View Our Feedbacks" xml:space="preserve">
+    <value>View Our Feedbacks</value>
+  </data>
+  <data name="View Pet Profile" xml:space="preserve">
+    <value>View Pet Profile</value>
+  </data>
+  <data name="View Symptom" xml:space="preserve">
+    <value>View Symptom</value>
+  </data>
+  <data name="View the case" xml:space="preserve">
+    <value>View the case</value>
+  </data>
   <data name="ViewAllCases" xml:space="preserve">
     <value>View All Cases</value>
   </data>
@@ -255,10 +519,19 @@
   <data name="Wewishthatwehelpyouwithwhatyouneed" xml:space="preserve">
     <value>We wish that we help you with what you need</value>
   </data>
+  <data name="What do you want to search?" xml:space="preserve">
+    <value>What do you want to search?</value>
+  </data>
   <data name="What'swrongwithyourpet?" xml:space="preserve">
     <value>What's wrong with your pet?</value>
   </data>
   <data name="WhatsWrongwithyourPet!" xml:space="preserve">
     <value>Whats Wrong with your Pet!</value>
+  </data>
+  <data name="Your Password Reseted Successfully, Please Sign In Again ..." xml:space="preserve">
+    <value>Your Password Reseted Successfully, Please Sign In Again ...</value>
+  </data>
+  <data name="Your pet condition is ......" xml:space="preserve">
+    <value>Your pet condition is ......</value>
   </data>
 </root>

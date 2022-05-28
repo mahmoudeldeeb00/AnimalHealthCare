@@ -1,35 +1,84 @@
 ﻿
+
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
 @{
-    ViewData["Title"] = "SearchSymptoms";
+    ViewData["Title"] = @AppLng["Symptoms"];
     Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
 }
 
 @model List<ProjectBackEndDemo.Areas.Diseases.Models.SymptomVM>
 
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+<link href="~/css/viewsymptoms.css" rel="stylesheet" />
+
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/viewsymptoms-ar.css" rel="stylesheet" />
+}
 
 
-<div classs="Container">
-    <form asp-action="SearchSymptoms" asp-controller="Disease" asp-area="Diseases" method="get">
-        <input id="search" name="search" type="search" placeholder="Search Symptoms " />
-        <input type="submit" hidden />
-    </form>
-    <h1> View Medicines </h1>
-    @foreach (var item in Model)
-    {
-        <span class="text-primary"> @item.Name  </span> <br />
-        <span class="text-primary"> @item.Description  </span> <br />
-        <ul class="list-group">
-            @foreach (var (x, y) in item.DieasesNames.Zip(item.DieasesIds))
-            {
-                <li class="list-group-item">
-                    <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewDisease" asp-route-id="@y">@x</a>
-                </li>
-            }
-        </ul>
-        <br />
-    }
+
+<div class="symptom-section">
+    <h3 class="heading"> @AppLng["Symptoms"]</h3>
+    <div class="container">
+        <form asp-action="SearchSymptoms" asp-controller="Disease" asp-area="Diseases" method="get">
+            <input type="search" name="search" id="" placeholder="@AppLng["What do you want to search?"]" required />
+            <button>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                @AppLng["Search"]
+            </button>
+        </form>
+        @foreach (var item in Model)
+        {
+            <div class="symptom-box">
+                <h4 class="symptom-name">@item.Name</h4>
+                <div class="symptom-info">
+                    <div class="info-box name-box">
+                        <div class="info-title">
+                            <h5> @AppLng["Symptom Name"]</h5>
+                        </div>
+                        <div class="info-value">
+                            <span>@item.Name</span>
+                        </div>
+                    </div>
+                    <div class="info-box descrip-box">
+                        <div class="info-title">
+                            <h5>@AppLng["Symptom Description"] </h5>
+                        </div>
+                        <div class="info-value">
+                            <p>
+                                @item.Description
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info-box disease-box">
+                        <div class="info-title">
+                            <h5>@AppLng["Symptom Diseases"]</h5>
+                        </div>
+                        <div class="info-value">
+                            <ul>
+                                @foreach (var (i, e) in item.DieasesIds.Zip(item.DieasesNames))
+                                {
+                                    <li>@e  <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewDisease" asp-route-id="@i">@AppLng["View Disease"]</a></li>
+
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <span class="symptom-link more">
+        <span>@AppLng["View More"]</span>
+        <i class="fa-solid fa-angles-down"></i>
+    </span>
 </div>
 
-
-
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/viewsymptoms.js"></script>

@@ -33,8 +33,9 @@ namespace ProjectBackEndDemo.Areas.Diseases.Controllers
             {
                 var currentuser = await userManager.FindByNameAsync(User.Identity.Name);
 
-                var myList = dRep.GetAllDiseases(currentuser.AnimalId);
-                return View(myList);
+                    var myList = dRep.GetAllDiseases((int)currentuser.AnimalId);
+                     return View(myList);
+
             }
 
             return View();
@@ -47,8 +48,10 @@ namespace ProjectBackEndDemo.Areas.Diseases.Controllers
             {
                 var currentuser = await userManager.FindByNameAsync(User.Identity.Name);
 
-                var myList = dRep.GetAllDiseases(currentuser.AnimalId , search );
-                return View(myList);
+                var myList = dRep.GetAllDiseases((int)currentuser.AnimalId , search );
+                    return View(myList);
+
+               
             }
 
             return View();
@@ -89,7 +92,7 @@ namespace ProjectBackEndDemo.Areas.Diseases.Controllers
 
         [Authorize(Roles = "Admin,Vet")]
         public IActionResult CreateMedicine() => View();
-
+        [HttpPost]
         public IActionResult CreateMedicine(MedicineVM model)
         {
             if (ModelState.IsValid)

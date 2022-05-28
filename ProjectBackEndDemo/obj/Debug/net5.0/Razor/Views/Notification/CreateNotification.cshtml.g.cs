@@ -27,14 +27,14 @@ using ProjectBackEndDemo.Resource;
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\Views\_ViewImports.cshtml"
+#line 7 "D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\Views\_ViewImports.cshtml"
 using Microsoft.Extensions.Localization;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5ccfdb54a4b24645cac74e29b275ef6cc2118f75", @"/Views/Notification/CreateNotification.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bcd52d18e4e212d90e8be51fa2a462b6241a5b49", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e5054d1915f260fb01ffe74ce38d7d37152af90c", @"/Views/_ViewImports.cshtml")]
     public class Views_Notification_CreateNotification : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ProjectBackEndDemo.DAL.Entities.Notification>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("type", "text", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

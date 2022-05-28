@@ -24,7 +24,7 @@ namespace ProjectBackEndDemo.Areas.Sensor.Controllers
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
 
-        public SSensorController(DbContainer db , ISensorRep Srep,UserManager<AppUser> userManager,SignInManager<AppUser> signInManager)
+        public SSensorController(DbContainer db, ISensorRep Srep, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             this.db = db;
             srep = Srep;
@@ -36,7 +36,39 @@ namespace ProjectBackEndDemo.Areas.Sensor.Controllers
             return View();
         }
 
-        [Authorize(Roles ="Admin , Vet")]
+        public IActionResult EditPetProfile()
+        {
+            return View(srep.GetUserAnimalByUserId(userManager.GetUserId(HttpContext.User)));
+        }
+        [HttpPost]
+        public IActionResult EditPetProfile(UserAnimalVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                srep.EditPetProfile(model);
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+            return View(model);
+        }
+        public IActionResult EditPetProfilePicture()
+        {
+            return View(srep.GetUserAnimalPictureToEdit(userManager.GetUserId(HttpContext.User)));
+        }
+        [HttpPost]
+        public IActionResult EditPetProfilePicture(EditAnimalPictureVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                srep.EditPetProfilePicture(model);
+                return RedirectToAction("EditPetProfile");
+            }
+            return View(model);
+        }
+
+        public IActionResult ViewPet() => View(srep.GetUserAnimalByUserId(userManager.GetUserId(HttpContext.User)));
+
+
+        [Authorize(Roles = "Admin , Vet")]
         public IActionResult CreateSensorData()
         {
             return View();
@@ -59,15 +91,30 @@ namespace ProjectBackEndDemo.Areas.Sensor.Controllers
 
         }
 
-        public IActionResult GetSensorData (int Id) =>  View(srep.GetSensorData(Id));
+        public IActionResult GetSensorData(int Id) => View(srep.GetSensorData(Id));
 
 
 
+        public IActionResult Monitoring() {
+
+         
+                return View(srep.ViewMonitoring(userManager.GetUserId(HttpContext.User)));
+        }
 
 
+        [Authorize(Roles ="Admin,Vet")]
+        public IActionResult AddSensorMeter() => View();
+        [HttpPost]
+        public IActionResult AddSensorMeter(string Name)
+        {
+            srep.AddSensorMeter(Name);
+            return RedirectToAction("Index","Home",new { area=""});
+
+
+        }
 
         //jsons for auto send notification ----------------
-      
+
         [HttpPost]
         public  JsonResult  GetRandomSensorId()
         {
@@ -77,11 +124,48 @@ namespace ProjectBackEndDemo.Areas.Sensor.Controllers
                 var random = new Random();
                 var list = db.SensorDatas.Where(a => a.AnimalId == currentuser.AnimalId).Select(i => i.Id).ToList();
                 var randomId = list[random.Next(list.Count)];
+                     return Json(randomId);
 
-                return Json(randomId);
             }
 
             return Json("");
+        }
+
+        [HttpPost]
+        public async void ChangeLastMonitoring(int ID)
+        {
+            if (signInManager.IsSignedIn(User))
+            {
+                var currentUser = await userManager.FindByNameAsync(User.Identity.Name);               
+                var sensordata = db.SensorDatas.Where(w => w.Id == ID).Include(i => i.SensorMeter).FirstOrDefault();
+                var userAnimal = db.UserAnimals.FirstOrDefault(f => f.ApplicationUserId == currentUser.Id);
+                string TypeName = sensordata.SensorMeter.Name;
+                if (TypeName == "Temperature")
+                {
+                    userAnimal.CurrentTempreture = sensordata.Value;
+                    userAnimal.LastSensorTempretureSend = ID;
+                    db.SaveChanges();
+                }
+                else if (TypeName == "Glucose")
+                {
+                    userAnimal.Currentlucose = sensordata.Value;
+                    userAnimal.LastSensorGlucoseSend = ID;
+                    db.SaveChanges();
+
+                }
+                else if(TypeName == "Pulse")
+                {
+                    userAnimal.CurrentPulse = sensordata.Value;
+                    userAnimal.LastSensorPulseSend = ID;
+
+                    db.SaveChanges();
+
+                }
+                currentUser.LastSensorSend = ID;
+                var result = await userManager.UpdateAsync(currentUser);
+                
+            }
+           
         }
 
 

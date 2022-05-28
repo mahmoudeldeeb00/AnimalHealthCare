@@ -147,6 +147,7 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
             return RedirectToAction("Index","Home",new { area=""});
         }
 
+        [Authorize]
         public IActionResult ViewFeedBacks() => View(adRep.GetAllFeedBacks());
         
 

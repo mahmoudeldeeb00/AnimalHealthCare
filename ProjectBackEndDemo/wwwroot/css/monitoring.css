@@ -1,0 +1,614 @@
+/* Start Monitoring */
+
+.monitoring {
+    width: 100%;
+    padding-top: 60px;
+    padding-bottom: var(--section-padding);
+    background-image: url("../assets/imgs/background-2.webp");
+    background-size: cover;
+    background-color: var(--secondray-background);
+    color: var(--theme-color);
+    overflow: hidden;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+    .monitoring .heading {
+        color: var(--light-color);
+        margin: 80px auto 60px;
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        transition: var(--main-transition);
+        -webkit-transition: var(--main-transition);
+        -moz-transition: var(--main-transition);
+        -ms-transition: var(--main-transition);
+        -o-transition: var(--main-transition);
+    }
+
+        .monitoring .heading::before {
+            content: "";
+            height: 2px;
+            background-color: var(--option-color);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            -o-transform: translateX(-50%);
+            border-radius: 2px;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            -ms-border-radius: 2px;
+            -o-border-radius: 2px;
+            transition: var(--main-transition);
+            -webkit-transition: var(--main-transition);
+            -moz-transition: var(--main-transition);
+            -ms-transition: var(--main-transition);
+            -o-transition: var(--main-transition);
+        }
+
+@media (min-width: 768px) {
+    .monitoring .heading::before {
+        width: 28%;
+    }
+}
+
+@media (min-width: 992px) {
+    .monitoring .heading::before {
+        width: 20%;
+    }
+}
+
+@media (max-width: 767px) {
+    .monitoring .heading::before {
+        width: 35%;
+    }
+}
+
+@media (max-width: 480px) {
+    .monitoring .heading::before {
+        width: 40%;
+    }
+}
+
+.monitoring .container {
+    margin-top: 120px;
+    padding: 100px 40px 60px;
+    display: flex;
+    flex-direction: column;
+    max-width: 85% !important;
+    background-color: var(--theme-background);
+    color: var(--theme-color);
+    position: relative;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    filter: drop-shadow(0 0 3px var(--theme-color));
+    -webkit-filter: drop-shadow(0 0 3px var(--theme-color));
+}
+
+@media (max-width: 767px) {
+    .monitoring .container {
+        max-width: 95%;
+        padding: 80px 25px 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .monitoring .container {
+        padding: 80px 20px 60px;
+    }
+}
+
+.monitoring .container picture {
+    width: 120px;
+    height: 120px;
+    background-color: var(--theme-background);
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    .monitoring .container picture {
+        width: 100px;
+        height: 100px;
+        top: -50px;
+    }
+}
+
+.monitoring .container picture img {
+    max-width: 100%;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+.monitoring .container .monitoring-head {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+    .monitoring .container .monitoring-head.normal {
+        color: #00e57f;
+    }
+
+    .monitoring .container .monitoring-head.sick {
+        color: #ffc107;
+    }
+
+    .monitoring .container .monitoring-head.emergency {
+        color: #c82222;
+    }
+
+.monitoring .monitoring-box {
+    max-width: 85% !important;
+    margin: 15px auto;
+    padding: 60px 40px;
+    background-color: var(--theme-background);
+    color: var(--theme-color);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    filter: drop-shadow(0 0 3px var(--theme-color));
+    -webkit-filter: drop-shadow(0 0 3px var(--theme-color));
+}
+
+@media (max-width: 767px) {
+    .monitoring .monitoring-box {
+        max-width: 95%;
+        padding: 60px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .monitoring .monitoring-box {
+        padding: 60px 20px;
+    }
+}
+
+.monitoring .monitoring-box .monitoring-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    position: relative;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+@media (max-width: 767px) {
+    .monitoring .monitoring-box .monitoring-section {
+        flex-direction: column;
+        gap: 25px;
+    }
+}
+
+.monitoring .monitoring-box .description-section,
+.monitoring .monitoring-box .deal-section {
+    flex-direction: column;
+}
+
+.monitoring .monitoring-box .normal-section,
+.monitoring .monitoring-box .current-section {
+    align-items: center;
+}
+
+.monitoring .monitoring-box .normal-section {
+    margin-top: 20px;
+}
+
+.monitoring .monitoring-box .current-section {
+    margin: 20px 0;
+}
+
+@media (max-width: 767px) {
+    .monitoring .monitoring-box .normal-section,
+    .monitoring .monitoring-box .current-section {
+        align-items: flex-start;
+        gap: 55px;
+    }
+
+    .monitoring .monitoring-box .normal-section {
+        margin-top: 0;
+    }
+
+    .monitoring .monitoring-box .current-section {
+        margin: 0 0 30px;
+    }
+}
+
+.monitoring .monitoring-box .monitoring-section .monitoring-title h5 {
+    width: fit-content;
+    position: relative;
+    line-height: 1;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+    .monitoring .monitoring-box .monitoring-section .monitoring-title h5:after {
+        content: "";
+        height: 2px;
+        width: 110%;
+        background-color: var(--option-color);
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        border-radius: 2px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        -o-border-radius: 2px;
+        transition: var(--main-transition);
+        -webkit-transition: var(--main-transition);
+        -moz-transition: var(--main-transition);
+        -ms-transition: var(--main-transition);
+        -o-transition: var(--main-transition);
+    }
+
+.monitoring .monitoring-box .monitoring-section .monitoring-value {
+    width: 60%;
+    position: relative;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+@media (max-width: 767px) {
+    .monitoring .monitoring-box .monitoring-section .monitoring-value {
+        width: 100%;
+    }
+}
+
+.monitoring .monitoring-box .pet-section .monitoring-value,
+.monitoring .monitoring-box .system-section .monitoring-value {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+    .monitoring .monitoring-box .system-section .monitoring-value svg {
+        font-size: 18px;
+    }
+
+.monitoring .monitoring-box .description-section .monitoring-value,
+.monitoring .monitoring-box .deal-section .monitoring-value {
+    width: 100%;
+}
+
+@media (max-width: 767px) {
+    .monitoring .monitoring-box .pet-section .monitoring-value,
+    .monitoring .monitoring-box .system-section .monitoring-value {
+        justify-content: center;
+    }
+}
+
+.monitoring .monitoring-box .normal-section .monitoring-value .normal-range,
+.monitoring .monitoring-box .current-section .monitoring-value .current-range {
+    width: 80%;
+    height: 25px;
+    position: relative;
+    border: 1px solid;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+@media (max-width: 767px) {
+    .monitoring .monitoring-box .normal-section .monitoring-value,
+    .monitoring .monitoring-box .current-section .monitoring-value {
+        display: flex;
+        justify-content: center;
+    }
+
+        .monitoring .monitoring-box .normal-section .monitoring-value .normal-range,
+        .monitoring .monitoring-box .current-section .monitoring-value .current-range {
+            width: 90%;
+        }
+}
+
+.monitoring .monitoring-box .normal-section .monitoring-value .normal-range {
+    background-color: #00e57f;
+    border-color: #00e57f;
+}
+
+.monitoring .monitoring-box .current-section .monitoring-value .current-range {
+    background-color: #eee;
+    border-color: #ccc;
+}
+
+    .monitoring .monitoring-box .current-section .monitoring-value .current-range .current-scale {
+        width: 75%;
+        height: 100%;
+        position: relative;
+        border-radius: 25px;
+        -webkit-border-radius: 25px;
+        -moz-border-radius: 25px;
+        -ms-border-radius: 25px;
+        -o-border-radius: 25px;
+        transition: var(--main-transition);
+        -webkit-transition: var(--main-transition);
+        -moz-transition: var(--main-transition);
+        -ms-transition: var(--main-transition);
+        -o-transition: var(--main-transition);
+    }
+
+    .monitoring .monitoring-box .current-section .monitoring-value .current-range .current-normal {
+        background-color: #00e57f;
+    }
+
+    .monitoring .monitoring-box .current-section .monitoring-value .current-range .current-sick {
+        background-color: #ffc107;
+    }
+
+    .monitoring .monitoring-box .current-section .monitoring-value .current-range .current-emergency {
+        background-color: #c82222;
+    }
+
+    .monitoring .monitoring-box .normal-section .monitoring-value .normal-range span,
+    .monitoring .monitoring-box .current-section .monitoring-value .current-range span {
+        width: 30px;
+        height: 30px;
+        background-color: var(--theme-color);
+        color: var(--theme-background);
+        font-size: 14px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        border-radius: 6px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+        -o-border-radius: 6px;
+        transition: var(--main-transition);
+        -webkit-transition: var(--main-transition);
+        -moz-transition: var(--main-transition);
+        -ms-transition: var(--main-transition);
+        -o-transition: var(--main-transition);
+    }
+
+.monitoring .monitoring-box .normal-section .monitoring-value .normal-range span {
+    top: -40px;
+}
+
+    .monitoring .monitoring-box .normal-section .monitoring-value .normal-range span.normal-min {
+        left: -15px;
+    }
+
+    .monitoring .monitoring-box .normal-section .monitoring-value .normal-range span.normal-max {
+        right: -15px;
+    }
+
+.monitoring .monitoring-box .current-section .monitoring-value .current-range .current-scale span.scale-value {
+    top: -40px;
+    right: -15px;
+}
+
+.monitoring .monitoring-box .current-section .monitoring-value .current-range span.normal-min,
+.monitoring .monitoring-box .current-section .monitoring-value .current-range span.normal-max {
+    bottom: -40px;
+}
+
+.monitoring .monitoring-temperature .current-section .monitoring-value .current-range span.normal-min {
+    left: calc(var(--normal-temp-min) - 15px);
+}
+
+.monitoring .monitoring-pulse .current-section .monitoring-value .current-range span.normal-min {
+    left: calc(var(--normal-pulse-min) - 15px);
+}
+
+.monitoring .monitoring-glukose .current-section .monitoring-value .current-range span.normal-min {
+    left: calc(var(--normal-glukose-min) - 15px);
+}
+
+.monitoring .monitoring-temperature .current-section .monitoring-value .current-range span.normal-max {
+    left: calc(var(--normal-temp-max) - 15px);
+}
+
+.monitoring .monitoring-pulse .current-section .monitoring-value .current-range span.normal-max {
+    left: calc(var(--normal-pulse-max) - 15px);
+}
+
+.monitoring .monitoring-glukose .current-section .monitoring-value .current-range span.normal-max {
+    left: calc(var(--normal-glukose-max) - 15px);
+}
+
+.monitoring .monitoring-box .normal-section .monitoring-value .normal-range span::before,
+.monitoring .monitoring-box .current-section .monitoring-value .current-range span::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 6px solid;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+.monitoring .monitoring-box .normal-section .monitoring-value .normal-range span::before,
+.monitoring .monitoring-box .current-section .monitoring-value .current-range span.scale-value::before {
+    bottom: -12px;
+    border-color: var(--theme-color) transparent transparent transparent;
+}
+
+.monitoring .monitoring-box .current-section .monitoring-value .current-range span.normal-min::before,
+.monitoring .monitoring-box .current-section .monitoring-value .current-range span.normal-max::before {
+    top: -12px;
+    border-color: transparent transparent var(--theme-color) transparent;
+}
+
+.monitoring .monitoring-box .monitoring-section .monitoring-value p {
+    line-height: 1.8;
+    margin-bottom: 0;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+.monitoring .monitoring-box .monitoring-section .monitoring-value ul {
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 0;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+    .monitoring .monitoring-box .monitoring-section .monitoring-value ul li {
+        line-height: 1.8;
+        transition: var(--main-transition);
+        -webkit-transition: var(--main-transition);
+        -moz-transition: var(--main-transition);
+        -ms-transition: var(--main-transition);
+        -o-transition: var(--main-transition);
+    }
+
+.monitoring .monitoring-link {
+    width: 100%;
+    margin: 50px 0 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .monitoring .monitoring-link a {
+        padding: 12px 40px;
+        width: 280px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: #000;
+        background-color: var(--option-color);
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        transition: var(--main-transition);
+        -webkit-transition: var(--main-transition);
+        -moz-transition: var(--main-transition);
+        -ms-transition: var(--main-transition);
+        -o-transition: var(--main-transition);
+    }
+
+@media (max-width: 767px) {
+    .monitoring .monitoring-link a {
+        width: 90%;
+    }
+}
+
+.monitoring .monitoring-link a::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(51, 51, 51, 0.2);
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+.monitoring .monitoring-link a:hover::after {
+    left: 105%;
+}
+
+
+/* End Monitoring */

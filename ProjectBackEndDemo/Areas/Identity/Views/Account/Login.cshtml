@@ -1,9 +1,12 @@
 ﻿
 @{
     Layout = "~/Views/Layouts/MainLayout.cshtml";
-    ViewBag.Title = "Login";
-    
+    ViewBag.title = @AppLng["Login"];
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
 }
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> AppLng
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model ProjectBackEndDemo.Areas.Identity.Models.LoginVM
 
@@ -12,41 +15,55 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
+    <link href="~/css/form.css" rel="stylesheet" />
+    @if (Culuture == "ar-EG")
+    {
+        <link href="~/css/form-ar.css" rel="stylesheet" />
+    }
+    <title>@AppLng["Login"]</title>
 </head>
 <body>
-    <div style="height:100px">   </div>
+    <div class="user-form">
+        <h3 class="heading">@AppLng["Login"]</h3>
 
-    <div class="container">
+        <form asp-area="Identity" asp-controller="Account" asp-action="Login" method="post">
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <input hidden type="text" name="returnUrl" value="@ViewBag.ReturnUrl" />
 
-        <div asp-validation-summary="All" class="text-danger">   </div>
-        <form asp-area="Identity" asp-controller="Account" asp-action="Login" method="post" class="card form-group" style="padding:15px">      
-            <label asp-for="UserName"> Enter User Name </label>
-            <input type="text" asp-for="UserName" placeholder="User Name" class="form-control" />
-            <span asp-validation-for="UserName">  </span>
-            <br />
-            <label asp-for="Password"> Enter Password  </label>
+            <div class="form-section email-section">
 
-            <input type="password" asp-for="Password" placeholder="password" class="form-control" />
+                <input type="text" asp-for="UserName" id="" class="user-email" placeholder=@AppLng["Enter Your UserName"]/>
+                <span asp-validation-for="UserName" class="text-danger">  </span>
+                <div class="email-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+            </div>
+            <div class="form-section pass-section">
+                <input type="password" asp-for="Password" id="" class="user-password" placeholder=@AppLng["Enter Your password"] />
+                <span asp-validation-for="Password" class="text-danger">  </span>
 
-            <span asp-validation-for="Password">  </span>
-            <br />
-            <label asp-for="RemmemberMe"> Remmember Me </label>
-            <input type="checkbox" asp-for="RemmemberMe" />
-            <br />
-
-            <input type="submit" value="Login" class="btn btn-primary" />
-
+                <div class="show-password">
+                    <i class="fa-solid fa-eye-slash" title=@AppLng["Show password"]></i>
+                </div>
+            </div>
+            <div class="form-section remember-section">
+                <div class="remember-me">
+                    <input type="checkbox" asp-for="RemmemberMe" id="login-remember" class="user-remember" />
+                    <label for="login-remember">@AppLng["Remember Me"]</label>
+                </div>
+                <a asp-area="Identity" asp-controller="Account" asp-action="ForgetPassword">@AppLng["Forget Password?"]</a>
+            </div>
+            <div class="form-section login-section">
+                <button type="submit" class="login-btn">@AppLng["Login"]</button>
+            </div>
+            <div class="form-section regist-new">
+                <a asp-area="Identity" asp-controller="Account" asp-action="Registration">@AppLng["Create new account"]</a>
+            </div>
         </form>
-
-
-        <div class="text-sm-center">
-            don't Have account ?  <a asp-area="Identity" asp-controller="Account" asp-action="Registration"> Sign Up </a> <br />
-            Forget password ?  <a asp-area="Identity" asp-controller="Account" asp-action="ForgetPassword"> Forget Password </a>
-        </div>
     </div>
 </body>
 </html>
 <script src="~/jquery/jquery.min.js"></script>
 <script src="~/jquery-validate/jquery.validate.min.js"></script>
 <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/js/login.js"></script>

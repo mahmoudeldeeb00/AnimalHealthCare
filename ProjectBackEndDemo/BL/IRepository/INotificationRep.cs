@@ -9,10 +9,14 @@ namespace ProjectBackEndDemo.BL.IRepository
 {
     public interface INotificationRep
     {
-        List<NotificationVM> GetUserNotifications(string userId);
-        List<NotificationVM> GetAllUserNotifications(string userId);
+        public List<NotificationVM> GetUserNotifications(string userId);
+        public List<NotificationVM> GetAllUserNotifications(string userId);
 
-        void CreateNotification(Notification notification , string userId);
-        void ReadNotification(int notificationid, string userId);
+        public void CreateNotification(Notification notification , string userId);
+        public void ReadNotification(int notificationid, string userId);
+        public void ReadAll(string userId);
+
+
+        
     }
 }

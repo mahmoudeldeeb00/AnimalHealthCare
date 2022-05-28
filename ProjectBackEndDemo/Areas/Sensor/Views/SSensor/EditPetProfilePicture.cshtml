@@ -1,0 +1,43 @@
+﻿@model ProjectBackEndDemo.Areas.Sensor.Models.EditAnimalPictureVM
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "EditPetProfilePicture";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+    if (Model.pictureSrc == null)
+    {
+        Model.pictureSrc = "DefaultPhoto.jpg";
+    }
+}
+<link href="~/css/editpetprofile.css" rel="stylesheet" />
+
+@if (Culuture == "ar-EG")
+{
+
+    <link href="~/css/editpetprofile-ar.css" rel="stylesheet" />
+}
+<div class="user-form">
+    <h3 class="heading">Edit Pet Profile Picture</h3>
+    <form asp-area="Sensor" asp-controller="SSensor" asp-action="EditPetProfilePicture" method="post" enctype="multipart/form-data">
+        <input asp-for="ApplicationUserId" type="text" hidden />
+        <div class="editprofile-section">
+            <img src="~/Files/UserAnimalPictures/@Model.pictureSrc" alt="profile" class="editprofile-img">
+        </div>
+        <div class="form-section file-section">
+            <input type="file" asp-for="AnimalPicture" id="" class="user-picture" />
+            <div class="file-icon">
+                <i class="fa-solid fa-box"></i>
+            </div>
+        </div>
+        <div class="form-section save-section">
+            <button type="submit" class="save-btn">Save</button>
+        </div>
+    </form>
+</div>
+
+
+<script src="~/js/editpetprofile.js"></script>
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

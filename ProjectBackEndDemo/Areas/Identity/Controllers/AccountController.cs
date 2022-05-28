@@ -87,8 +87,9 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
 
         #region Login 
         
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -145,7 +146,7 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
                 Email = currentUser.Email,
                 PhoneNumber = currentUser.PhoneNumber,
             
-                AnimalId = currentUser.AnimalId,
+                AnimalId = (int)currentUser.AnimalId,
                 Gmail = currentUser.Gmail
             };
    
@@ -258,10 +259,10 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
             {
                 
                 var user = await userManager.FindByNameAsync(model.UserName);
-                var useremail = user.Email;
                 if (user != null)
                 {
-                   
+                   var useremail = user.Email;
+
                     var token = await userManager.GeneratePasswordResetTokenAsync(user);
                     
                     var passwordResetLink = Url.Action("ResetPassword", "Account", new { area = "Identity", Email = useremail, Token = token }, Request.Scheme);
@@ -271,8 +272,8 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
 
                     return RedirectToAction("ConfirmResetPassword");
                 }
-
-                return RedirectToAction("ConfirmResetPassword");
+                ModelState.AddModelError("", "There is no account with this UserName");
+                return View();
 
             }
 
@@ -350,13 +351,12 @@ namespace ProjectBackEndDemo.Areas.Identity.Controllers
                 Email = currentUser.Email,
                 PhoneNumber = currentUser.PhoneNumber,
                 ProfilePic = currentUser.ProfilePic,
-                AnimalId = currentUser.AnimalId,
+                AnimalId = (int)currentUser.AnimalId,
                 Gmail = currentUser.Gmail
              
             };
 
             u.AnimalName = db.Animals.Where(a => a.Id == currentUser.AnimalId).Select(a => a.Name).FirstOrDefault();
-
 
             return View(u);
         }

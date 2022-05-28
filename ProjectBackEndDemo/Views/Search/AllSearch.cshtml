@@ -1,78 +1,326 @@
-﻿@{
-    ViewBag.Title = "AllSearch";
-    Layout = "~/Views/Layouts/MainLayout.cshtml";
-}
-
+﻿
+@using ProjectBackEndDemo.Resource
+@using Microsoft.Extensions.Localization
 @inject ProjectBackEndDemo.Areas.Diseases.Rep.IDiseaseRep Drep
 @inject ProjectBackEndDemo.Areas.Emergency.EmergencyServices.IEmergencyRep ERep
+@inject IStringLocalizer<SharedResource> AppLng
+
 @{
+    ViewBag.Title = AppLng["AllSearch"];
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+}
+<link href="~/css/allsearch.css" rel="stylesheet" />
 
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/allsearch-ar.css" rel="stylesheet" />
+
+}
+
+@{
     var search = ViewBag.search;
-
     var SympList = Drep.GetAllSymptoms(search);
     var medicineList = Drep.GetAllMedicines(search);
     var EmergencyList = ERep.GetAllEmergences(search);
 }
 
 @model List<ProjectBackEndDemo.Areas.Diseases.Models.DieseaseVM>
-<h1>AllSearch</h1>
+<div class="search-section">
+    <h3 class="heading">@AppLng["Search Page"]</h3>
+    <div class="container">
+        <div class="search-filter">
+            <span class="active" data-target="search-box"> @AppLng["All"] </span>
+            @if (EmergencyList.Count != 0)
+            {
+                <span data-target="emergency-search"> @AppLng["Emergency"] </span>
 
+            }
+            @if (Model.Count != 0)
+            {
+                <span data-target="disease-search"> @AppLng["Disease"] </span>
 
+            }
+            @if (medicineList.Count != 0)
+            {
+                <span data-target="medicine-search"> @AppLng["Medicine"] </span>
 
+            }
+            @if (SympList.Count != 0)
+            {
+                <span data-target="symptom-search"> @AppLng["Symptom"] </span>
 
-@if (Model.Count != 0)
-{
-    <h1> Dieases </h1>
-    @foreach (var item in Model)
-    {
-        <div> @item.Name  </div>
-
-    }
-}
-
-@if(EmergencyList.Count != 0)
-{
-    <h1>Emergincies</h1>
-    @foreach (var item in EmergencyList)
-    {
-        <div>
-            @item.Name , @item.Description , @item.HowToDeal
-            <div> another One ------------------------------- </div>
+            }
         </div>
-    }
-
-}
-
-@if (SympList.Count != 0)
-{
-    <h1>Symptoms</h1>
-
-    @foreach (var item in SympList)
-    {
-        <div> Name : @item.Name </div>
-
-        <div> another One ------------------------------- </div>
-
-
-    }
-
-}
-
-
-@if (medicineList.Count != 0)
-{
-    <h1>Medicines</h1>
-    @foreach (var item in medicineList)
-    {
-        <div>
-            @item.Name , @item.Price
-            <div> another One ------------------------------- </div>
-        </div>
-    }
-
-}
 
 
 
 
+        @if (Model.Count != 0)
+        {
 
+            @foreach (var item in Model)
+            {
+                <div class="search-box disease-search">
+                    <h4 class="search-name disease-name">@item.Name</h4>
+                    <div class="search-info disease-info">
+                        <div class="info-box name-box">
+                            <div class="info-title">
+                                <h5>@AppLng["Disease Name"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <span>@item.Name</span>
+                            </div>
+                        </div>
+                        <div class="info-box pet-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Disease Pet"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <span>@item.AnimalName</span>
+                            </div>
+                        </div>
+                        <div class="info-box infect-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Disease Infection"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <span>@item.IsInfect</span>
+                            </div>
+                        </div>
+                        <div class="info-box medicine-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Disease Medicines"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <ul>
+                                    @foreach (var (i, e) in item.MedicineIds.Zip(item.MedicineNames))
+                                    {
+                                        <li>@e <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewMedicine" asp-route-id="@i">@AppLng["View Medicine"]</a></li>
+
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info-box symptom-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Disease Symptoms"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <ul>
+                                    @foreach (var (i, e) in item.SymptomIds.Zip(item.SymptomNames))
+                                    {
+                                        <li>@e <a asp-area="Diseases" asp-controller="Disease" asp-action="Viewsymptom" asp-route-id="@i">@AppLng["View Symptom"]</a></li>
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        }
+
+
+        @if (EmergencyList.Count != 0)
+        {
+
+            @foreach (var item in EmergencyList)
+            {
+
+                <div class="search-box emergency-search">
+                    <div class="search-name emergency-name">
+                        <h4>@item.Name</h4>
+                    </div>
+                    <div class="search-info emergency-info">
+                        <div class="info-box name-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Emergency Name"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <span>@item.Name</span>
+                            </div>
+                        </div>
+                        <div class="info-box name-box">
+                            <div class="info-title">
+                                <h5>  @AppLng["For Which Pet"]  </h5>
+                            </div>
+                            <div class="info-value">
+                                <ul>
+                                    <li>@item.Animal</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info-box descrip-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Emergency Description"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <p>@item.Description</p>
+                            </div>
+                        </div>
+                        <div class="info-box deal-box">
+                            <div class="info-title">
+                                <h5>  @AppLng["How To Deal With Emergency"]  </h5>
+                            </div>
+                            <div class="info-value">
+                                <p>@item.HowToDeal</p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+        }
+
+
+        @if (medicineList.Count != 0)
+        {
+
+            @foreach (var item in medicineList)
+            {
+                <div class="search-box medicine-search">
+                    <h4 class="search-name medicine-name">@item.Name</h4>
+                    <div class="search-info medicine-info">
+                        <div class="info-box name-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Medicine Name"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <span>@item.Name</span>
+                            </div>
+                        </div>
+                        <div class="info-box effect-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Medicine Side Effect"]  </h5>
+                            </div>
+                            <div class="info-value">
+                                <span>@item.HasSideEffect</span>
+                            </div>
+                        </div>
+                        <div class="info-box temp-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Medicine Temperature"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <span>@item.Temperature</span>
+                            </div>
+                        </div>
+                        <div class="info-box expirty-box">
+                            <div class="info-title">
+                                <h5>@AppLng["Medicine Expirty"]</h5>
+                            </div>
+                            <div class="info-value">
+                                <span>@item.Expirty</span>
+                            </div>
+                        </div>
+                        <div class="info-box price-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Medicine Price"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <span>@item.Price $</span>
+                            </div>
+                        </div>
+                        <div class="info-box disease-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Medicine Diseases"]  </h5>
+                            </div>
+                            <div class="info-value">
+                                <ul>
+                                    @{
+                                        List<int> x = new List<int>();
+                                        x = item.DieasesIds;
+                                        List<string> y = new List<string>();
+                                        y = item.DieasesNames;
+
+                                    }
+                                    @foreach (var (i, e) in x.Zip(y))
+                                    {
+                                        <li>@e <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewDisease" asp-route-id="@i">@AppLng["View Disease"]</a></li>
+
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+
+
+
+        @if (SympList.Count != 0)
+        {
+
+
+            @foreach (var item in SympList)
+            {
+
+                <div class="search-box symptom-search">
+                    <h4 class="search-name symptom-name">@item.Name</h4>
+                    <div class="search-info symptom-info">
+                        <div class="info-box name-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Symptom Name"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <span>@item.Name</span>
+                            </div>
+                        </div>
+                        <div class="info-box descrip-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Symptom Description"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <p>
+                                    @item.Description
+                                </p>
+                            </div>
+                        </div>
+                        <div class="info-box disease-box">
+                            <div class="info-title">
+                                <h5> @AppLng["Symptom Diseases"] </h5>
+                            </div>
+                            <div class="info-value">
+                                <ul>
+                                    @{
+                                        List<int> x = new List<int>();
+                                        x = item.DieasesIds;
+                                        List<string> y = new List<string>();
+                                        y = item.DieasesNames;
+
+                                    }
+                                    @foreach (var (i, e) in x.Zip(y))
+                                    {
+                                        <li>@e  <a asp-area="Diseases" asp-controller="Disease" asp-action="ViewDisease" asp-route-id="@i">@AppLng["View Disease"]</a></li>
+
+                                    }
+
+                                  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        }
+
+
+
+
+    </div>
+</div>
+
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/allsearch.js"></script>

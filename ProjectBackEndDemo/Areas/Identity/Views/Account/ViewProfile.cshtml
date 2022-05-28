@@ -4,31 +4,58 @@
 @{
     ViewData["Title"] = "ViewProfile";
     Layout = "~/Views/Layouts/MainLayout.cshtml";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
+}
+<link href="~/css/viewprofile.css" rel="stylesheet" />
+@if (Culuture == "ar-EG")
+{
+    <link href="~/css/viewprofile-ar.css" rel="stylesheet" />
+
 }
 
-
-<div class="text-center" style="margin:0 auto">
-    <h3 class="text-primary">ViewProfile</h3>
-    <br />
-    <img src="~/Files/UsersProfilePictures/@Model.ProfilePic" style="width:200px;height:200px;border-radius:50%" /><br />
-    <br />
-
-
-    <br />
-    <span>User Name : </span> @Model.UserName <br />
-    <span>Phone Number : </span> @Model.PhoneNumber <br />
-    <span>Email : </span> @Model.Email <br />
-    <span>Birth Day  : </span> @Model.BirthDay <br />
-    <span>Animal   : </span> @Model.AnimalName <br />
-    <span>Gmail  : </span> @Model.Gmail <br />
-
-
-    <a class="btn btn-primary" asp-area="Identity" asp-controller="Account" asp-action="EditProfile" asp-route-id="@Model.Id">Edit Profile</a>
-
-
-
-
-</div>
-
+<section class="viewprofile">
+    <h3 class="heading">View Profile</h3>
+    <div class="container">
+        <div class="viewprofile-picture">
+            <img src="~/Files/UsersProfilePictures/@Model.ProfilePic" alt="profile" class="viewprofile-img">
+            <div class="viewprofile-link">
+                <i class="fa-solid fa-camera"></i>
+                <a asp-area="Identity" asp-controller="Account" asp-action="EditProfilePicture" asp-route-id="@Model.Id">Edit Picture</a>
+            </div>
+        </div>
+        <div class="viewprofile-section viewprofile-name">
+            <h5 class="viewprofile-title">User Name</h5>
+            <div class="viewprofile-value">@Model.UserName</div>
+        </div>
+        <div class="viewprofile-section viewprofile-email">
+            <h5 class="viewprofile-title">Email</h5>
+            <div class="viewprofile-value">@Model.Email</div>
+        </div>
+        <div class="viewprofile-section viewprofile-gmail">
+            <h5 class="viewprofile-title">Gmail</h5>
+            <div class="viewprofile-value">@Model.Gmail</div>
+        </div>
+        <div class="viewprofile-section viewprofile-phone">
+            <h5 class="viewprofile-title">Phone Number</h5>
+            <div class="viewprofile-value"> @Model.PhoneNumber</div>
+        </div>
+        <div class="viewprofile-section viewprofile-birth">
+            <h5 class="viewprofile-title">Birthday</h5>
+            <div class="viewprofile-value">@Model.BirthDay</div>
+        </div>
+        <div class="viewprofile-section viewprofile-animal">
+            <h5 class="viewprofile-title">Pet</h5>
+            <div class="viewprofile-value">@Model.AnimalName</div>
+        </div>
+        @*<div class="viewprofile-section viewprofile-sensor">
+            <h5 class="viewprofile-title">Pet Sensor</h5>
+            <div class="viewprofile-value">Temperature sensor</div>
+        </div>*@
+        <div class="viewprofile-section viewprofile-edit">
+            <a asp-area="Identity" asp-controller="Account" asp-action="EditProfile" asp-route-id="@Model.Id">Edit Profile</a>
+        </div>
+    </div>
+</section>
 
 

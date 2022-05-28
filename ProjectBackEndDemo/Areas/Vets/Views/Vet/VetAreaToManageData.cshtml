@@ -1,0 +1,29 @@
+﻿
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@inject ProjectBackEndDemo.BL.Helpers.ISelectHelper slcthHelper
+@{
+    ViewData["Title"] = "VetAreaToManageData";
+    Layout = "~/Views/Layouts/MainLayout.cshtml";
+
+    var lifestyleslist = slcthHelper.GetLifeStyles();
+}
+
+
+
+<div class="container">
+
+    <div>
+        <h2 class="text-primary"> edit life style for </h2> 
+        <ul>
+            @foreach (var item in lifestyleslist)
+            {
+                <li> <a  class="btn btn-primary" style="margin:10px" asp-area="Care" asp-controller="LifeStyle" asp-action="EditLifeStyle" asp-route-Id="@item.Id"> @item.Animal.Name</a></li>
+            }
+        </ul>
+    </div>
+
+
+
+</div>

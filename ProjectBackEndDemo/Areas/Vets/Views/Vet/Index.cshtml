@@ -76,16 +76,7 @@
                             <address>@item.Address</address>
                         </div>
                     </div>
-                    @*<div class="vet-info gmail-info">
-                            <div class="info-title">
-                                <h5>Gmail</h5>
-                            </div>
-                            <div class="info-value">
-                                <a href="mailto:ahmedabdoelhewala1211@gmail.com">
-                                    <i class="fa-solid fa-envelope"></i> ahmedabdoelhewala1211@gmail.com
-                                </a>
-                            </div>
-                        </div>*@
+
                     <div class="vet-info phone-info">
                         <div class="info-title">
                             <h5> @AppLng["Phone Number"]</h5>
@@ -96,7 +87,18 @@
                             </a>
                         </div>
                     </div>
+                    <div class="vet-info gmail-info">
+                        <div class="info-title">
+                            <h5>@AppLng["View vet Profile"]</h5>
+                        </div>
+                        <div class="info-value">
+                            <a asp-area="Vets" asp-controller="Vet" asp-action="ViewVet" asp-route-Id="@item.Id" >
+                                <i class="fa-solid fa-envelope"></i> @AppLng["View Vet Profile"]
+                            </a>
+                        </div>
+                      </div>
                 </div>
+
                 @if (signInManager.IsSignedIn(User))
                 {
                     var currentUser = await userManager.FindByNameAsync(User.Identity.Name);

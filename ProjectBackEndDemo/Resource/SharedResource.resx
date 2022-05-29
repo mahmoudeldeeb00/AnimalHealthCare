@@ -513,6 +513,9 @@
   <data name="View the case" xml:space="preserve">
     <value>View the case</value>
   </data>
+  <data name="View Vet Profile" xml:space="preserve">
+    <value>View Vet Profile</value>
+  </data>
   <data name="ViewAllCases" xml:space="preserve">
     <value>View All Cases</value>
   </data>

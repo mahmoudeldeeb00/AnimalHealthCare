@@ -8,21 +8,62 @@
     Layout = "~/Views/Layouts/MainLayout.cshtml";
 
     var lifestyleslist = slcthHelper.GetLifeStyles();
+    var PetList = slcthHelper.GetAnimals();
 }
-
+<style>
+    a {
+        margin: 10px;
+    }
+</style>
 
 
 <div class="container">
 
-    <div>
-        <h2 class="text-primary"> edit life style for </h2> 
-        <ul>
-            @foreach (var item in lifestyleslist)
-            {
-                <li> <a  class="btn btn-primary" style="margin:10px" asp-area="Care" asp-controller="LifeStyle" asp-action="EditLifeStyle" asp-route-Id="@item.Id"> @item.Animal.Name</a></li>
-            }
-        </ul>
+
+    <a class="btn btn-primary" asp-area="Sensor" asp-controller="SSensor" asp-action="CreateSensorData"> Add Sensor data  </a>
+    <br />
+    <br />
+    <a class="btn btn-primary" asp-area="Diseases" asp-controller="Disease" asp-action="CreateDisease"> Add Disease </a>
+    <a class="btn btn-primary" asp-area="Diseases" asp-controller="Disease" asp-action="CreateMedicine"> Add Medicine </a>
+    <a class="btn btn-primary" asp-area="Diseases" asp-controller="Disease" asp-action="CreateSymptom"> Add Symptom </a>
+    <a class="btn btn-primary" asp-action="AddFaq" asp-area="Diseases" asp-controller="Disease">Add Faq</a>
+    <a class="btn btn-primary" asp-action="CreateEmergency" asp-area="Emergency" asp-controller="Emergencyy">Add Emergency</a>
+
+    <br />
+    <br />
+    <a class="btn btn-primary" asp-area="Vets" asp-controller="Vet" asp-action="AddAnimal"> Add Animal  </a>
+    <a class="btn btn-primary" asp-area="Care" asp-controller="LifeStyle" asp-action="CreateLiFeStyle"> Add Animal LifeStyle </a>
+    <a class="btn btn-primary" asp-area="Care" asp-controller="LifeStyle" asp-action="CreateFood"> Add Animal Food </a>
+
+    <a class="btn btn-primary" asp-area="Vets" asp-controller="Vet" asp-action="CreateVet"> Add Vet </a>
+    <a class="btn btn-primary" asp-area="Sensor" asp-controller="SSensor" asp-action="AddSensorMeter">Add SensorMeter</a>
+
+
+
+
+
+
+    <div style="display:flex ">
+        <div style="margin:20px">
+            <h2 class="text-primary"> edit life style for </h2>
+            <ul>
+                @foreach (var item in lifestyleslist)
+                {
+                    <li> <a class="btn btn-primary" style="margin:10px" asp-area="Care" asp-controller="LifeStyle" asp-action="EditLifeStyle" asp-route-Id="@item.Id"> @item.Animal.Name</a></li>
+                }
+            </ul>
+        </div>
+        <div style="margin:20px">
+            <h2 class="text-primary"> edit Pets  </h2>
+            <ul>
+                @foreach (var item in PetList)
+                {
+                    <li> <a class="btn btn-primary" style="margin:10px" asp-area="Vets" asp-controller="Vet" asp-action="EditPet" asp-route-Id="@item.Id"> @item.Name</a></li>
+                }
+            </ul>
+        </div>
     </div>
+
 
 
 

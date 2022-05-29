@@ -18,6 +18,8 @@ namespace ProjectBackEndDemo.BL.Helpers
         public List<Gender> GetGender();
         public List<SensorMeter> GetSensorMeters();
         public List<LifeStyle> GetLifeStyles();
+      
+
 
 
 

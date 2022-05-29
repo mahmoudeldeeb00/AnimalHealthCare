@@ -107,7 +107,7 @@
                     <h5>@AppLng["Status Decription"]</h5>
                 </div>
                 <div class="monitoring-value">
-                    <p>
+                    <p id="ajaxtempreturedescription">
                         @Model.LastTempretureSend.Description
                     </p>
                 </div>
@@ -117,7 +117,7 @@
                     <h5>@AppLng["How To Deal"]</h5>
                 </div>
                 <div class="monitoring-value">
-                    <p>
+                    <p id="ajaxtempreturehowtodeal">
                         @Model.LastTempretureSend.HowToDeal
                     </p>
                 </div>
@@ -127,8 +127,8 @@
                     <h5>@AppLng["Recommended Medicines"]</h5>
                 </div>
                 <div class="monitoring-value">
-                    <ul class="medicine-list">
-                      
+                    <ul class="medicine-list" id="ajaxtempreturerecommendedmedicine">
+
 
                         @foreach (var item in Model.LastTempretureSend.RecommendedMedicines)
                         {
@@ -212,7 +212,7 @@
                     <h5>@AppLng["Status Decription"]</h5>
                 </div>
                 <div class="monitoring-value">
-                    <p>
+                    <p id="ajaxpulsedescription">
                         @Model.LastPulseSend.Description
                     </p>
                 </div>
@@ -222,7 +222,7 @@
                     <h5>@AppLng["How To Deal"]</h5>
                 </div>
                 <div class="monitoring-value">
-                    <p>
+                    <p id="ajaxpulsehowtodeal">
                         @Model.LastPulseSend.HowToDeal
 
                     </p>
@@ -233,7 +233,7 @@
                     <h5>@AppLng["Recommended Medicines"]</h5>
                 </div>
                 <div class="monitoring-value">
-                    <ul class="medicine-list">
+                    <ul class="medicine-list" id="ajaxpulserecommendedmedicine">
                         @foreach (var item in Model.LastPulseSend.RecommendedMedicines)
                         {
                             <li>@item.Name</li>
@@ -315,7 +315,7 @@
                     <h5>@AppLng["Status Decription"]</h5>
                 </div>
                 <div class="monitoring-value">
-                    <p>
+                    <p id="ajaxglucozdescription">
                         @Model.LastGlucoseSend.Description
                     </p>
                 </div>
@@ -325,7 +325,7 @@
                     <h5>@AppLng["How To Deal"]</h5>
                 </div>
                 <div class="monitoring-value">
-                    <p>
+                    <p id="ajaxglucozhowtodeal">
                         @Model.LastGlucoseSend.HowToDeal
 
                     </p>
@@ -336,7 +336,7 @@
                     <h5>@AppLng["Recommended Medicines"]</h5>
                 </div>
                 <div class="monitoring-value">
-                    <ul class="medicine-list">
+                    <ul class="medicine-list" id="ajaxglucozrecommendedmedicine">
                         @foreach (var item in Model.LastGlucoseSend.RecommendedMedicines)
                         {
                             <li>@item.Name</li>
@@ -361,4 +361,6 @@
 <script src="~/js/jquery-3.6.0.min.js"></script>
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
 <script src="~/js/monitoring.js"></script>

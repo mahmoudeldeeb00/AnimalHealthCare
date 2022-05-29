@@ -494,3 +494,5 @@ D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Raz
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Sensor\Views\SSensor\ViewPet.cshtml.g.cs
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Vets\Views\Vet\VetAreaToManageData.cshtml.g.cs
 D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Emergency\Views\Emergencyy\SearchEmerginces.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Vets\Views\Vet\EditPet.cshtml.g.cs
+D:\Garduation Project\ProjectBackEndDemo\ProjectBackEndDemo\obj\Debug\net5.0\Razor\Areas\Vets\Views\Vet\AddAnimal.cshtml.g.cs

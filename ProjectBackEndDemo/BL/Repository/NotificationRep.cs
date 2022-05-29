@@ -115,6 +115,8 @@ namespace ProjectBackEndDemo.BL.Repository
                 db.SaveChanges();
 
             }
+            SignalHub.Clients.All.SendAsync("displayNotification", "");
+
         }
 
     }

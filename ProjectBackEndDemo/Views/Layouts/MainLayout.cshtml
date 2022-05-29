@@ -152,6 +152,16 @@
                     <i class="fa-solid fa-user-gear"></i>
                     <a asp-area="Identity" asp-controller="Account" asp-action="EditProfile" asp-route-id="@currentUser.Id">@AppLng["Setting"]</a>
                 </li>
+                @foreach (var role in await usermanager.GetRolesAsync(currentUser))
+                {
+                    if (role == "Admin" || role == "Vet")
+                    {
+                        <li>
+                            <i class="fa-solid fa-user-gear"></i>
+                            <a asp-area="Vets" asp-controller="Vet" asp-action="VetAreaToManageData">@AppLng["Vet Area To Manage Data"]</a>
+                        </li>
+                    }
+                }
                 <li>
                     <i class="fa-solid fa-circle-question"></i>
                     <a href="#">Help</a>
@@ -337,7 +347,7 @@
             </div>
             <div class="lang-option">
                 @*if (Culuture == "ar-EG")*@
-                <span class="option-heading">Language</span>
+                <span class="option-heading">@AppLng["Language"]</span>
                 <div class="lang-box" translate="no">
                     <a class="english active" asp-area="" asp-controller="home" asp-action="ChangeCulture" asp-route-culture="en-US" asp-route-returnUrl="@Url.ActionLink()">English</a>
                     <a class="arabic" asp-area="" asp-controller="home" asp-action="ChangeCulture" asp-route-culture="ar-EG" asp-route-returnUrl="@Url.ActionLink()">العربية</a>
@@ -400,7 +410,6 @@
 
 
     <script>
-                                                                               // setTimeout(GetRandomIdNotification(),5000);
 
     </script>
 

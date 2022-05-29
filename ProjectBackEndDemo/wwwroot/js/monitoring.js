@@ -84,18 +84,110 @@ $(customlangArabic).on("click", function (e) {
     }
 });
 // Changing scales & status
-let changingTempScale = setInterval(function () {
-    let newTempCurrent = Math.floor(Math.random() * 100);
-    let newPulseCurrent = Math.floor(Math.random() * 100);
-    let newGlukoseCurrent = Math.floor(Math.random() * 100);
-    $(tempCurrentValue).text(newTempCurrent);
-    $(pulseCurrentValue).text(newPulseCurrent);
-    $(glukoseCurrentValue).text(newGlukoseCurrent);
-    updateTempScale();
-    updatePulseScale();
-    updateGlukoseScale();
-    updateWholeStatus();
-}, 3000);
+
+
+//let changingTempScale = setInterval(function () {
+//    let newTempCurrent = Math.floor(Math.random() * 100);
+//    let newPulseCurrent = Math.floor(Math.random() * 100);
+//    let newGlukoseCurrent = Math.floor(Math.random() * 100);
+//    $(tempCurrentValue).text(newTempCurrent);
+//    $(pulseCurrentValue).text(newPulseCurrent);
+//    $(glukoseCurrentValue).text(newGlukoseCurrent);
+//    updateTempScale();
+//    updatePulseScale();
+//    updateGlukoseScale();
+//    updateWholeStatus();
+//}, 3000);
+
+function updateallvaluesandmakeprojectrealtime() {
+
+    $.ajax({
+        url: "/Sensor/SSensor/GetCurrentAnimalValues",
+        method: "Post",
+        success: function (result) {
+
+            console.log(result);
+
+            let newTempCurrent = result.CurrentTempreture;
+            console.log("tempreture" + newTempCurrent )
+            let newPulseCurrent = result.CurrentPulse;
+            console.log("pulse" + newPulseCurrent)
+            let newGlukoseCurrent = result.CurrentClucose;
+            console.log("clocoz" + newGlukoseCurrent)
+            $(tempCurrentValue).text(newTempCurrent);
+            $(pulseCurrentValue).text(newPulseCurrent);
+            $(glukoseCurrentValue).text(newGlukoseCurrent);
+            updateTempScale();
+            updatePulseScale();
+            updateGlukoseScale();
+            updateWholeStatus();
+
+            //tempreture area 
+            $("#ajaxtempreturedescription").text("");
+            $("#ajaxtempreturedescription").text(result.LastTempretureSend.Description);
+            $("#ajaxtempreturehowtodeal").text();
+            $("#ajaxtempreturehowtodeal").text(result.LastTempretureSend.HowToDeal);
+            $("ajaxtempreturerecommendedmedicine").html("");
+            let x = "";
+            $.each(result.LastTempretureSend.RecommendedMedicines, function (i, e) {
+
+                x += "<li>"+e.Name +"</li>"
+
+            })
+            $("ajaxtempreturerecommendedmedicine").html(x);
+            //pulse area 
+            $("#ajaxpulsedescription").text("");
+            $("#ajaxpulsedescription").text(result.LastTempretureSend.Description);
+            $("#ajaxpulsehowtodeal").text();
+            $("#ajaxpulsehowtodeal").text(result.LastTempretureSend.HowToDeal);
+            $("ajaxpulserecommendedmedicine").html("");
+            let y = "";
+            $.each(result.LastTempretureSend.RecommendedMedicines, function (i, e) {
+
+                y += "<li>" + e.Name + "</li>"
+
+            })
+            $("ajaxpulserecommendedmedicine").html(y);
+
+
+            //clocoz area
+            $("#ajaxglucozdescription").text("");
+            $("#ajaxglucozdescription").text(result.LastTempretureSend.Description);
+            $("#ajaxglucozhowtodeal").text();
+            $("#ajaxglucozhowtodeal").text(result.LastTempretureSend.HowToDeal);
+            $("ajaxglucozrecommendedmedicine").html("");
+            let z = "";
+            $.each(result.LastTempretureSend.RecommendedMedicines, function (i, e) {
+
+                z += "<li>" + e.Name + "</li>"
+
+            })
+            $("ajaxglucozrecommendedmedicine").html(z);
+
+
+            
+            
+            
+
+
+
+        },
+        error: function () {
+            console.log("error Get data")
+        }
+
+
+    })
+
+
+
+}
+
+
+
+
+
+
 // Update The whole state
 function updateWholeStatus() {
     if ($(tempCurrentScale).hasClass("current-emergency") || $(pulseCurrentScale).hasClass("current-emergency") || $(glukoseCurrentScale).hasClass("current-emergency")) {
@@ -302,4 +394,14 @@ var swiper = new Swiper(".mySwiper", {
     pagination: {
         el: ".swiper-pagination",
     },
+});
+
+
+
+"use strict";
+var connect = new signalR.HubConnectionBuilder().withUrl("/signalServer").build();
+connect.start();
+
+connect.on('makeapprealTimeMonitoring', function () {
+    updateallvaluesandmakeprojectrealtime();
 });

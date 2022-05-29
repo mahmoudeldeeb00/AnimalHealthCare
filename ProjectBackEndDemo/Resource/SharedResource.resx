@@ -297,6 +297,9 @@
   <data name="Instructions" xml:space="preserve">
     <value>Instructions</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
   <data name="Let'stakecareofouranimals" xml:space="preserve">
     <value>Let's take care of our animals</value>
   </data>
@@ -473,6 +476,9 @@
   </data>
   <data name="ThemeMood" xml:space="preserve">
     <value>Theme Mood</value>
+  </data>
+  <data name="Vet Area To Manage Data" xml:space="preserve">
+    <value>Vet Area To Manage Data</value>
   </data>
   <data name="Veterinaries" xml:space="preserve">
     <value>Veterinaries</value>

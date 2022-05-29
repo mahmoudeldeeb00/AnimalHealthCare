@@ -187,5 +187,54 @@ namespace ProjectBackEndDemo.Areas.Sensor.SensorRep
         }
 
 
+
+        //public List<int> ChangeScaleValues(string Id)
+        //{
+        //    var myList = new List<int>();
+
+        //    var userAnimal = db.UserAnimals.FirstOrDefault(f => f.ApplicationUserId == Id);
+        //    myList.Add(userAnimal.CurrentTempreture);
+        //    myList.Add(userAnimal.Currentlucose);
+        //    myList.Add(userAnimal.CurrentPulse);
+        //    return myList;
+
+
+
+        //}
+        public MonitoringVM ChangeScaleValues(string Id)
+        {
+            MonitoringVM model = new MonitoringVM();
+            var UserAni = db.UserAnimals
+                .Include(i => i.Animal)
+                .Include(ii => ii.Gender)
+                .FirstOrDefault(f => f.ApplicationUserId == Id);
+
+
+            model.AnimalType = UserAni.Animal.Name;
+            model.AnimalNickName = UserAni.Name;
+            model.AnimalGenderType = UserAni.Gender.Name;
+            model.AnimalId = UserAni.AnimalId;
+            model.AnimalAge = TimeStringHelper.GetAgeFromDate(UserAni.BirthDay);
+            model.CurrentTempreture = UserAni.CurrentTempreture;
+            model.StartTempreture = UserAni.Animal.StartTempreture;
+            model.EndTempreture = UserAni.Animal.EndTempreture;
+            model.CurrentClucose = UserAni.Currentlucose;
+            model.EndClucose = UserAni.Animal.EndGlucose;
+            model.StartClucose = UserAni.Animal.StartGlucose;
+
+            model.CurrentPulse = UserAni.CurrentPulse;
+            model.StartPulse = UserAni.Animal.StartPulse;
+            model.EndPulse = UserAni.Animal.EndPulse;
+            model.AnimalPicSource = UserAni.pictureSrc;
+
+            model.LastGlucoseSend = GetSensorData(UserAni.LastSensorGlucoseSend);
+            model.LastPulseSend = GetSensorData(UserAni.LastSensorPulseSend);
+            model.LastTempretureSend = GetSensorData(UserAni.LastSensorTempretureSend);
+
+            return model;
+
+        }
+
+
     }
 }

@@ -22,6 +22,6 @@ namespace ProjectBackEndDemo.Areas.Sensor.SensorRep
         public EditAnimalPictureVM GetUserAnimalPictureToEdit(string UserId);
         public void EditPetProfile(UserAnimalVM model);
         public void EditPetProfilePicture(EditAnimalPictureVM model);
-
+        public MonitoringVM ChangeScaleValues(string Id);
     }
 }

@@ -297,6 +297,9 @@
   <data name="Instructions" xml:space="preserve">
     <value>التعليمات</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
   <data name="Let'stakecareofouranimals" xml:space="preserve">
     <value>هيا نعتني بحيوانتنا الاليفة</value>
   </data>
@@ -476,6 +479,9 @@
   </data>
   <data name="ThemeMood" xml:space="preserve">
     <value>تغيير الوضع</value>
+  </data>
+  <data name="Vet Area To Manage Data" xml:space="preserve">
+    <value>تغيرر البيانات - الدكتور</value>
   </data>
   <data name="Veterinaries" xml:space="preserve">
     <value>الأطباء</value>

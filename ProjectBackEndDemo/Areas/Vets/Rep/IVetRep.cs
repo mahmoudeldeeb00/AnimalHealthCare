@@ -1,4 +1,5 @@
 ﻿using ProjectBackEndDemo.Areas.Vets.Models;
+using ProjectBackEndDemo.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,12 @@ namespace ProjectBackEndDemo.Areas.Vets.Rep
         public void CreateVet(VetVM model);
 
         public void EditVet(VetVM model);
+        public Animal GetAnimalById(int id);
+        public void UpdatePetData(Animal model);
+        public void CreatePet(Animal model);
+
+        
+
 
     }
 }

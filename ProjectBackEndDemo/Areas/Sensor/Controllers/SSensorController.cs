@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using ProjectBackEndDemo.Areas.Identity.Models;
 using ProjectBackEndDemo.Areas.Sensor.Data;
 using ProjectBackEndDemo.Areas.Sensor.Models;
 using ProjectBackEndDemo.Areas.Sensor.SensorRep;
 using ProjectBackEndDemo.DAL.DataBase;
+using ProjectBackEndDemo.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,13 +25,15 @@ namespace ProjectBackEndDemo.Areas.Sensor.Controllers
         private readonly ISensorRep srep;
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
+        private readonly IHubContext<SignalServer> signalHub;
 
-        public SSensorController(DbContainer db, ISensorRep Srep, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public SSensorController(DbContainer db, ISensorRep Srep, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,IHubContext<SignalServer> SignalHub)
         {
             this.db = db;
             srep = Srep;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            signalHub = SignalHub;
         }
         public IActionResult Index()
         {
@@ -132,13 +136,14 @@ namespace ProjectBackEndDemo.Areas.Sensor.Controllers
         }
 
         [HttpPost]
-        public async void ChangeLastMonitoring(int ID)
+        public  void ChangeLastMonitoring(int ID)
         {
-            if (signInManager.IsSignedIn(User))
-            {
-                var currentUser = await userManager.FindByNameAsync(User.Identity.Name);               
-                var sensordata = db.SensorDatas.Where(w => w.Id == ID).Include(i => i.SensorMeter).FirstOrDefault();
-                var userAnimal = db.UserAnimals.FirstOrDefault(f => f.ApplicationUserId == currentUser.Id);
+           
+                var UserId = userManager.GetUserId(HttpContext.User);
+       
+
+            var sensordata = db.SensorDatas.Where(w => w.Id == ID).Include(i => i.SensorMeter).FirstOrDefault();
+                var userAnimal = db.UserAnimals.FirstOrDefault(f => f.ApplicationUserId == UserId);
                 string TypeName = sensordata.SensorMeter.Name;
                 if (TypeName == "Temperature")
                 {
@@ -161,11 +166,31 @@ namespace ProjectBackEndDemo.Areas.Sensor.Controllers
                     db.SaveChanges();
 
                 }
+                  var currentUser = userManager.FindByIdAsync(UserId).Result;
                 currentUser.LastSensorSend = ID;
-                var result = await userManager.UpdateAsync(currentUser);
-                
-            }
-           
+                var result = userManager.UpdateAsync(currentUser).Result;
+
+
+
+                _ = signalHub.Clients.All.SendAsync("makeapprealTimeMonitoring", "");
+
+
+            
+
+        }
+
+        //jsons for make real timt to monitoring page send notification ----------------
+
+        [HttpPost]
+        public JsonResult GetCurrentAnimalValues()
+        {
+
+            var UserId = userManager.GetUserId(HttpContext.User);
+                return Json(srep.ChangeScaleValues(UserId));
+
+            
+
+            
         }
 
 

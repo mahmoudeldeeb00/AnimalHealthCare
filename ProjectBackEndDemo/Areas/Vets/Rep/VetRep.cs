@@ -66,5 +66,37 @@ namespace ProjectBackEndDemo.Areas.Vets.Rep
             db.SaveChanges();
 
         }
+    
+        public Animal GetAnimalById(int id)
+        {
+            return db.Animals.FirstOrDefault(f => f.Id == id);
+        }
+
+
+        public void UpdatePetData(Animal model)
+        {
+            var animalentity = db.Animals.FirstOrDefault(f => f.Id == model.Id);
+            animalentity.Name = model.Name;
+            animalentity.StartTempreture = model.StartTempreture;
+            animalentity.EndTempreture = model.EndTempreture;
+            animalentity.StartPulse = model.StartPulse;
+            animalentity.EndPulse = model.EndPulse;
+            animalentity.StartGlucose = model.StartGlucose;
+            animalentity.EndGlucose = model.EndGlucose;
+
+            db.Animals.Update(animalentity);
+            db.SaveChanges();
+
+
+        }
+        public void CreatePet(Animal model)
+        {
+            db.Animals.Add(model);
+            db.SaveChanges();
+
+
+        }
+
+
     }
 }

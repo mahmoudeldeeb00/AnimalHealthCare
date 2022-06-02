@@ -164,6 +164,8 @@
 
 .monitoring .container .monitoring-head {
     width: 100%;
+    background-color: var(--theme-background);
+    padding: 0;
     position: relative;
     display: flex;
     align-items: center;
@@ -180,14 +182,17 @@
 
     .monitoring .container .monitoring-head.normal {
         color: #00e57f;
+        padding: 0;
     }
 
     .monitoring .container .monitoring-head.sick {
         color: #ffc107;
+        padding: 0;
     }
 
     .monitoring .container .monitoring-head.emergency {
         color: #c82222;
+        padding: 0;
     }
 
 .monitoring .monitoring-box {

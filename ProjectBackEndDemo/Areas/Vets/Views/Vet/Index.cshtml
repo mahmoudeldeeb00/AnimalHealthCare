@@ -92,24 +92,15 @@
                             <h5>@AppLng["View vet Profile"]</h5>
                         </div>
                         <div class="info-value">
-                            <a asp-area="Vets" asp-controller="Vet" asp-action="ViewVet" asp-route-Id="@item.Id" >
-                                <i class="fa-solid fa-envelope"></i> @AppLng["View Vet Profile"]
+                            <a asp-area="Vets" asp-controller="Vet" asp-action="ViewVet" asp-route-Id="@item.Id">
+                                <i class="fa-solid fa-user"></i> @AppLng["View Vet Profile"]
                             </a>
                         </div>
-                      </div>
+                    </div>
+                   
                 </div>
 
-                @if (signInManager.IsSignedIn(User))
-                {
-                    var currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-                    foreach (var role in await userManager.GetRolesAsync(currentUser))
-                    {
-                        if (role == "Admin")
-                        {
-                            <a asp-area="Vets" asp-controller="Vet" asp-action="EditVet" asp-route-Id="@item.Id"> @AppLng["Edit"]</a>
-                        }
-                    }
-                }
+               
 
             </div>
         }

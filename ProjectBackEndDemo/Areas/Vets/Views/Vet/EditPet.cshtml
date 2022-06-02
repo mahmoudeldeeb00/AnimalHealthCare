@@ -19,7 +19,7 @@
     <h3 class="heading">Edit Pet Data</h3>
     <form asp-area="Vets" asp-controller="Vet" asp-action="EditPet" method="post">
 
-        <input type="number" asp-for="Id" hidden/>
+        <input type="number" asp-for="Id" hidden />
 
 
         <div class="editprofile-section">
@@ -63,6 +63,35 @@
             <span class="text-danger" asp-validation-for="EndTempreture">  </span>
 
         </div>
+
+        <div class="form-section birthday-section">
+            <label for="my-birthday" asp-for="StartTempretureEmergency">Start Tempreture Emergency</label>
+            <div class="input-section">
+                <input type="number" asp-for="StartTempretureEmergency" id="my-StartTempreture" class="pet-birthday" />
+                <div class="birthday-icon">
+                    <i class="fa-solid fa-calendar"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="StartTempretureEmergency">  </span>
+
+        </div>
+        <div class="form-section birthday-section">
+            <label for="my-birthday" asp-for="EndTempretureEmergency">End Tempreture Emergency</label>
+            <div class="input-section">
+                <input type="number" asp-for="EndTempretureEmergency" id="my-StartTempreture" class="pet-birthday" />
+                <div class="birthday-icon">
+                    <i class="fa-solid fa-calendar"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="EndTempretureEmergency">  </span>
+
+        </div>
+
+
+
+
+
+
         <div class="form-section birthday-section">
             <label for="my-birthday" asp-for="StartPulse"> Start Pulse </label>
             <div class="input-section">
@@ -87,6 +116,35 @@
         </div>
 
         <div class="form-section birthday-section">
+            <label for="my-birthday" asp-for="StartPulseEmergency">Start Pulse Emergency </label>
+            <div class="input-section">
+                <input type="number" asp-for="StartPulseEmergency" id="my-StartTempreture" class="pet-birthday" />
+                <div class="birthday-icon">
+                    <i class="fa-solid fa-calendar"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="StartPulseEmergency">  </span>
+
+        </div>
+        <div class="form-section birthday-section">
+            <label for="my-birthday" asp-for="EndPulseEmergency">End Pulse Emergency </label>
+            <div class="input-section">
+                <input type="number" asp-for="EndPulseEmergency" id="my-StartTempreture" class="pet-birthday" />
+                <div class="birthday-icon">
+                    <i class="fa-solid fa-calendar"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="EndPulseEmergency">  </span>
+
+        </div>
+
+
+
+
+
+
+
+        <div class="form-section birthday-section">
             <label for="my-birthday" asp-for="StartGlucose"> Start Glucose </label>
             <div class="input-section">
                 <input type="number" asp-for="StartGlucose" id="my-StartGlucose" class="pet-birthday" />
@@ -109,8 +167,29 @@
 
         </div>
 
+        <div class="form-section birthday-section">
+            <label for="my-birthday" asp-for="StartGlucozEmergency"> Start Glucoz Emergency </label>
+            <div class="input-section">
+                <input type="number" asp-for="StartGlucozEmergency" id="my-StartGlucose" class="pet-birthday" />
+                <div class="birthday-icon">
+                    <i class="fa-solid fa-calendar"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="StartGlucozEmergency">  </span>
 
+        </div>
 
+        <div class="form-section birthday-section">
+            <label for="my-birthday" asp-for="EndGlucozEmergency"> EndGlucozEmergency </label>
+            <div class="input-section">
+                <input type="number" asp-for="EndGlucozEmergency" id="my-StartGlucose" class="pet-birthday" />
+                <div class="birthday-icon">
+                    <i class="fa-solid fa-calendar"></i>
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="EndGlucozEmergency">  </span>
+
+        </div>
 
 
 

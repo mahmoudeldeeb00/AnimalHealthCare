@@ -90,9 +90,20 @@ namespace ProjectBackEndDemo.Areas.Sensor.SensorRep
             model.EndPulse = UserAni.Animal.EndPulse;
             model.AnimalPicSource = UserAni.pictureSrc;
 
+            model.StartTempretureEmergency = UserAni.Animal.StartTempretureEmergency;
+            model.EndTempretureEmergency = UserAni.Animal.EndTempretureEmergency;
+
+            model.StartGlucozEmergency = UserAni.Animal.StartGlucozEmergency;
+            model.EndGlucozEmergency = UserAni.Animal.EndGlucozEmergency;
+
+            model.StartPulseEmergency = UserAni.Animal.StartPulseEmergency;
+            model.EndPulseEmergency = UserAni.Animal.EndPulseEmergency;
+
             model.LastGlucoseSend = GetSensorData(UserAni.LastSensorGlucoseSend);
             model.LastPulseSend = GetSensorData(UserAni.LastSensorPulseSend);
             model.LastTempretureSend = GetSensorData(UserAni.LastSensorTempretureSend);
+
+
           
             return model;
 

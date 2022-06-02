@@ -46,7 +46,7 @@
             </button>
         </form>
         <div class="emergency-pet">
-            <picture class="pet-box dog-box " data-value="dog">
+            <picture class="pet-box dog-box" data-value="dog">
                 <img src="/assets/imgs/dog-life.webp" alt="Dog">
             </picture>
             <picture class="pet-box cat-box" data-value="cat">
@@ -78,50 +78,10 @@
 
 
 <script src="~/jquery/jquery.min.js"></script>
-
-
-<script>
-    $(function () {
-
-        $("#selectPet").change(function () {
-
-            var x = $("#selectPet").val();
-
-            $.ajax({
-                type: "post",
-                url: "/Emergency/Emergencyy/FilterData",
-                data: { name: x },
-                success: function (res) {
-                    $("#view").empty();
-
-
-                    $.each(res, function (i, e) {
-                        $("#view").append(
-
-                            " <div class='emergency-box'><div class='emergency-name'><h4>" + e.Name + "</h4></div><div class='emergency-info'><div class='info-box name-box'>" +
-                            "<div class= 'info-title' > <h5>Emergency Name</h5></div > <div class='info-value'><span>" + e.Name + "</span> </div></div > " +
-                            "<div class='info-box descrip-box'><div class='info-title'><h5>Emergency Description</h5></div>" +
-                            "<div class='info-value'><p>" + e.Description + "</p> </div></div><div class='info-box deal-box'> <div class='info-title'><h5>How To Deal With Emergency</h5></div>" +
-                            "<div class='info-value'> <p>" + e.HowToDeal + "</p> </div> </div></div> </div>"
-
-
-                        )
-                    })
-
-
-                }
-
-
-
-            })
-
-        })
-    })
-
-</script>
-
-
 <script src="~/js/viewemergencies.js"></script>
+
+
+
 
 
 

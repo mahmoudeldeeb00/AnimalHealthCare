@@ -123,13 +123,13 @@ $(document).ready(function () {
     ////////// use functions 
 
 
-  //  GetRandomIdNotification();
+  // GetRandomIdNotification();
 
     getNotification();
     r();
 
-    
-   //setTimeout(GetRandomIdNotification, 5000);
+
+    // setInterval(GetRandomIdNotification, 5000);
 
 
   

@@ -16,14 +16,26 @@ namespace ProjectBackEndDemo.DAL.Entities
 
         public int StartTempreture { get; set; }
         public int EndTempreture { get; set; }
+     
+
 
         public int StartGlucose{ get; set; }
         public int EndGlucose { get; set; }
+      
+
 
         public int StartPulse { get; set; }
         public int EndPulse { get; set; }
 
 
+
+
+        public int StartTempretureEmergency { get; set; }
+        public int EndTempretureEmergency { get; set; }
+        public int StartGlucozEmergency { get; set; }
+        public int EndGlucozEmergency { get; set; }
+        public int StartPulseEmergency { get; set; }
+        public int EndPulseEmergency { get; set; }
 
         public UserAnimal UserAnimal { get; set; }
 

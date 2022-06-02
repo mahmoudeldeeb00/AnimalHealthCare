@@ -84,6 +84,18 @@ namespace ProjectBackEndDemo.Areas.Vets.Rep
             animalentity.StartGlucose = model.StartGlucose;
             animalentity.EndGlucose = model.EndGlucose;
 
+            animalentity.StartTempretureEmergency = model.StartTempretureEmergency;
+            animalentity.EndTempretureEmergency = model.EndTempretureEmergency;
+
+            animalentity.StartGlucozEmergency = model.StartGlucozEmergency;
+            animalentity.EndGlucozEmergency = model.EndGlucozEmergency;
+
+            animalentity.StartPulseEmergency = model.StartPulseEmergency;
+            animalentity.EndPulseEmergency = model.EndPulseEmergency;
+
+
+
+
             db.Animals.Update(animalentity);
             db.SaveChanges();
 

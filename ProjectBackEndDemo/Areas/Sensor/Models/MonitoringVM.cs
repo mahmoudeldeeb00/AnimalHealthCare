@@ -24,7 +24,14 @@ namespace ProjectBackEndDemo.Areas.Sensor.Models
         public int StartPulse { get; set; }
         public int EndPulse { get; set; }
 
-     //   public int AnimalPulse { get; set; }
+       
+
+        public int StartTempretureEmergency { get; set; }
+        public int EndTempretureEmergency { get; set; }
+        public int StartGlucozEmergency { get; set; }
+        public int EndGlucozEmergency { get; set; }
+        public int StartPulseEmergency { get; set; }
+        public int EndPulseEmergency { get; set; }
 
         public string AnimalNickName { get; set; }
         public string AnimalAge { get; set; }

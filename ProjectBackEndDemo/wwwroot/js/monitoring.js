@@ -1,24 +1,25 @@
 // monitoring variables
 let wholeStatus = `.monitoring .container .monitoring-head`;
 let wholeStatusIcon = `.monitoring .container .monitoring-head svg`;
-let tempNormalMinVal = parseInt($("body").css("--normal-temp-min"));
-let tempNormalMaxVal = parseInt($("body").css("--normal-temp-max"));
-let pulseNormalMinVal = parseInt($("body").css("--normal-pulse-min"));
-let pulseNormalMaxVal = parseInt($("body").css("--normal-pulse-max"));
-let glukoseNormalMinVal = parseInt($("body").css("--normal-glukose-min"));
-let glukoseNormalMaxVal = parseInt($("body").css("--normal-glukose-max"));
-let tempEmergencyMinVal = 15;
-let tempEmergencyMaxVal = 75;
-let pulseEmergencyMinVal = 20;
-let pulseEmergencyMaxVal = 85;
-let glukoseEmergencyMinVal = 10;
-let glukoseEmergencyMaxVal = 65;
+let tempNormalMinVal = parseInt($(`.monitoring .monitoring-temperature .normal-section .monitoring-value .normal-range span.normal-min`).text());
+let tempNormalMaxVal = parseInt($(`.monitoring .monitoring-temperature .normal-section .monitoring-value .normal-range span.normal-max`).text());
+let pulseNormalMinVal = parseInt($(`.monitoring .monitoring-pulse .normal-section .monitoring-value .normal-range span.normal-min`).text());
+let pulseNormalMaxVal = parseInt($(`.monitoring .monitoring-pulse .normal-section .monitoring-value .normal-range span.normal-max`).text());
+let glukoseNormalMinVal = parseInt($(`.monitoring .monitoring-glukose .current-section .monitoring-value .current-range span.normal-min`).text());
+let glukoseNormalMaxVal = parseInt($(`.monitoring .monitoring-glukose .current-section .monitoring-value .current-range span.normal-max`).text());
+let tempEmergencyMinVal = parseInt($(`.monitoring .monitoring-temperature .current-section .monitoring-value .current-range span.emergency-min`).text());
+let tempEmergencyMaxVal = parseInt($(`.monitoring .monitoring-temperature .current-section .monitoring-value .current-range span.emergency-max`).text());
+let pulseEmergencyMinVal = parseInt($(`.monitoring .monitoring-pulse .current-section .monitoring-value .current-range span.emercency-min`).text());
+let pulseEmergencyMaxVal = parseInt($(`.monitoring .monitoring-pulse .current-section .monitoring-value .current-range span.emercency-max`).text());
+let glukoseEmergencyMinVal = parseInt($(`.monitoring .monitoring-glukose .current-section .monitoring-value .current-range span.emercency-min`).text());
+let glukoseEmergencyMaxVal = parseInt($(`.monitoring .monitoring-glukose .current-section .monitoring-value .current-range span.emercency-max`).text());
 let tempNormalMinPos = `.monitoring .monitoring-temperature .current-section .monitoring-value .current-range span.normal-min`;
 let tempNormalMaxPos = `.monitoring .monitoring-temperature .current-section .monitoring-value .current-range span.normal-max`;
 let tempNormalScaleMin = `.monitoring .monitoring-temperature .normal-section .monitoring-value .normal-range span.normal-min`;
 let tempNormalScaleMax = `.monitoring .monitoring-temperature .normal-section .monitoring-value .normal-range span.normal-max`;
 let tempCurrentScale = `.monitoring .monitoring-temperature .current-section .monitoring-value .current-range .current-scale`;
-let tempCurrentValue = `.monitoring .monitoring-temperature .current-section .monitoring-value .current-range .current-scale span.scale-value`;
+let tempCurrentValue = parseInt($(`.monitoring .monitoring-temperature .current-section .monitoring-value .current-range .current-scale span.scale-value`).text());
+let tempCurrentEle = `.monitoring .monitoring-temperature .current-section .monitoring-value .current-range .current-scale span.scale-value`;
 let tempDealSection = `.monitoring .monitoring-temperature .deal-section`;
 let tempMedicineSection = `.monitoring .monitoring-temperature .medicine-section`;
 let pulseNormalMinPos = `.monitoring .monitoring-pulse .current-section .monitoring-value .current-range span.normal-min`;
@@ -26,7 +27,8 @@ let pulseNormalMaxPos = `.monitoring .monitoring-pulse .current-section .monitor
 let pulseNormalScaleMin = `.monitoring .monitoring-pulse .normal-section .monitoring-value .normal-range span.normal-min`;
 let pulseNormalScaleMax = `.monitoring .monitoring-pulse .normal-section .monitoring-value .normal-range span.normal-max`;
 let pulseCurrentScale = `.monitoring .monitoring-pulse .current-section .monitoring-value .current-range .current-scale`;
-let pulseCurrentValue = `.monitoring .monitoring-pulse .current-section .monitoring-value .current-range .current-scale span.scale-value`;
+let pulseCurrentValue = parseInt($(`.monitoring .monitoring-pulse .current-section .monitoring-value .current-range .current-scale span.scale-value`).text());
+let pulseCurrentEle = `.monitoring .monitoring-pulse .current-section .monitoring-value .current-range .current-scale span.scale-value`;
 let pulseDealSection = `.monitoring .monitoring-pulse .deal-section`;
 let pulseMedicineSection = `.monitoring .monitoring-pulse .medicine-section`;
 let glukoseNormalMinPos = `.monitoring .monitoring-glukose .current-section .monitoring-value .current-range span.normal-min`;
@@ -34,7 +36,8 @@ let glukoseNormalMaxPos = `.monitoring .monitoring-glukose .current-section .mon
 let glukoseNormalScaleMin = `.monitoring .monitoring-glukose .normal-section .monitoring-value .normal-range span.normal-min`;
 let glukoseNormalScaleMax = `.monitoring .monitoring-glukose .normal-section .monitoring-value .normal-range span.normal-max`;
 let glukoseCurrentScale = `.monitoring .monitoring-glukose .current-section .monitoring-value .current-range .current-scale`;
-let glukoseCurrentValue = `.monitoring .monitoring-glukose .current-section .monitoring-value .current-range .current-scale span.scale-value`;
+let glukoseCurrentValue = parseInt($(`.monitoring .monitoring-glukose .current-section .monitoring-value .current-range .current-scale span.scale-value`).text());
+let glukoseCurrentEle = `.monitoring .monitoring-glukose .current-section .monitoring-value .current-range .current-scale span.scale-value`;
 let glukoseDealSection = `.monitoring .monitoring-glukose .deal-section`;
 let glukoseMedicineSection = `.monitoring .monitoring-glukose .medicine-section`;
 let customsaveLanuage = localStorage.getItem("page-language");
@@ -43,6 +46,11 @@ let customlangArabic = `.option .lang-option .lang-box > a.arabic`;
 let customenglishStyle = `link.style-en`;
 let customarabicstyle = `link.style-ar`;
 // End Variables
+
+
+
+
+
 // Start check Localstorage
 // page language value
 if (customsaveLanuage !== null) {
@@ -69,14 +77,9 @@ if (customsaveLanuage !== null) {
 // End check Localstorage
 // Update the current scale
 $(document).ready(() => {
-    updateTempNormlaRange();
-    updateTempScale();
-    updatePulseNormlaRange();
-    updatePulseScale();
-    updateGlukoseNormlaRange();
-    updateGlukoseScale();
-    updateWholeStatus();
+    updateallvaluesandmakeprojectrealtime();
 });
+
 // click on arabic btn
 $(customlangArabic).on("click", function (e) {
     if (!$(customlangArabic).hasClass("active")) {
@@ -84,44 +87,27 @@ $(customlangArabic).on("click", function (e) {
     }
 });
 // Changing scales & status
-
-
-//let changingTempScale = setInterval(function () {
-//    let newTempCurrent = Math.floor(Math.random() * 100);
-//    let newPulseCurrent = Math.floor(Math.random() * 100);
-//    let newGlukoseCurrent = Math.floor(Math.random() * 100);
-//    $(tempCurrentValue).text(newTempCurrent);
-//    $(pulseCurrentValue).text(newPulseCurrent);
-//    $(glukoseCurrentValue).text(newGlukoseCurrent);
-//    updateTempScale();
-//    updatePulseScale();
-//    updateGlukoseScale();
-//    updateWholeStatus();
-//}, 3000);
-
 function updateallvaluesandmakeprojectrealtime() {
-
     $.ajax({
         url: "/Sensor/SSensor/GetCurrentAnimalValues",
         method: "Post",
         success: function (result) {
-
-            console.log(result);
-
             let newTempCurrent = result.CurrentTempreture;
-            console.log("tempreture" + newTempCurrent )
             let newPulseCurrent = result.CurrentPulse;
-            console.log("pulse" + newPulseCurrent)
             let newGlukoseCurrent = result.CurrentClucose;
-            console.log("clocoz" + newGlukoseCurrent)
-            $(tempCurrentValue).text(newTempCurrent);
-            $(pulseCurrentValue).text(newPulseCurrent);
-            $(glukoseCurrentValue).text(newGlukoseCurrent);
+            $(tempCurrentEle).text(newTempCurrent);
+            tempCurrentValue = parseInt($(`.monitoring .monitoring-temperature .current-section .monitoring-value .current-range .current-scale span.scale-value`).text());
+            updateTempNormlaRange();
             updateTempScale();
+            $(pulseCurrentEle).text(newPulseCurrent);
+            pulseCurrentValue = parseInt($(`.monitoring .monitoring-pulse .current-section .monitoring-value .current-range .current-scale span.scale-value`).text());
+            updatePulseNormlaRange();
             updatePulseScale();
+            $(glukoseCurrentEle).text(newGlukoseCurrent);
+            glukoseCurrentValue = parseInt($(`.monitoring .monitoring-glukose .current-section .monitoring-value .current-range .current-scale span.scale-value`).text());
+            updateGlukoseNormlaRange();
             updateGlukoseScale();
-            updateWholeStatus();
-
+            updateWholeStatus();           
             //tempreture area 
             $("#ajaxtempreturedescription").text("");
             $("#ajaxtempreturedescription").text(result.LastTempretureSend.Description);
@@ -163,31 +149,12 @@ function updateallvaluesandmakeprojectrealtime() {
 
             })
             $("ajaxglucozrecommendedmedicine").html(z);
-
-
-            
-            
-            
-
-
-
         },
         error: function () {
             console.log("error Get data")
         }
-
-
     })
-
-
-
 }
-
-
-
-
-
-
 // Update The whole state
 function updateWholeStatus() {
     if ($(tempCurrentScale).hasClass("current-emergency") || $(pulseCurrentScale).hasClass("current-emergency") || $(glukoseCurrentScale).hasClass("current-emergency")) {
@@ -218,20 +185,20 @@ function updateWholeStatus() {
 }
 // Update temperature current scale
 function updateTempScale() {
-    $(tempCurrentScale).width(`${$(tempCurrentValue).text()}%`);
-    if ($(tempCurrentValue).text() >= tempEmergencyMaxVal || $(tempCurrentValue).text() <= tempEmergencyMinVal) {
+    $(tempCurrentScale).width(`${tempCurrentValue}%`);
+    if (tempCurrentValue >= tempEmergencyMaxVal || tempCurrentValue <= tempEmergencyMinVal) {
         if ($(tempCurrentScale).hasClass("current-normal")) {
             $(tempCurrentScale).removeClass("current-normal").addClass("current-emergency");
         } else if ($(tempCurrentScale).hasClass("current-sick")) {
             $(tempCurrentScale).removeClass("current-sick").addClass("current-emergency");
         }
-    } else if (($(tempCurrentValue).text() > tempNormalMaxVal && $(tempCurrentValue).text() < tempEmergencyMaxVal) || ($(tempCurrentValue).text() > tempEmergencyMinVal && $(tempCurrentValue).text() < tempNormalMinVal)) {
+    } else if ((tempCurrentValue > tempNormalMaxVal && tempCurrentValue < tempEmergencyMaxVal) || (tempCurrentValue > tempEmergencyMinVal && tempCurrentValue < tempNormalMinVal)) {
         if ($(tempCurrentScale).hasClass("current-normal")) {
             $(tempCurrentScale).removeClass("current-normal").addClass("current-sick");
         } else if ($(tempCurrentScale).hasClass("current-emergency")) {
             $(tempCurrentScale).removeClass("current-emergency").addClass("current-sick");
         }
-    } else if (($(tempCurrentValue).text() >= tempNormalMinVal && $(tempCurrentValue).text() <= tempNormalMaxVal)) {
+    } else if (tempCurrentValue >= tempNormalMinVal && tempCurrentValue <= tempNormalMaxVal) {
         if ($(tempCurrentScale).hasClass("current-sick")) {
             $(tempCurrentScale).removeClass("current-sick").addClass("current-normal");
         } else if ($(tempCurrentScale).hasClass("current-emergency")) {
@@ -272,20 +239,20 @@ function updateTempNormlaRange() {
 }
 // Update Pulse current scale
 function updatePulseScale() {
-    $(pulseCurrentScale).width(`${$(pulseCurrentValue).text()}%`);
-    if ($(pulseCurrentValue).text() >= pulseEmergencyMaxVal || $(pulseCurrentValue).text() <= pulseEmergencyMinVal) {
+    $(pulseCurrentScale).width(`${pulseCurrentValue}%`);
+    if (pulseCurrentValue >= pulseEmergencyMaxVal || pulseCurrentValue <= pulseEmergencyMinVal) {
         if ($(pulseCurrentScale).hasClass("current-normal")) {
             $(pulseCurrentScale).removeClass("current-normal").addClass("current-emergency");
         } else if ($(pulseCurrentScale).hasClass("current-sick")) {
             $(pulseCurrentScale).removeClass("current-sick").addClass("current-emergency");
         }
-    } else if (($(pulseCurrentValue).text() > pulseNormalMaxVal && $(pulseCurrentValue).text() < pulseEmergencyMaxVal) || ($(pulseCurrentValue).text() > pulseEmergencyMinVal && $(pulseCurrentValue).text() < pulseNormalMinVal)) {
+    } else if ((pulseCurrentValue > pulseNormalMaxVal && pulseCurrentValue < pulseEmergencyMaxVal) || (pulseCurrentValue > pulseEmergencyMinVal && pulseCurrentValue < pulseNormalMinVal)) {
         if ($(pulseCurrentScale).hasClass("current-normal")) {
             $(pulseCurrentScale).removeClass("current-normal").addClass("current-sick");
         } else if ($(pulseCurrentScale).hasClass("current-emergency")) {
             $(pulseCurrentScale).removeClass("current-emergency").addClass("current-sick");
         }
-    } else if (($(pulseCurrentValue).text() >= pulseNormalMinVal && $(pulseCurrentValue).text() <= pulseNormalMaxVal)) {
+    } else if ((pulseCurrentValue >= pulseNormalMinVal && pulseCurrentValue <= pulseNormalMaxVal)) {
         if ($(pulseCurrentScale).hasClass("current-sick")) {
             $(pulseCurrentScale).removeClass("current-sick").addClass("current-normal");
         } else if ($(pulseCurrentScale).hasClass("current-emergency")) {
@@ -326,20 +293,20 @@ function updatePulseNormlaRange() {
 }
 // Update Glukose current scale
 function updateGlukoseScale() {
-    $(glukoseCurrentScale).width(`${$(glukoseCurrentValue).text()}%`);
-    if ($(glukoseCurrentValue).text() >= glukoseEmergencyMaxVal || $(glukoseCurrentValue).text() <= glukoseEmergencyMinVal) {
+    $(glukoseCurrentScale).width(`${glukoseCurrentValue}%`);
+    if (glukoseCurrentValue >= glukoseEmergencyMaxVal || glukoseCurrentValue <= glukoseEmergencyMinVal) {
         if ($(glukoseCurrentScale).hasClass("current-normal")) {
             $(glukoseCurrentScale).removeClass("current-normal").addClass("current-emergency");
         } else if ($(glukoseCurrentScale).hasClass("current-sick")) {
             $(glukoseCurrentScale).removeClass("current-sick").addClass("current-emergency");
         }
-    } else if (($(glukoseCurrentValue).text() > glukoseNormalMaxVal && $(glukoseCurrentValue).text() < glukoseEmergencyMaxVal) || ($(glukoseCurrentValue).text() > glukoseEmergencyMinVal && $(glukoseCurrentValue).text() < glukoseNormalMinVal)) {
+    } else if ((glukoseCurrentValue > glukoseNormalMaxVal && glukoseCurrentValue < glukoseEmergencyMaxVal) || (glukoseCurrentValue > glukoseEmergencyMinVal && glukoseCurrentValue < glukoseNormalMinVal)) {
         if ($(glukoseCurrentScale).hasClass("current-normal")) {
             $(glukoseCurrentScale).removeClass("current-normal").addClass("current-sick");
         } else if ($(glukoseCurrentScale).hasClass("current-emergency")) {
             $(glukoseCurrentScale).removeClass("current-emergency").addClass("current-sick");
         }
-    } else if (($(glukoseCurrentValue).text() >= glukoseNormalMinVal && $(glukoseCurrentValue).text() <= glukoseNormalMaxVal)) {
+    } else if ((glukoseCurrentValue >= glukoseNormalMinVal && glukoseCurrentValue <= glukoseNormalMaxVal)) {
         if ($(glukoseCurrentScale).hasClass("current-sick")) {
             $(glukoseCurrentScale).removeClass("current-sick").addClass("current-normal");
         } else if ($(glukoseCurrentScale).hasClass("current-emergency")) {
@@ -395,8 +362,6 @@ var swiper = new Swiper(".mySwiper", {
         el: ".swiper-pagination",
     },
 });
-
-
 
 "use strict";
 var connect = new signalR.HubConnectionBuilder().withUrl("/signalServer").build();

@@ -50,6 +50,37 @@ if (a !== null) {
     }
 }
 // End check Localstorage
+// change pet select box
+$(document).ready(() => {
+    $.ajax({
+        type: "post",
+        url: "/Emergency/Emergencyy/FilterData",
+        data: { name:"cat" },
+        success: function (res) {
+            $("#view").empty();
+
+
+            $.each(res, function (i, e) {
+                $("#view").append(
+
+                    " <div class='emergency-box'><div class='emergency-name'><h4>" + e.Name + "</h4></div><div class='emergency-info'><div class='info-box name-box'>" +
+                    "<div class= 'info-title' > <h5>Emergency Name</h5></div > <div class='info-value'><span>" + e.Name + "</span> </div></div > " +
+                    "<div class='info-box descrip-box'><div class='info-title'><h5>Emergency Description</h5></div>" +
+                    "<div class='info-value'><p>" + e.Description + "</p> </div></div><div class='info-box deal-box'> <div class='info-title'><h5>How To Deal With Emergency</h5></div>" +
+                    "<div class='info-value'> <p>" + e.HowToDeal + "</p> </div> </div></div> </div>"
+
+
+                )
+            })
+
+
+        }
+
+
+
+    })
+    document.querySelector(`.cat-box`).classList.add("active");
+});
 // Check and edit emergencies
 if (emergenciesCounter > 4) {
     for (let i = emergenciesCounter - 1; i > 3; i--) {
@@ -102,3 +133,41 @@ $(emergencyBtn).on("click", function() {
         $(emergencyBtn).removeClass("less").addClass("more");
     }
 });
+
+//-------------- ajax call
+$(function () {
+
+    $("#selectPet").change(function () {
+
+        var x = $("#selectPet").val();
+
+        $.ajax({
+            type: "post",
+            url: "/Emergency/Emergencyy/FilterData",
+            data: { name: x },
+            success: function (res) {
+                $("#view").empty();
+
+
+                $.each(res, function (i, e) {
+                    $("#view").append(
+
+                        " <div class='emergency-box'><div class='emergency-name'><h4>" + e.Name + "</h4></div><div class='emergency-info'><div class='info-box name-box'>" +
+                        "<div class= 'info-title' > <h5>Emergency Name</h5></div > <div class='info-value'><span>" + e.Name + "</span> </div></div > " +
+                        "<div class='info-box descrip-box'><div class='info-title'><h5>Emergency Description</h5></div>" +
+                        "<div class='info-value'><p>" + e.Description + "</p> </div></div><div class='info-box deal-box'> <div class='info-title'><h5>How To Deal With Emergency</h5></div>" +
+                        "<div class='info-value'> <p>" + e.HowToDeal + "</p> </div> </div></div> </div>"
+
+
+                    )
+                })
+
+
+            }
+
+
+
+        })
+
+    })
+})

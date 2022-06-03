@@ -1,6 +1,8 @@
 ﻿
 @{
     ViewBag.Title = "Cura";
+    var Culuture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
 }
 
 @using Microsoft.AspNetCore.Identity
@@ -17,7 +19,19 @@
     var FAQList = DieaseRep.GetFAQS().Take(5);
 }
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" href="/css/home - Copy.css" class="style-en" />
+    @if (Culuture == "ar-EG")
+    {
+        <link href="~/css/home-ar.css" rel="stylesheet" />
 
+        <style>
+            body {
+                direction: rtl;
+            }
+        </style>
+
+
+    }
 <!-- Start Landing -->
 <section class="landing">
     <div class="container">

@@ -25,19 +25,13 @@ namespace ProjectBackEndDemo.BL.Helpers
         public static bool  SendMail(string email , string title , string body )
         {
 
-            try
-            {
                 SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
                 smtp.EnableSsl = true;
                 smtp.Credentials = new NetworkCredential("applicationcura@gmail.com", "#ae244910");
 
                 smtp.Send("applicationcura@gmail.com", email, title, body);
                 return true;
-            }
-            catch
-            {
-                return false; 
-            }
+
           
         }
      

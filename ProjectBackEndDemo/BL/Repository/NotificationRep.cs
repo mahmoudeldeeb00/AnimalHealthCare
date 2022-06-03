@@ -57,7 +57,7 @@ namespace ProjectBackEndDemo.BL.Repository
                .ToList();
 
             var notifies = new List<NotificationVM>();
-            foreach (var item in dbnotiefies.Reverse<NotificationApplicationUser>())
+            foreach (var item in dbnotiefies.Reverse<NotificationApplicationUser>().Take(50))
             {
                 NotificationVM x = new NotificationVM()
                 {

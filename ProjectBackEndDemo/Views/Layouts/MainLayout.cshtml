@@ -29,21 +29,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- Page Style -->
+   
+    <link href="~/css/layout.css" rel="stylesheet" />
 
-
-    <link rel="stylesheet" href="/css/home - Copy.css" class="style-en" />
- 
-    @if (Culuture == "ar-EG")
-    {
-        <link href="~/css/home-ar.css" rel="stylesheet" />
-       
-        <style>
-            body {
-                direction: rtl;
-            }
-        </style>
-
-    }
 
 
 </head>
@@ -97,18 +85,7 @@
             }
             else
             {
-                <!--<div class="user-section">
-                <div class="profile">
-                    <picture class="profile-img">
-                        <img src="/Files/UsersProfilePictures/DefaultProfilePicture.png" alt="profile picture" />
-                    </picture>
-                    <div class="profile-name">
-                        <span class="name">User Name </span>-->
-                @*<i class="fa-solid fa-caret-down caret"></i>*@
-                <!--</div>
-                    </div>
-
-                </div>-->
+                
 
 
                 <div class="header-login">
@@ -199,7 +176,7 @@
             <i class="fa-solid fa-gear"></i>
             <ul class="setting-content">
                 <li><a href='/Notification/GetAllNotification'>@AppLng["Notificationshistory"]</a></li>
-                <li>@AppLng["Managenotifications"]</li>
+                
                 <li> <a href="#" id="readAllNotification"> @AppLng["mark all as read"] </a></li>
             </ul>
         </div>
@@ -290,7 +267,7 @@
                         <i class="fa-solid fa-calendar-plus"></i>
                         <a asp-action="Index" asp-controller="LifeStyle" asp-area="Care">@AppLng["LifeStyle"]  </a>
                     </li>
-                    <li>
+                    @*<li>
                         <i class="fa-solid fa-arrows-to-eye"></i>
                         <a href="#">@AppLng["Assessment"] </a>
                     </li>
@@ -301,7 +278,7 @@
                     <li>
                         <i class="fa-solid fa-check-to-slot"></i>
                         <a href="#">@AppLng["Instructions"] </a>
-                    </li>
+                    </li>*@
                 </ul>
             </li>
             <li>

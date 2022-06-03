@@ -10,8 +10,11 @@ $(document).ready(function () {
                 if (result.length == 0) {
                     $("#notificationCount").html("");
                     $("#notificationCount").hide();
+
+                   
                 }
                 else {
+                    $("#notificationCount").show();
                     $("#notificationCount").html(result.length);
                     $.each(result, function (i, e) {
 
@@ -129,7 +132,7 @@ $(document).ready(function () {
     r();
 
 
-    // setInterval(GetRandomIdNotification, 5000);
+   //   setInterval(GetRandomIdNotification, 5000);
 
 
   

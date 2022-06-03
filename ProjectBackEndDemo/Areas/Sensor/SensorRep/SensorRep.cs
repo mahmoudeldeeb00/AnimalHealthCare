@@ -37,7 +37,7 @@ namespace ProjectBackEndDemo.Areas.Sensor.SensorRep
         public SensorDataVM GetSensorData(int Id)
         {
             SensorData mysesordata = db.SensorDatas.Where(a => a.Id == Id)
-                .Include(a=> a.Animal )
+                .Include(a=> a.Animal  )
                 .Include(d=> d.Disease)
                 .FirstOrDefault();
           SensorDataVM  mysesordataVM = mapper.Map<SensorDataVM>(mysesordata);
@@ -78,6 +78,9 @@ namespace ProjectBackEndDemo.Areas.Sensor.SensorRep
             model.AnimalGenderType = UserAni.Gender.Name;
             model.AnimalId = UserAni.AnimalId;
             model.AnimalAge = TimeStringHelper.GetAgeFromDate(UserAni.BirthDay);
+         
+            
+            
             model.CurrentTempreture = UserAni.CurrentTempreture;
             model.StartTempreture = UserAni.Animal.StartTempreture;
             model.EndTempreture = UserAni.Animal.EndTempreture;
@@ -99,9 +102,25 @@ namespace ProjectBackEndDemo.Areas.Sensor.SensorRep
             model.StartPulseEmergency = UserAni.Animal.StartPulseEmergency;
             model.EndPulseEmergency = UserAni.Animal.EndPulseEmergency;
 
-            model.LastGlucoseSend = GetSensorData(UserAni.LastSensorGlucoseSend);
-            model.LastPulseSend = GetSensorData(UserAni.LastSensorPulseSend);
-            model.LastTempretureSend = GetSensorData(UserAni.LastSensorTempretureSend);
+
+            try
+            {
+                model.LastGlucoseSend = GetSensorData(UserAni.LastSensorGlucoseSend);
+                model.LastPulseSend = GetSensorData(UserAni.LastSensorPulseSend);
+                model.LastTempretureSend = GetSensorData(UserAni.LastSensorTempretureSend);
+            }
+            catch
+            {
+                SensorDataVM errr = new SensorDataVM()
+                {
+                    AnimalId = 3,
+                    Description = " There is an error might be loss of data in User animal Table "
+                };
+                model.LastGlucoseSend = errr;
+                model.LastPulseSend = errr;
+                model.LastTempretureSend = errr;
+
+            }
 
 
           

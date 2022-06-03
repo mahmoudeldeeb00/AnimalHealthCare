@@ -112,15 +112,14 @@ namespace ProjectBackEndDemo.Contrrollers
                     not.AddWarningToastMessage(notification.Text);
 
                     var currentUser = userManager.FindByNameAsync(User.Identity.Name).Result;
-                    try
+                    if (currentUser.Gmail != null)
                     {
                         MailHelper.SendMail(currentUser.Gmail, notification.Text, notification.UrlReference);
 
                     }
-                    catch
-                    {
 
-                    }
+
+
                 }
             }
          

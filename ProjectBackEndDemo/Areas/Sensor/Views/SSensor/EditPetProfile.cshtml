@@ -91,18 +91,26 @@
 
         </div>
         @*<div class="form-section select-section sensor-section">
-                <label for="my-sensor">Pet Sensor</label>
-                <div class="input-section">
-                    <select name="sensor" id="my-sensor" class="pet-sensor">
-                        <option disabled selected>Choose Your Pet Sensor</option>
-                        <option value="Temperature">Temperature</option>
-                        <option value="Glukoz">Glukoz</option>
-                    </select>
-                    <div class="select-icon">
-                        <i class="fa-solid fa-box"></i>
-                    </div>
+            <label for="my-sensor">Pet Sensor</label>
+            <div class="input-section">
+                <select name="sensor" id="my-sensor" class="pet-sensor">
+                    <option disabled selected>Choose Your Pet Sensor</option>
+                    <option value="Temperature">Temperature</option>
+                    <option value="Glukoz">Glukoz</option>
+                </select>
+                <div class="select-icon">
+                    <i class="fa-solid fa-box"></i>
                 </div>
-            </div>*@
+            </div>
+        </div>*@
+
+
+        <input hidden type="number" asp-for="CurrentTempreture" />
+        <input hidden type="number" asp-for="Currentlucose" />
+        <input hidden type="number" asp-for="CurrentPulse" />
+        <input hidden type="number" asp-for="LastSensorTempretureSend" />
+        <input hidden type="number" asp-for="LastSensorGlucoseSend" />
+        <input hidden type="number" asp-for="LastSensorPulseSend" />
         <div class="form-section save-section">
             <button type="submit" class="save-btn">@AppLng["Save"]</button>
         </div>
